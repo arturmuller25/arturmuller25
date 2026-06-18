@@ -145,9 +145,9 @@ def main():
     def stack(labels):
         return svgchip.row(citems(labels), max_width=560, fill=STACK_FILL, fg=STACK_FG,
                            stroke=STACK_STROKE, height=34, size=14)
-    write("stack-langs.svg", stack(["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]))
-    write("stack-frameworks.svg", stack(["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face", "Twig"]))
-    write("stack-tools.svg", stack(["Railway", "uv", "Playwright", "Git", "VS Code", "Claude"]))
+    write("tech-langs.svg", stack(["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]))
+    write("tech-frameworks.svg", stack(["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face", "Twig"]))
+    write("tech-tools.svg", stack(["Railway", "uv", "Playwright", "Git", "VS Code", "Claude"]))
 
     # Tecnologias por projeto (aço + ícone branco)
     write("proj-comac.svg", svgchip.row(mitems(["Python", "FastAPI", "OpenAI", "Pinecone"]), max_width=340))

@@ -25,17 +25,17 @@ No momento estou me aprofundando em arquitetura de software, boas práticas e IA
 
 <p align="center"><b>Linguagens</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-langs.svg?v=3" alt="Python, TypeScript, JavaScript, PHP, PowerShell, HTML, CSS" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/tech-langs.svg" alt="Python, TypeScript, JavaScript, PHP, PowerShell, HTML, CSS" />
 </p>
 
 <p align="center"><b>Frameworks &amp; bibliotecas</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-frameworks.svg?v=3" alt="React, Vite, FastAPI, PyTorch, OpenAI, Pinecone, Hugging Face, Twig" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/tech-frameworks.svg" alt="React, Vite, FastAPI, PyTorch, OpenAI, Pinecone, Hugging Face, Twig" />
 </p>
 
 <p align="center"><b>Ferramentas &amp; plataformas</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-tools.svg?v=3" alt="Railway, uv, Playwright, Git, VS Code, Claude" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/tech-tools.svg" alt="Railway, uv, Playwright, Git, VS Code, Claude" />
 </p>
 
 ---
