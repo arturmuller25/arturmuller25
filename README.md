@@ -2,26 +2,22 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light.svg" />
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-dark.svg" width="100%" alt="Artur Müller" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light.svg" width="100%" alt="Artur Müller" />
 </picture>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=arturmuller25&style=flat-square&color=8b5cf6&labelColor=161b22&label=Visitas" alt="Visitas" />
-  <img src="https://img.shields.io/github/followers/arturmuller25?style=flat-square&logo=github&logoColor=a78bfa&label=Seguidores&color=8b5cf6&labelColor=161b22" alt="Seguidores" />
-  <a href="https://checkmygit.com/arturmuller25"><img src="https://img.shields.io/badge/Modo%20visual-CheckMyGit-8b5cf6?style=flat-square&logo=github&logoColor=a78bfa&labelColor=161b22" alt="CheckMyGit" /></a>
+  <img src="https://komarev.com/ghpvc/?username=arturmuller25&style=flat-square&color=4A6FA5&labelColor=36567D&label=Visitas" alt="Visitas" />
+  <img src="https://img.shields.io/github/followers/arturmuller25?style=flat-square&logo=github&logoColor=white&label=Seguidores&color=4A6FA5&labelColor=36567D" alt="Seguidores" />
+  <a href="https://checkmygit.com/arturmuller25"><img src="https://img.shields.io/badge/Modo%20visual-CheckMyGit-4A6FA5?style=flat-square&logo=github&logoColor=white&labelColor=36567D" alt="CheckMyGit" /></a>
 </p>
 
 ---
 
 ## Sobre
 
-Estudante de desenvolvimento e criador de projetos próprios. Gosto de levar uma ideia do conceito ao deploy — passando por front-end, back-end e, mais recentemente, inteligência artificial.
+Estudante de desenvolvimento e criador de projetos próprios. Gosto de transformar ideias em coisas que funcionam de verdade, do front-end ao back-end, e ultimamente venho explorando bastante inteligência artificial e sistemas de RAG.
 
-- **[comac-rag](https://github.com/arturmuller25/comac-rag)** — sistema de RAG em Python (FastAPI, OpenAI, Pinecone), em produção no Railway
-- **[mullerchess](https://github.com/arturmuller25/mullerchess)** — xadrez com interface em React + TypeScript
-- **[clarividenciarpg](https://github.com/arturmuller25/clarividenciarpg)** — sistema de RPG de mesa para *Ordem Paranormal* (PHP + MySQL)
-
-Atualmente me aprofundando em arquitetura de software, boas práticas e IA aplicada.
+No momento estou me aprofundando em arquitetura de software, boas práticas e IA aplicada.
 
 ---
 
@@ -32,48 +28,79 @@ Atualmente me aprofundando em arquitetura de software, boas práticas e IA aplic
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/OpenAI-161b22?style=flat-square&logo=openai&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/Pinecone-161b22?style=flat-square&logo=pinecone&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/Hugging%20Face-161b22?style=flat-square&logo=huggingface&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/Railway-161b22?style=flat-square&logo=railway&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/Twig-161b22?style=flat-square&logo=twig&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/uv-161b22?style=flat-square&logo=uv&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/Playwright-161b22?style=flat-square&logo=playwright&logoColor=a78bfa" />
-  <img src="https://img.shields.io/badge/Claude-161b22?style=flat-square&logo=anthropic&logoColor=a78bfa" />
+  <img src="https://img.shields.io/badge/OpenAI-4A6FA5?style=flat-square&logo=openai&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pinecone-4A6FA5?style=flat-square&logo=pinecone&logoColor=white" />
+  <img src="https://img.shields.io/badge/Hugging%20Face-4A6FA5?style=flat-square&logo=huggingface&logoColor=white" />
+  <img src="https://img.shields.io/badge/Railway-4A6FA5?style=flat-square&logo=railway&logoColor=white" />
+  <img src="https://img.shields.io/badge/Twig-4A6FA5?style=flat-square&logo=twig&logoColor=white" />
+  <img src="https://img.shields.io/badge/uv-4A6FA5?style=flat-square&logo=uv&logoColor=white" />
+  <img src="https://img.shields.io/badge/Playwright-4A6FA5?style=flat-square&logo=playwright&logoColor=white" />
+  <img src="https://img.shields.io/badge/Claude-4A6FA5?style=flat-square&logo=anthropic&logoColor=white" />
 </p>
 
 ---
 
 ## Projetos em destaque
 
-<p align="center">
-  <a href="https://github.com/arturmuller25/comac-rag">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=arturmuller25&repo=comac-rag&hide_border=true&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&icon_color=8b5cf6&border_color=30363d" alt="comac-rag" />
-  </a>
-  <a href="https://github.com/arturmuller25/mullerchess">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=arturmuller25&repo=mullerchess&hide_border=true&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&icon_color=8b5cf6&border_color=30363d" alt="mullerchess" />
-  </a>
-</p>
-<p align="center">
-  <a href="https://github.com/arturmuller25/clarividenciarpg">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=arturmuller25&repo=clarividenciarpg&hide_border=true&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&icon_color=8b5cf6&border_color=30363d" alt="clarividenciarpg" />
-  </a>
-</p>
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/arturmuller25/comac-rag">comac&#8209;rag</a></h3>
+      <p>Sistema de RAG em Python: busca semântica sobre uma base de conhecimento e geração de respostas, em produção no Railway.</p>
+      <p>
+        <img src="https://img.shields.io/badge/Python-4A6FA5?style=flat-square&logo=python&logoColor=white" />
+        <img src="https://img.shields.io/badge/FastAPI-4A6FA5?style=flat-square&logo=fastapi&logoColor=white" />
+        <img src="https://img.shields.io/badge/OpenAI-4A6FA5?style=flat-square&logo=openai&logoColor=white" />
+        <img src="https://img.shields.io/badge/Pinecone-4A6FA5?style=flat-square&logo=pinecone&logoColor=white" />
+      </p>
+    </td>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/arturmuller25/mullerchess">mullerchess</a></h3>
+      <p>Xadrez com interface web e backend próprio, do tabuleiro à validação dos lances.</p>
+      <p>
+        <img src="https://img.shields.io/badge/React-4A6FA5?style=flat-square&logo=react&logoColor=white" />
+        <img src="https://img.shields.io/badge/TypeScript-4A6FA5?style=flat-square&logo=typescript&logoColor=white" />
+        <img src="https://img.shields.io/badge/Vite-4A6FA5?style=flat-square&logo=vite&logoColor=white" />
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/arturmuller25/clarividenciarpg">clarividenciarpg</a></h3>
+      <p>Sistema de RPG de mesa para <em>Ordem Paranormal</em>: rolagem de dados, criaturas, NPCs e campanhas.</p>
+      <p>
+        <img src="https://img.shields.io/badge/PHP-4A6FA5?style=flat-square&logo=php&logoColor=white" />
+        <img src="https://img.shields.io/badge/MySQL-4A6FA5?style=flat-square&logo=mysql&logoColor=white" />
+        <img src="https://img.shields.io/badge/JavaScript-4A6FA5?style=flat-square&logo=javascript&logoColor=white" />
+      </p>
+    </td>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/arturmuller25?tab=repositories">Mais projetos</a></h3>
+      <p>Estudos de templating com Twig, exercícios de programação web e outros experimentos.</p>
+      <p>
+        <a href="https://github.com/arturmuller25?tab=repositories"><img src="https://img.shields.io/badge/Ver%20todos%20os%20reposit%C3%B3rios-4A6FA5?style=flat-square&logo=github&logoColor=white" /></a>
+      </p>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## Xadrez jogável
 
-Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Brancas** contra o **Stockfish**. Como o GitHub não permite clicar diretamente no tabuleiro, **cada lance é um botão** — ao clicar, abre uma _issue_ já preenchida; basta enviá-la (**Submit new issue**) que, em segundos, a IA responde e o tabuleiro abaixo se atualiza sozinho.
+Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Brancas** contra o **Stockfish**. Como o GitHub não deixa clicar direto no tabuleiro, cada lance é um botão. Ao clicar, abre uma _issue_ já preenchida; é só enviá-la (**Submit new issue**) que, em segundos, a IA responde e o tabuleiro abaixo se atualiza sozinho.
 
 <!-- CHESS:START -->
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/game/board.svg?v=3416e89d" width="340" alt="Tabuleiro de xadrez atual" />
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/game/board-dark.svg?v=3416e89d" />
+<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/game/board-light.svg?v=3416e89d" width="340" alt="Tabuleiro de xadrez atual" />
+</picture>
 
-**Vez das Brancas** &mdash; escolha um lance abaixo:
+**Vez das Brancas.** Escolha um lance abaixo:
 
-[![d4](https://img.shields.io/badge/d4-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cd2d4&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![e5](https://img.shields.io/badge/e5-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Ce4e5&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![f4](https://img.shields.io/badge/f4-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf2f4&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Na3](https://img.shields.io/badge/Na3-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cb1a3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Nc3](https://img.shields.io/badge/Nc3-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cb1c3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Bd3](https://img.shields.io/badge/Bd3-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf1d3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Be2](https://img.shields.io/badge/Be2-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf1e2&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Ne2](https://img.shields.io/badge/Ne2-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cg1e2&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.)
+[![d4](https://img.shields.io/badge/d4-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cd2d4&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![e5](https://img.shields.io/badge/e5-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Ce4e5&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![f4](https://img.shields.io/badge/f4-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf2f4&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Na3](https://img.shields.io/badge/Na3-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cb1a3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Nc3](https://img.shields.io/badge/Nc3-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cb1c3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Bd3](https://img.shields.io/badge/Bd3-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf1d3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Be2](https://img.shields.io/badge/Be2-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf1e2&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Ne2](https://img.shields.io/badge/Ne2-4A6FA5?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cg1e2&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.)
 
 </div>
 
@@ -95,7 +122,7 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 </details>
 
-<sub>Placar &mdash; Partidas: 0 &nbsp;|&nbsp; Suas vitórias: 0 &nbsp;|&nbsp; Vitórias da IA: 0 &nbsp;|&nbsp; Empates: 0 &nbsp;|&nbsp; Lances: 4</sub>
+<sub>Placar &nbsp;·&nbsp; Partidas: 0 &nbsp;·&nbsp; Suas vitórias: 0 &nbsp;·&nbsp; Vitórias da IA: 0 &nbsp;·&nbsp; Empates: 0 &nbsp;·&nbsp; Lances: 4</sub>
 <!-- CHESS:END -->
 
 ---
@@ -103,12 +130,21 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 ## Estatísticas
 
 <p align="center">
-  <img height="160" src="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&icon_color=8b5cf6&border_color=30363d" alt="Estatísticas" />
-  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&hide_border=true&bg_color=0d1117&title_color=a78bfa&text_color=c9d1d9&border_color=30363d" alt="Linguagens mais usadas" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&include_all_commits=true&count_private=true&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&icon_color=7E97B8&border_color=2d3f57" />
+    <img height="160" src="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&include_all_commits=true&count_private=true&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&icon_color=4A6FA5&border_color=DDE1E6" alt="Estatísticas" />
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&border_color=2d3f57" />
+    <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&border_color=DDE1E6" alt="Linguagens mais usadas" />
+  </picture>
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com/?user=arturmuller25&hide_border=true&background=0d1117&border=30363d&stroke=30363d&ring=8b5cf6&fire=a78bfa&currStreakNum=c9d1d9&sideNums=c9d1d9&currStreakLabel=a78bfa&sideLabels=8b949e&dates=8b949e" alt="Sequência de commits" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=arturmuller25&background=1c2530&border=2d3f57&stroke=2d3f57&ring=8aa6c8&fire=7E97B8&currStreakNum=c9d4e0&sideNums=c9d4e0&currStreakLabel=8aa6c8&sideLabels=9fb0c4&dates=9fb0c4" />
+    <img src="https://streak-stats.demolab.com/?user=arturmuller25&background=F4F4F2&border=DDE1E6&stroke=DDE1E6&ring=4A6FA5&fire=4A6FA5&currStreakNum=2E3A48&sideNums=2E3A48&currStreakLabel=36567D&sideLabels=5A6B7B&dates=5A6B7B" alt="Sequência de commits" />
+  </picture>
 </p>
 
 <picture>
@@ -123,9 +159,9 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <p align="center">
   <a href="https://www.linkedin.com/in/artur-crispim-sant-anna-m%C3%BCller-56bb73380/">
-    <img src="https://img.shields.io/badge/LinkedIn-161b22?style=flat-square&logo=linkedin&logoColor=a78bfa" alt="LinkedIn" />
+    <img src="https://img.shields.io/badge/LinkedIn-4A6FA5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
   <a href="mailto:tutimuller2.0@gmail.com">
-    <img src="https://img.shields.io/badge/Gmail-161b22?style=flat-square&logo=gmail&logoColor=a78bfa" alt="Gmail" />
+    <img src="https://img.shields.io/badge/Gmail-4A6FA5?style=flat-square&logo=gmail&logoColor=white" alt="Gmail" />
   </a>
 </p>
