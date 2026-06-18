@@ -131,12 +131,15 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&icon_color=7E97B8&border_color=2d3f57" />
-    <img height="160" src="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&icon_color=4A6FA5&border_color=DDE1E6" alt="Estatísticas" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stats-dark.svg" />
+    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stats-light.svg" alt="Estatísticas reais (inclui repositórios privados)" />
   </picture>
+</p>
+
+<p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&border_color=2d3f57" />
-    <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&border_color=DDE1E6" alt="Linguagens mais usadas" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-dark.svg" />
+    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-light.svg" alt="Linguagens mais usadas (inclui repositórios privados)" />
   </picture>
 </p>
 
@@ -152,9 +155,10 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <p align="center">
   <a href="https://www.linkedin.com/in/artur-crispim-sant-anna-m%C3%BCller-56bb73380/">
-    <img src="https://img.shields.io/badge/LinkedIn-4A6FA5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    <img height="46" src="https://img.shields.io/badge/LinkedIn-Artur%20M%C3%BCller-4A6FA5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=36567D" alt="LinkedIn" />
   </a>
+  &nbsp;&nbsp;
   <a href="mailto:tutimuller2.0@gmail.com">
-    <img src="https://img.shields.io/badge/Gmail-4A6FA5?style=flat-square&logo=gmail&logoColor=white" alt="Gmail" />
+    <img height="46" src="https://img.shields.io/badge/Gmail-tutimuller2.0-4A6FA5?style=for-the-badge&logo=gmail&logoColor=white&labelColor=36567D" alt="Gmail" />
   </a>
 </p>
