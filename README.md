@@ -24,10 +24,10 @@ No momento estou me aprofundando em arquitetura de software, boas práticas e IA
 ## Stack
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-langs.svg" alt="Linguagens" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-langs.svg?v=2" alt="Linguagens" />
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-tools.svg" alt="Ferramentas e bibliotecas" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stack-tools.svg?v=2" alt="Ferramentas e bibliotecas" />
 </p>
 
 ---
@@ -39,19 +39,19 @@ No momento estou me aprofundando em arquitetura de software, boas práticas e IA
     <td width="50%" valign="top">
       <h3>comac&#8209;rag &nbsp;<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/privado.svg" alt="privado" /></h3>
       <p>Sistema de RAG em Python: busca semântica sobre uma base de conhecimento e geração de respostas, em produção no Railway.</p>
-      <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-comac.svg" alt="Python, FastAPI, OpenAI, Pinecone" /></p>
+      <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-comac.svg?v=2" alt="Python, FastAPI, OpenAI, Pinecone" /></p>
     </td>
     <td width="50%" valign="top">
       <h3><a href="https://github.com/arturmuller25/mullerchess">mullerchess</a></h3>
       <p>Xadrez com interface web e backend próprio, do tabuleiro à validação dos lances.</p>
-      <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-muller.svg" alt="React, TypeScript, Vite" /></p>
+      <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-muller.svg?v=2" alt="React, TypeScript, Vite" /></p>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
       <h3><a href="https://github.com/arturmuller25/clarividenciarpg">clarividenciarpg</a></h3>
       <p>Sistema de RPG de mesa para <em>Ordem Paranormal</em>: rolagem de dados, criaturas, NPCs e campanhas.</p>
-      <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-clarivid.svg" alt="PHP, MySQL, JavaScript" /></p>
+      <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-clarivid.svg?v=2" alt="PHP, MySQL, JavaScript" /></p>
     </td>
     <td width="50%" valign="top">
       <h3><a href="https://github.com/arturmuller25?tab=repositories">Mais projetos</a></h3>
@@ -134,10 +134,10 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <p align="center">
   <a href="https://www.linkedin.com/in/artur-crispim-sant-anna-m%C3%BCller-56bb73380/">
-    <img height="40" src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/contact-linkedin.svg" alt="LinkedIn" />
+    <img height="40" src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/contact-linkedin.svg?v=2" alt="LinkedIn" />
   </a>
   &nbsp;
   <a href="mailto:tutimuller2.0@gmail.com">
-    <img height="40" src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/contact-gmail.svg" alt="Gmail" />
+    <img height="40" src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/contact-gmail.svg?v=2" alt="Gmail" />
   </a>
 </p>
