@@ -131,19 +131,12 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&include_all_commits=true&count_private=true&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&icon_color=7E97B8&border_color=2d3f57" />
-    <img height="160" src="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&include_all_commits=true&count_private=true&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&icon_color=4A6FA5&border_color=DDE1E6" alt="Estatísticas" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&icon_color=7E97B8&border_color=2d3f57" />
+    <img height="160" src="https://github-readme-stats.vercel.app/api?username=arturmuller25&show_icons=true&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&icon_color=4A6FA5&border_color=DDE1E6" alt="Estatísticas" />
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&bg_color=1c2530&title_color=8aa6c8&text_color=c9d4e0&border_color=2d3f57" />
     <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=arturmuller25&layout=compact&langs_count=8&bg_color=F4F4F2&title_color=36567D&text_color=2E3A48&border_color=DDE1E6" alt="Linguagens mais usadas" />
-  </picture>
-</p>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=arturmuller25&background=1c2530&border=2d3f57&stroke=2d3f57&ring=8aa6c8&fire=7E97B8&currStreakNum=c9d4e0&sideNums=c9d4e0&currStreakLabel=8aa6c8&sideLabels=9fb0c4&dates=9fb0c4" />
-    <img src="https://streak-stats.demolab.com/?user=arturmuller25&background=F4F4F2&border=DDE1E6&stroke=DDE1E6&ring=4A6FA5&fire=4A6FA5&currStreakNum=2E3A48&sideNums=2E3A48&currStreakLabel=36567D&sideLabels=5A6B7B&dates=5A6B7B" alt="Sequência de commits" />
   </picture>
 </p>
 
