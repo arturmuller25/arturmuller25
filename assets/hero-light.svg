@@ -47,7 +47,7 @@
 
   <!-- subtitle -->
   <text x="74" y="220" font-family="'Cascadia Code','Consolas',monospace" font-size="22" fill="#4c3f7a" opacity="0">
-    criador &#8226; dev web &#8226; RPG &#9823; &#8226; intelig&#234;ncia artificial
+    Desenvolvedor em forma&#231;&#227;o &#8226; Web &#8226; Intelig&#234;ncia Artificial
     <tspan fill="#7c3aed">&#9612;<animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></tspan>
     <animate attributeName="opacity" from="0" to="1" begin="1.6s" dur="0.6s" fill="freeze"/>
   </text>

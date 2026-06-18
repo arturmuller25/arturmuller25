@@ -3,12 +3,12 @@
 Xadrez jogável no README do perfil.
 
 - O visitante joga de Brancas; o bot (Stockfish, com fallback) responde de Pretas.
-- Para jogar, abre-se uma issue com título:  chess|move|<lance-uci>
-  (os links no README já geram essa issue prontinha).
-- Em eventos que não sejam de issue (workflow_dispatch / push) o script apenas
-  re-renderiza o tabuleiro atual — útil para "semear" o estado inicial.
+- Cada lance é uma issue com título:  chess|move|<lance-uci>
+  (os botões/links no README já geram essa issue prontinha).
+- Em eventos que não sejam de issue (workflow_dispatch) o script apenas
+  re-renderiza o tabuleiro atual.
 
-Lê o evento via variáveis de ambiente definidas no workflow:
+Variáveis de ambiente esperadas (definidas pelo workflow):
   GITHUB_EVENT_NAME, ISSUE_TITLE, ISSUE_AUTHOR, GITHUB_REPOSITORY
 """
 
@@ -37,6 +37,9 @@ PROFILE_URL = f"https://github.com/{REPO.split('/')[0]}"
 MARK_START = "<!-- CHESS:START -->"
 MARK_END = "<!-- CHESS:END -->"
 
+# Paleta do perfil
+ACCENT = "8b5cf6"   # violeta
+
 PIECE_ICON = {
     (chess.PAWN, True): "♙", (chess.KNIGHT, True): "♘", (chess.BISHOP, True): "♗",
     (chess.ROOK, True): "♖", (chess.QUEEN, True): "♕", (chess.KING, True): "♔",
@@ -45,11 +48,21 @@ PIECE_ICON = {
 }
 
 TERM_PT = {
-    "CHECKMATE": "xeque-mate", "STALEMATE": "afogamento (stalemate)",
+    "CHECKMATE": "xeque-mate", "STALEMATE": "afogamento",
     "INSUFFICIENT_MATERIAL": "material insuficiente", "SEVENTYFIVE_MOVES": "regra dos 75 lances",
     "FIVEFOLD_REPETITION": "quíntupla repetição", "FIFTY_MOVES": "regra dos 50 lances",
-    "THREEFOLD_REPETITION": "tripla repetição", "VARIANT_WIN": "vitória", "VARIANT_LOSS": "derrota",
-    "VARIANT_DRAW": "empate",
+    "THREEFOLD_REPETITION": "tripla repetição", "VARIANT_WIN": "vitória",
+    "VARIANT_LOSS": "derrota", "VARIANT_DRAW": "empate",
+}
+
+# Cores do tabuleiro (na paleta do perfil)
+BOARD_COLORS = {
+    "square light": "#e6e2f5",
+    "square dark": "#6f689e",
+    "square light lastmove": "#c4b5fd",
+    "square dark lastmove": "#8b5cf6",
+    "margin": "#0d1117",
+    "coord": "#8b949e",
 }
 
 
@@ -97,16 +110,14 @@ def write_stats(s):
 def archive_game(author, result_tag, reason):
     os.makedirs(GAME_DIR, exist_ok=True)
     today = datetime.date.today().isoformat()
-    line = f"- `{today}` &mdash; **@{author}** &mdash; {result_tag} _({reason})_\n"
+    line = f"- `{today}` &mdash; **@{author}** &mdash; {result_tag} _({reason})_"
     prev = ""
     if os.path.exists(HISTORY_FILE):
         prev = open(HISTORY_FILE, encoding="utf-8").read()
-    body = re.sub(r"^# .*?\n+", "", prev, flags=re.S).strip().splitlines()
-    # mantém só as 12 partidas mais recentes
-    body = [line.rstrip("\n")] + body
-    body = body[:12]
+    body = [l for l in re.sub(r"^#.*?\n+", "", prev, flags=re.S).strip().splitlines() if l.strip()]
+    body = ([line] + body)[:12]
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
-        f.write("# 🏅 Hall da Fama do xadrez\n\nPartidas mais recentes:\n\n")
+        f.write("# Hall da Fama do xadrez\n\nPartidas mais recentes:\n\n")
         f.write("\n".join(body) + "\n")
 
 
@@ -114,7 +125,6 @@ def archive_game(author, result_tag, reason):
 # Bot
 # --------------------------------------------------------------------------- #
 def bot_move(board):
-    """Pretas. Tenta o Stockfish; se não houver, usa heurística gulosa."""
     sf = shutil.which("stockfish") or "/usr/games/stockfish"
     try:
         import chess.engine
@@ -144,8 +154,7 @@ def _greedy_move(board):
         gain = 0
         if board.is_capture(m):
             cap = board.piece_at(m.to_square)
-            if cap:
-                gain = val.get(cap.piece_type, 0)
+            gain = val.get(cap.piece_type, 0) if cap else 1
         if gain > best_val:
             best_val, best = gain, m
     return best
@@ -157,12 +166,8 @@ def _greedy_move(board):
 def render_svg(board, lastmove):
     check_sq = board.king(board.turn) if board.is_check() else None
     svg = chess.svg.board(
-        board=board,
-        lastmove=lastmove,
-        check=check_sq,
-        size=380,
-        coordinates=True,
-        colors={"square light": "#f0d9b5", "square dark": "#b58863"},
+        board=board, lastmove=lastmove, check=check_sq,
+        size=380, coordinates=True, colors=BOARD_COLORS,
     )
     os.makedirs(GAME_DIR, exist_ok=True)
     with open(SVG_FILE, "w", encoding="utf-8") as f:
@@ -172,10 +177,54 @@ def render_svg(board, lastmove):
 def issue_link(uci):
     title = urllib.parse.quote(f"chess|move|{uci}")
     body = urllib.parse.quote(
-        "Apenas clique em **Submit new issue** para jogar este lance. "
-        "O bot responde em alguns segundos e o tabuleiro do perfil é atualizado automaticamente. ♟️\n\nBoa partida!"
+        "Clique em **Submit new issue** para confirmar o lance. "
+        "O bot responde em alguns segundos e o tabuleiro do perfil é atualizado automaticamente."
     )
     return f"https://github.com/{REPO}/issues/new?title={title}&body={body}"
+
+
+CENTRAL = {chess.D4, chess.E4, chess.D5, chess.E5, chess.C4, chess.F4, chess.C5, chess.F5}
+_VAL = {chess.PAWN: 1, chess.KNIGHT: 3, chess.BISHOP: 3, chess.ROOK: 5, chess.QUEEN: 9, chess.KING: 0}
+
+
+def _suggest_moves(board, k=8):
+    """Seleciona os lances mais 'interessantes' para virarem botões em destaque."""
+    scored = []
+    for m in board.legal_moves:
+        score = 0
+        if board.is_capture(m):
+            cap = board.piece_at(m.to_square)
+            score += 10 * (_VAL.get(cap.piece_type, 0) if cap else 1)
+        board.push(m)
+        if board.is_checkmate():
+            score += 1000
+        elif board.is_check():
+            score += 40
+        board.pop()
+        if m.to_square in CENTRAL:
+            score += 5
+        pc = board.piece_at(m.from_square)
+        if pc and pc.piece_type in (chess.KNIGHT, chess.BISHOP) and chess.square_rank(m.from_square) in (0, 7):
+            score += 4
+        scored.append((score, m.uci(), m))
+    scored.sort(key=lambda x: (-x[0], x[1]))
+    return [m for _, _, m in scored[:k]]
+
+
+def _badge_label(san):
+    return san.replace("-", "").replace("+", "").replace("#", "")
+
+
+def suggest_buttons_md(board):
+    if board.is_game_over():
+        return ""
+    parts = []
+    for m in _suggest_moves(board, 8):
+        san = board.san(m)
+        label = urllib.parse.quote(_badge_label(san), safe="")
+        badge = f"https://img.shields.io/badge/{label}-{ACCENT}?style=for-the-badge"
+        parts.append(f"[![{san}]({badge})]({issue_link(m.uci())})")
+    return " ".join(parts)
 
 
 def move_links_md(board):
@@ -188,42 +237,30 @@ def move_links_md(board):
     for from_sq in sorted(by_from, key=lambda s: (-chess.square_rank(s), chess.square_file(s))):
         piece = board.piece_at(from_sq)
         icon = PIECE_ICON[(piece.piece_type, piece.color)]
-        from_name = chess.square_name(from_sq)
-        targets = []
-        for m in by_from[from_sq]:
-            to_name = chess.square_name(m.to_square)
-            label = to_name
-            if m.promotion:
-                label = f"{to_name}={chess.piece_symbol(m.promotion).upper()}"
-            targets.append(f"[`{label}`]({issue_link(m.uci())})")
-        lines.append(f"{icon} **{from_name}** &rarr; " + " ".join(targets))
+        targets = [f"[`{board.san(m)}`]({issue_link(m.uci())})" for m in by_from[from_sq]]
+        lines.append(f"{icon} {chess.square_name(from_sq)} &rarr; " + " ".join(targets))
     return "<br>\n".join(lines)
 
 
 def build_section(board, lastmove, msg, stats):
     ver = hashlib.md5(board.fen().encode()).hexdigest()[:8]
     raw = f"https://raw.githubusercontent.com/{REPO}/main/game/board.svg?v={ver}"
-    out = []
-    out.append('<div align="center">\n')
-    out.append(f'<img src="{raw}" width="360" alt="Tabuleiro de xadrez atual" />\n')
-    out.append("</div>\n\n")
+    out = ['<div align="center">\n\n']
+    out.append(f'<img src="{raw}" width="340" alt="Tabuleiro de xadrez atual" />\n\n')
     if msg:
-        out.append(f"> {msg}\n\n")
-    side = "Brancas ♔" if board.turn == chess.WHITE else "Pretas ♚"
-    out.append(
-        f"**Vez das {side}.** Você joga de Brancas ♔ contra a IA (Stockfish). "
-        "Clique em um lance abaixo &mdash; vai abrir uma _issue_ já preenchida, "
-        "é só enviar (**Submit new issue**) que o bot responde em segundos. ♟️\n\n"
-    )
-    out.append("<details>\n<summary>♟️ <b>Ver lances possíveis</b></summary>\n\n")
+        out.append(f"{msg}\n\n")
+    if not board.is_game_over():
+        side = "Brancas" if board.turn == chess.WHITE else "Pretas"
+        out.append(f"**Vez das {side}** &mdash; escolha um lance abaixo:\n\n")
+        out.append(suggest_buttons_md(board) + "\n\n")
+    out.append("</div>\n\n")
+    out.append("<details>\n<summary>Ver todos os lances possíveis</summary>\n\n")
     out.append(move_links_md(board) + "\n\n")
     out.append("</details>\n\n")
     out.append(
-        f"`\U0001F3AE Partidas: {stats['games']}` &nbsp; "
-        f"`\U0001F3C6 Suas vitórias: {stats['wins']}` &nbsp; "
-        f"`\U0001F916 Vitórias da IA: {stats['losses']}` &nbsp; "
-        f"`\U0001F91D Empates: {stats['draws']}` &nbsp; "
-        f"`♟️ Lances: {stats['moves']}`\n"
+        f"<sub>Placar &mdash; Partidas: {stats['games']} &nbsp;|&nbsp; "
+        f"Suas vitórias: {stats['wins']} &nbsp;|&nbsp; Vitórias da IA: {stats['losses']} &nbsp;|&nbsp; "
+        f"Empates: {stats['draws']} &nbsp;|&nbsp; Lances: {stats['moves']}</sub>\n"
     )
     return "".join(out)
 
@@ -249,10 +286,9 @@ def write_comment(text):
 
 
 # --------------------------------------------------------------------------- #
-# Lógica de fim de jogo
+# Fim de jogo
 # --------------------------------------------------------------------------- #
 def settle_if_over(board, stats, author):
-    """Se a partida acabou, atualiza placar/histórico e devolve o texto do resultado."""
     if not board.is_game_over(claim_draw=True):
         return ""
     outcome = board.outcome(claim_draw=True)
@@ -260,15 +296,15 @@ def settle_if_over(board, stats, author):
     stats["games"] += 1
     if outcome.winner is None:
         stats["draws"] += 1
-        tag = "\U0001F91D Empate!"
+        tag = "Empate"
     elif outcome.winner == chess.WHITE:
         stats["wins"] += 1
-        tag = f"\U0001F3C6 **@{author}** venceu a IA!"
+        tag = f"**@{author}** venceu a IA"
     else:
         stats["losses"] += 1
-        tag = "\U0001F916 A IA venceu desta vez!"
+        tag = "A IA venceu desta vez"
     archive_game(author, tag, reason)
-    return f"{tag} _({reason})_ Uma nova partida já está no tabuleiro &mdash; faça o primeiro lance!"
+    return f"{tag} _({reason})_. Uma nova partida já começou no tabuleiro."
 
 
 # --------------------------------------------------------------------------- #
@@ -294,11 +330,11 @@ def main():
             mv = None
 
         if mv is None or mv not in board.legal_moves:
-            msg = "⚠️ Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Tente de novo abaixo!"
+            msg = "Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Escolha outro abaixo."
             comment = (
-                f"❌ Não consegui jogar `{uci}`. Provavelmente alguém moveu antes de você "
-                f"ou o link estava velho.\n\nVeja o tabuleiro atual no [meu perfil]({PROFILE_URL}) "
-                "e escolha um novo lance. ♟️"
+                f"Não consegui jogar `{uci}` — provavelmente alguém moveu antes de você "
+                f"ou o link estava velho. Veja o tabuleiro atual no [perfil]({PROFILE_URL}) "
+                "e escolha um novo lance."
             )
         else:
             seq = []
@@ -325,11 +361,8 @@ def main():
                         seq.append(res)
                         board = chess.Board()
                         lastmove = None
-            msg = " &middot; ".join(seq) + "."
-            comment = (
-                f"{msg}\n\n\U0001F449 Continue a partida no [meu perfil]({PROFILE_URL})! "
-                "Obrigado por jogar. ♟️"
-            )
+            msg = "; ".join(seq) + "."
+            comment = f"{msg}\n\nContinue a partida no [perfil]({PROFILE_URL}). Obrigado por jogar."
 
     render_svg(board, lastmove)
     section = build_section(board, lastmove, msg, stats)
