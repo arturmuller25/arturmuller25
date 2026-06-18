@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gera as pílulas estáticas (contato, stack e tecnologias dos projetos) com ícones."""
+"""Gera as pílulas estáticas (contato, stack e tecnologias dos projetos)."""
 
 import os
 import re
@@ -11,33 +11,38 @@ import svgchip
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(ROOT, "assets")
 
-# nome exibido -> slugs candidatos no Simple Icons
+# Stack: tile escura + ícone colorido + texto claro
+STACK_FILL = "#22303f"
+STACK_FG = "#eef2f7"
+STACK_STROKE = "#3a4f6a"
+
+# slugs Simple Icons (monocromático) -> usado em contato/projetos (ícone branco)
 SLUGS = {
     "Python": ["python"], "TypeScript": ["typescript"], "JavaScript": ["javascript"],
-    "PHP": ["php"], "PowerShell": ["powershell"], "HTML": ["html5"], "CSS": ["css3", "css"],
-    "React": ["react"], "Vite": ["vite"], "FastAPI": ["fastapi"], "PyTorch": ["pytorch"],
-    "OpenAI": ["openai"], "Pinecone": ["pinecone"], "Hugging Face": ["huggingface"],
-    "Railway": ["railway"], "Twig": ["twig"], "uv": ["uv", "astral"], "Playwright": ["playwright"],
-    "Git": ["git"], "VS Code": [], "Claude": ["claude", "anthropic"], "MySQL": ["mysql"],
+    "PHP": ["php"], "React": ["react"], "Vite": ["vite"], "FastAPI": ["fastapi"],
+    "OpenAI": ["openai"], "Pinecone": ["pinecone"], "MySQL": ["mysql"],
     "LinkedIn": ["linkedin"], "Gmail": ["gmail"],
 }
+MONO_LOGOS = {"Pinecone": "logos/pinecone-icon"}
 
-# fallback no set 'logos' do Iconify (para marcas removidas do Simple Icons)
-LOGOS = {
-    "Pinecone": "logos/pinecone-icon", "Twig": "vscode-icons/file-type-twig",
-    "VS Code": "logos/visual-studio-code",
+# ícones COLORIDOS (Iconify) para o Stack
+COLORED = {
+    "Python": ["logos/python"], "TypeScript": ["logos/typescript-icon"],
+    "JavaScript": ["logos/javascript"], "PHP": ["logos/php"], "PowerShell": ["logos/powershell"],
+    "HTML": ["logos/html-5"], "CSS": ["logos/css-3"], "React": ["logos/react"],
+    "Vite": ["logos/vitejs"], "FastAPI": ["logos/fastapi-icon"], "PyTorch": ["logos/pytorch-icon"],
+    "OpenAI": ["logos/openai-icon"], "Pinecone": ["logos/pinecone-icon"],
+    "Hugging Face": ["logos/hugging-face-icon"], "Railway": ["logos/railway"],
+    "Twig": ["vscode-icons/file-type-twig"], "Playwright": ["logos/playwright"],
+    "Git": ["logos/git-icon"], "VS Code": ["logos/visual-studio-code"],
+    "MySQL": ["logos/mysql-icon"], "uv": ["logos/astral"], "Claude": ["logos/claude-ai-icon", "logos/anthropic-icon"],
 }
+# cor de marca para fallback (quando não há ícone colorido pronto)
+BRAND = {"PowerShell": "#5391FE", "uv": "#DE5FE9", "Claude": "#D97757", "Railway": "#FFFFFF"}
+# slug Simple Icons para tingir quando não há colorido (logos) disponível
+FALLBACK_SLUG = {"PowerShell": "powershell", "uv": "uv", "Railway": "railway"}
 
-_cache = {}
-
-
-def _urls(label):
-    for slug in SLUGS.get(label, []):
-        yield f"https://cdn.simpleicons.org/{slug}"
-    for slug in SLUGS.get(label, []):
-        yield f"https://api.iconify.design/simple-icons/{slug}.svg"
-    if label in LOGOS:
-        yield f"https://api.iconify.design/{LOGOS[label]}.svg"
+_ctr = [0]
 
 
 def _fetch(url):
@@ -45,29 +50,83 @@ def _fetch(url):
     return urllib.request.urlopen(req, timeout=15).read().decode()
 
 
-def icon(label):
-    if label in _cache:
-        return _cache[label]
-    result = None
-    for url in _urls(label):
+def _viewbox(svg):
+    m = re.search(r'viewBox="[\d.\-]+ [\d.\-]+ ([\d.]+) ([\d.]+)"', svg)
+    return (float(m.group(1)), float(m.group(2))) if m else (24.0, 24.0)
+
+
+def _paths(svg):
+    return re.findall(r'<path[^>]*\sd="([^"]+)"', svg)
+
+
+def mono_icon(label, fg="#ffffff"):
+    urls = [f"https://cdn.simpleicons.org/{s}" for s in SLUGS.get(label, [])]
+    urls += [f"https://api.iconify.design/simple-icons/{s}.svg" for s in SLUGS.get(label, [])]
+    if label in MONO_LOGOS:
+        urls.append(f"https://api.iconify.design/{MONO_LOGOS[label]}.svg")
+    for url in urls:
         try:
             svg = _fetch(url)
         except Exception:
             continue
-        paths = re.findall(r'<path[^>]*\sd="([^"]+)"', svg)
-        if not paths:
+        ps = _paths(svg)
+        if ps:
+            inner = "".join(f'<path d="{d}" fill="{fg}"/>' for d in ps)
+            w, h = _viewbox(svg)
+            time.sleep(0.1)
+            return (inner, w, h)
+    return None
+
+
+def _namespace(inner):
+    _ctr[0] += 1
+    pfx = f"ic{_ctr[0]}_"
+    inner = re.sub(r'\bid="([^"]+)"', lambda m: f'id="{pfx}{m.group(1)}"', inner)
+    inner = re.sub(r'url\(#([^)]+)\)', lambda m: f'url(#{pfx}{m.group(1)})', inner)
+    inner = re.sub(r'((?:xlink:)?href)="#([^"]+)"', lambda m: f'{m.group(1)}="#{pfx}{m.group(2)}"', inner)
+    return inner
+
+
+def color_icon(label):
+    for ic in COLORED.get(label, []):
+        try:
+            svg = _fetch(f"https://api.iconify.design/{ic}.svg")
+        except Exception:
             continue
-        vb = re.search(r'viewBox="[\d.\-]+ [\d.\-]+ ([\d.]+) ([\d.]+)"', svg)
-        size = max(float(vb.group(1)), float(vb.group(2))) if vb else 24.0
-        result = (paths, size)
-        break
-    _cache[label] = result
-    time.sleep(0.15)
-    return result
+        if "<path" not in svg and "<g" not in svg:
+            continue
+        inner = re.sub(r"(?is)^.*?<svg[^>]*>", "", svg)
+        inner = re.sub(r"(?is)</svg>\s*$", "", inner).strip()
+        if not inner:
+            continue
+        w, h = _viewbox(svg)
+        time.sleep(0.1)
+        return (_namespace(inner), w, h)
+    # fallback: ícone monocromático tingido com a cor de marca
+    slug = FALLBACK_SLUG.get(label)
+    if slug:
+        hexc = BRAND.get(label, "#cfd8e3")
+        for url in (f"https://cdn.simpleicons.org/{slug}",
+                    f"https://api.iconify.design/simple-icons/{slug}.svg"):
+            try:
+                svg = _fetch(url)
+            except Exception:
+                continue
+            ps = _paths(svg)
+            if ps:
+                inner = "".join(f'<path d="{d}" fill="{hexc}"/>' for d in ps)
+                w, h = _viewbox(svg)
+                time.sleep(0.1)
+                return (inner, w, h)
+    return None
 
 
-def items(labels):
-    return [(l, icon(l)) for l in labels]
+def citems(labels):
+    return [(l, color_icon(l)) for l in labels]
+
+
+def mitems(labels):
+    return [(l, mono_icon(l)) for l in labels]
 
 
 def write(name, content):
@@ -78,24 +137,28 @@ def write(name, content):
 def main():
     os.makedirs(ASSETS, exist_ok=True)
 
-    write("contact-linkedin.svg", svgchip.pill("LinkedIn", icon("LinkedIn"), height=40, size=15))
-    write("contact-gmail.svg", svgchip.pill("Gmail", icon("Gmail"), height=40, size=15))
+    # Contato (aço + ícone branco)
+    write("contact-linkedin.svg", svgchip.pill("LinkedIn", mono_icon("LinkedIn"), height=40, size=15))
+    write("contact-gmail.svg", svgchip.pill("Gmail", mono_icon("Gmail"), height=40, size=15))
 
-    langs = ["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]
-    tools = ["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face",
-             "Railway", "Twig", "uv", "Playwright", "Git", "VS Code", "Claude"]
-    write("stack-langs.svg", svgchip.row(items(langs), max_width=520))
-    write("stack-tools.svg", svgchip.row(items(tools), max_width=520))
+    # Stack (categorias, tile escura, ícone colorido)
+    def stack(labels):
+        return svgchip.row(citems(labels), max_width=560, fill=STACK_FILL, fg=STACK_FG,
+                           stroke=STACK_STROKE, height=34, size=14)
+    write("stack-langs.svg", stack(["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]))
+    write("stack-frameworks.svg", stack(["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face", "Twig"]))
+    write("stack-tools.svg", stack(["Railway", "uv", "Playwright", "Git", "VS Code", "Claude"]))
 
-    write("proj-comac.svg", svgchip.row(items(["Python", "FastAPI", "OpenAI", "Pinecone"]), max_width=340))
-    write("proj-muller.svg", svgchip.row(items(["React", "TypeScript", "Vite"]), max_width=340))
-    write("proj-clarivid.svg", svgchip.row(items(["PHP", "MySQL", "JavaScript"]), max_width=340))
+    # Tecnologias por projeto (aço + ícone branco)
+    write("proj-comac.svg", svgchip.row(mitems(["Python", "FastAPI", "OpenAI", "Pinecone"]), max_width=340))
+    write("proj-muller.svg", svgchip.row(mitems(["React", "TypeScript", "Vite"]), max_width=340))
+    write("proj-clarivid.svg", svgchip.row(mitems(["PHP", "MySQL", "JavaScript"]), max_width=340))
 
+    # Utilitárias
     write("privado.svg", svgchip.pill("privado", fill="#5A6B7B", height=24, size=12))
     write("ver-repos.svg", svgchip.pill("Ver todos os repositórios", height=30, size=14))
 
-    missing = [k for k in SLUGS if icon(k) is None]
-    print("Pílulas geradas. Sem ícone:", missing or "nenhum")
+    print("Pílulas geradas.")
 
 
 if __name__ == "__main__":
