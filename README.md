@@ -140,3 +140,4 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
     <img src="https://img.shields.io/badge/Gmail-161b22?style=flat-square&logo=gmail&logoColor=a78bfa" alt="Gmail" />
   </a>
 </p>
+
