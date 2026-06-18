@@ -80,7 +80,7 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/game/board.svg?v=3416e89d" width="340" alt="Tabuleiro de xadrez atual" />
 
-**@arturmuller25** jogou **e4**; a IA respondeu **Nc6**.
+Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Escolha outro abaixo.
 
 **Vez das Brancas** &mdash; escolha um lance abaixo:
 
