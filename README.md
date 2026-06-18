@@ -15,15 +15,6 @@
 
 ## Sobre
 
-```text
- █████╗ ██████╗ ████████╗██╗   ██╗██████╗
-██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██╔══██╗
-███████║██████╔╝   ██║   ██║   ██║██████╔╝
-██╔══██║██╔══██╗   ██║   ██║   ██║██╔══██╗
-██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-```
-
 Estudante de desenvolvimento e criador de projetos próprios. Gosto de levar uma ideia do conceito ao deploy — passando por front-end, back-end e, mais recentemente, inteligência artificial.
 
 - **[comac-rag](https://github.com/arturmuller25/comac-rag)** — sistema de RAG em Python (FastAPI, OpenAI, Pinecone), em produção no Railway
@@ -80,8 +71,6 @@ Uma partida de xadrez de verdade, jogável aqui pelo GitHub: você joga de **Bra
 
 <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/game/board.svg?v=3416e89d" width="340" alt="Tabuleiro de xadrez atual" />
 
-Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Escolha outro abaixo.
-
 **Vez das Brancas** &mdash; escolha um lance abaixo:
 
 [![d4](https://img.shields.io/badge/d4-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cd2d4&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![e5](https://img.shields.io/badge/e5-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Ce4e5&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![f4](https://img.shields.io/badge/f4-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf2f4&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Na3](https://img.shields.io/badge/Na3-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cb1a3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Nc3](https://img.shields.io/badge/Nc3-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cb1c3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Bd3](https://img.shields.io/badge/Bd3-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf1d3&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Be2](https://img.shields.io/badge/Be2-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cf1e2&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.) [![Ne2](https://img.shields.io/badge/Ne2-8b5cf6?style=for-the-badge)](https://github.com/arturmuller25/arturmuller25/issues/new?title=chess%7Cmove%7Cg1e2&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20para%20confirmar%20o%20lance.%20O%20bot%20responde%20em%20alguns%20segundos%20e%20o%20tabuleiro%20do%20perfil%20%C3%A9%20atualizado%20automaticamente.)
@@ -122,10 +111,6 @@ Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Escolha outro a
   <img src="https://streak-stats.demolab.com/?user=arturmuller25&hide_border=true&background=0d1117&border=30363d&stroke=30363d&ring=8b5cf6&fire=a78bfa&currStreakNum=c9d1d9&sideNums=c9d1d9&currStreakLabel=a78bfa&sideLabels=8b949e&dates=8b949e" alt="Sequência de commits" />
 </p>
 
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=arturmuller25&theme=onedark&no-frame=true&no-bg=true&column=7&margin-w=8&margin-h=8" alt="Troféus" />
-</p>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/output/github-contribution-grid-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/output/github-contribution-grid-snake.svg" />
@@ -144,4 +129,3 @@ Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Escolha outro a
     <img src="https://img.shields.io/badge/Gmail-161b22?style=flat-square&logo=gmail&logoColor=a78bfa" alt="Gmail" />
   </a>
 </p>
-
