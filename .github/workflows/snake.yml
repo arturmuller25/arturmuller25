@@ -1,0 +1,35 @@
+name: Gerar animação da cobrinha
+
+on:
+  # Atualiza a cada 12 horas
+  schedule:
+    - cron: "0 */12 * * *"
+  # Permite rodar manualmente na aba Actions
+  workflow_dispatch:
+  # Roda quando houver push na branch main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gerar SVGs da cobrinha
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      - name: Publicar na branch output
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
