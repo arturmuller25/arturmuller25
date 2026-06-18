@@ -25,7 +25,8 @@ import chess.svg
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAME_DIR = os.path.join(ROOT, "game")
 FEN_FILE = os.path.join(GAME_DIR, "board.fen")
-SVG_FILE = os.path.join(GAME_DIR, "board.svg")
+SVG_LIGHT = os.path.join(GAME_DIR, "board-light.svg")
+SVG_DARK = os.path.join(GAME_DIR, "board-dark.svg")
 STATS_FILE = os.path.join(GAME_DIR, "stats.txt")
 HISTORY_FILE = os.path.join(GAME_DIR, "history.md")
 COMMENT_FILE = os.path.join(GAME_DIR, "_comment.md")
@@ -38,7 +39,7 @@ MARK_START = "<!-- CHESS:START -->"
 MARK_END = "<!-- CHESS:END -->"
 
 # Paleta do perfil
-ACCENT = "8b5cf6"   # violeta
+ACCENT = "4A6FA5"   # azul aço
 
 PIECE_ICON = {
     (chess.PAWN, True): "♙", (chess.KNIGHT, True): "♘", (chess.BISHOP, True): "♗",
@@ -55,14 +56,22 @@ TERM_PT = {
     "VARIANT_LOSS": "derrota", "VARIANT_DRAW": "empate",
 }
 
-# Cores do tabuleiro (na paleta do perfil)
-BOARD_COLORS = {
-    "square light": "#e6e2f5",
-    "square dark": "#6f689e",
-    "square light lastmove": "#c4b5fd",
-    "square dark lastmove": "#8b5cf6",
-    "margin": "#0d1117",
-    "coord": "#8b949e",
+# Cores do tabuleiro (azul aço + branco quartzo), uma versão por tema
+BOARD_LIGHT = {
+    "square light": "#ECECE8",
+    "square dark": "#8197B5",
+    "square light lastmove": "#cdd9ea",
+    "square dark lastmove": "#4A6FA5",
+    "margin": "#F4F4F2",
+    "coord": "#5A6B7B",
+}
+BOARD_DARK = {
+    "square light": "#6E86A8",
+    "square dark": "#36567D",
+    "square light lastmove": "#8aa6c8",
+    "square dark lastmove": "#4A6FA5",
+    "margin": "#1c2530",
+    "coord": "#9fb0c4",
 }
 
 
@@ -110,7 +119,7 @@ def write_stats(s):
 def archive_game(author, result_tag, reason):
     os.makedirs(GAME_DIR, exist_ok=True)
     today = datetime.date.today().isoformat()
-    line = f"- `{today}` &mdash; **@{author}** &mdash; {result_tag} _({reason})_"
+    line = f"- `{today}` &middot; **@{author}** &middot; {result_tag} _({reason})_"
     prev = ""
     if os.path.exists(HISTORY_FILE):
         prev = open(HISTORY_FILE, encoding="utf-8").read()
@@ -163,15 +172,16 @@ def _greedy_move(board):
 # --------------------------------------------------------------------------- #
 # Renderização
 # --------------------------------------------------------------------------- #
-def render_svg(board, lastmove):
+def render_svgs(board, lastmove):
     check_sq = board.king(board.turn) if board.is_check() else None
-    svg = chess.svg.board(
-        board=board, lastmove=lastmove, check=check_sq,
-        size=380, coordinates=True, colors=BOARD_COLORS,
-    )
     os.makedirs(GAME_DIR, exist_ok=True)
-    with open(SVG_FILE, "w", encoding="utf-8") as f:
-        f.write(svg)
+    for path, colors in ((SVG_LIGHT, BOARD_LIGHT), (SVG_DARK, BOARD_DARK)):
+        svg = chess.svg.board(
+            board=board, lastmove=lastmove, check=check_sq,
+            size=380, coordinates=True, colors=colors,
+        )
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(svg)
 
 
 def issue_link(uci):
@@ -244,23 +254,26 @@ def move_links_md(board):
 
 def build_section(board, lastmove, msg, stats):
     ver = hashlib.md5(board.fen().encode()).hexdigest()[:8]
-    raw = f"https://raw.githubusercontent.com/{REPO}/main/game/board.svg?v={ver}"
+    base = f"https://raw.githubusercontent.com/{REPO}/main/game"
     out = ['<div align="center">\n\n']
-    out.append(f'<img src="{raw}" width="340" alt="Tabuleiro de xadrez atual" />\n\n')
+    out.append("<picture>\n")
+    out.append(f'<source media="(prefers-color-scheme: dark)" srcset="{base}/board-dark.svg?v={ver}" />\n')
+    out.append(f'<img src="{base}/board-light.svg?v={ver}" width="340" alt="Tabuleiro de xadrez atual" />\n')
+    out.append("</picture>\n\n")
     if msg:
         out.append(f"{msg}\n\n")
     if not board.is_game_over():
         side = "Brancas" if board.turn == chess.WHITE else "Pretas"
-        out.append(f"**Vez das {side}** &mdash; escolha um lance abaixo:\n\n")
+        out.append(f"**Vez das {side}.** Escolha um lance abaixo:\n\n")
         out.append(suggest_buttons_md(board) + "\n\n")
     out.append("</div>\n\n")
     out.append("<details>\n<summary>Ver todos os lances possíveis</summary>\n\n")
     out.append(move_links_md(board) + "\n\n")
     out.append("</details>\n\n")
     out.append(
-        f"<sub>Placar &mdash; Partidas: {stats['games']} &nbsp;|&nbsp; "
-        f"Suas vitórias: {stats['wins']} &nbsp;|&nbsp; Vitórias da IA: {stats['losses']} &nbsp;|&nbsp; "
-        f"Empates: {stats['draws']} &nbsp;|&nbsp; Lances: {stats['moves']}</sub>\n"
+        f"<sub>Placar &nbsp;·&nbsp; Partidas: {stats['games']} &nbsp;·&nbsp; "
+        f"Suas vitórias: {stats['wins']} &nbsp;·&nbsp; Vitórias da IA: {stats['losses']} &nbsp;·&nbsp; "
+        f"Empates: {stats['draws']} &nbsp;·&nbsp; Lances: {stats['moves']}</sub>\n"
     )
     return "".join(out)
 
@@ -330,9 +343,9 @@ def main():
             mv = None
 
         if mv is None or mv not in board.legal_moves:
-            msg = "Lance inválido ou desatualizado &mdash; o tabuleiro não mudou. Escolha outro abaixo."
+            msg = "Lance inválido ou desatualizado. O tabuleiro não mudou; escolha outro abaixo."
             comment = (
-                f"Não consegui jogar `{uci}` — provavelmente alguém moveu antes de você "
+                f"Não consegui jogar `{uci}`. Provavelmente alguém moveu antes de você "
                 f"ou o link estava velho. Veja o tabuleiro atual no [perfil]({PROFILE_URL}) "
                 "e escolha um novo lance."
             )
@@ -364,7 +377,7 @@ def main():
             msg = "; ".join(seq) + "."
             comment = f"{msg}\n\nContinue a partida no [perfil]({PROFILE_URL}). Obrigado por jogar."
 
-    render_svg(board, lastmove)
+    render_svgs(board, lastmove)
     section = build_section(board, lastmove, msg, stats)
     inject_readme(section)
     save_board(board)
