@@ -1,0 +1,48 @@
+name: Atualizar cards de estatísticas
+
+on:
+  # Atualiza uma vez por dia
+  schedule:
+    - cron: "0 6 * * *"
+  # Permite rodar manualmente na aba Actions
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar cards (stats + linguagens)
+        env:
+          # Precisa de um Personal Access Token SEU para enxergar os dados privados.
+          # Crie o secret PROFILE_TOKEN em Settings > Secrets and variables > Actions.
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN }}
+          PROFILE_USER: arturmuller25
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "Secret PROFILE_TOKEN ausente — pulando (mantém os cards atuais)."
+            exit 0
+          fi
+          python scripts/stats_card.py
+
+      - name: Commit dos cards atualizados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/stats-light.svg assets/stats-dark.svg assets/langs-light.svg assets/langs-dark.svg
+          if git diff --cached --quiet; then
+            echo "Nada mudou."
+          else
+            git commit -m "chore(stats): atualiza cards de estatísticas"
+            git push
+          fi
