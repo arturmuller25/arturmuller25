@@ -22,6 +22,8 @@ import urllib.parse
 import chess
 import chess.svg
 
+import svgchip
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAME_DIR = os.path.join(ROOT, "game")
 FEN_FILE = os.path.join(GAME_DIR, "board.fen")
@@ -225,15 +227,16 @@ def _badge_label(san):
     return san.replace("-", "").replace("+", "").replace("#", "")
 
 
-def suggest_buttons_md(board):
+def suggest_buttons_md(board, ver):
     if board.is_game_over():
         return ""
+    base = f"https://raw.githubusercontent.com/{REPO}/main/game"
     parts = []
-    for m in _suggest_moves(board, 8):
+    for i, m in enumerate(_suggest_moves(board, 8)):
         san = board.san(m)
-        label = urllib.parse.quote(_badge_label(san), safe="")
-        badge = f"https://img.shields.io/badge/{label}-{ACCENT}?style=for-the-badge"
-        parts.append(f"[![{san}]({badge})]({issue_link(m.uci())})")
+        with open(os.path.join(GAME_DIR, f"btn{i}.svg"), "w", encoding="utf-8") as f:
+            f.write(svgchip.pill(san, height=34, size=15))
+        parts.append(f"[![{san}]({base}/btn{i}.svg?v={ver})]({issue_link(m.uci())})")
     return " ".join(parts)
 
 
@@ -265,7 +268,7 @@ def build_section(board, lastmove, msg, stats):
     if not board.is_game_over():
         side = "Brancas" if board.turn == chess.WHITE else "Pretas"
         out.append(f"**Vez das {side}.** Escolha um lance abaixo:\n\n")
-        out.append(suggest_buttons_md(board) + "\n\n")
+        out.append(suggest_buttons_md(board, ver) + "\n\n")
     out.append("</div>\n\n")
     out.append("<details>\n<summary>Ver todos os lances possíveis</summary>\n\n")
     out.append(move_links_md(board) + "\n\n")
