@@ -45,7 +45,7 @@ No momento estou me aprofundando em arquitetura de software, boas práticas e IA
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3><a href="https://github.com/arturmuller25/comac-rag">comac&#8209;rag</a></h3>
+      <h3>comac&#8209;rag &nbsp;<img src="https://img.shields.io/badge/privado-5A6B7B?style=flat-square&logo=github&logoColor=white" alt="privado" /></h3>
       <p>Sistema de RAG em Python: busca semântica sobre uma base de conhecimento e geração de respostas, em produção no Railway.</p>
       <p>
         <img src="https://img.shields.io/badge/Python-4A6FA5?style=flat-square&logo=python&logoColor=white" />
