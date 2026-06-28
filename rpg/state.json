@@ -2,15 +2,15 @@
   "hp": 20,
   "score": 0,
   "best": 0,
-  "rituals": 3,
+  "rituals": 1,
   "defending": false,
   "over": false,
   "last_roll": 0,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 23,
-    "max": 23
+    "hp": 32,
+    "max": 32
   },
   "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }

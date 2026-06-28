@@ -64,11 +64,10 @@ def _pill_markup(label, x, y, fill, fg, height, size, radius, icon, stroke, min_
     else:
         content = tw + 2 * PAD_X
     w = max(round(content), int(min_w))
-    off = (w - content) / 2.0 if w > content else 0.0
     if icon:
-        icon_g, iw = _icon_group(icon, height, size, PAD_X + off)
-        tx = round(PAD_X + off + iw + ICON_GAP)
-        text = (f'<text x="{tx}" y="{ty}" text-anchor="start" font-family="{FONT_FAMILY}" '
+        icon_g, iw = _icon_group(icon, height, size, PAD_X)        # ícone sempre na mesma posição
+        tcx = (PAD_X + iw + ICON_GAP + (w - PAD_X)) / 2.0          # texto centralizado no espaço restante
+        text = (f'<text x="{tcx:.0f}" y="{ty}" text-anchor="middle" font-family="{FONT_FAMILY}" '
                 f'font-size="{size}" font-weight="600" fill="{fg}">{_esc(label)}</text>')
         inner = icon_g + text
     else:

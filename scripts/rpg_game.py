@@ -36,7 +36,7 @@ MARK_START = "<!-- RPG:START -->"
 MARK_END = "<!-- RPG:END -->"
 
 MAX_HP = 20
-START_RITUALS = 3
+START_RITUALS = 1
 
 # Cores vivas dos Elementos (boas em tema claro e escuro)
 ELEMENTS = {
@@ -102,9 +102,9 @@ DEMON = [
 def new_enemy(score, elem=None):
     pool = [c for c in CREATURES if c[1] == elem] if elem else CREATURES
     name, el = random.choice(pool)
-    hp = random.randint(14, 20) + score * 2
-    if el == "Sangue":        # Raziel é um chefe: mais resistente
-        hp += 8
+    hp = random.randint(16, 22) + score * 2
+    if el == "Sangue":        # Raziel é um chefe: bem mais resistente
+        hp += 10
     return {"name": name, "elem": el, "hp": hp, "max": hp}
 
 
@@ -137,7 +137,7 @@ def save_state(s):
 # Combate
 # --------------------------------------------------------------------------- #
 def _enemy_attack(s, parts):
-    base = (5, 10) if s["enemy"]["elem"] == "Sangue" else (3, 7)   # Raziel bate mais forte
+    base = (6, 11) if s["enemy"]["elem"] == "Sangue" else (4, 8)   # criaturas batem mais forte
     dano = random.randint(*base)
     if s["defending"]:
         dano = max(1, dano // 2)
@@ -192,7 +192,7 @@ def apply(s, action):
         if s["rituals"] <= 0:
             return "Sem rituais restantes nesta investida.", "Você está sem rituais; use Atacar ou Defender."
         s["rituals"] -= 1
-        dano = random.randint(7, 12)
+        dano = random.randint(10, 15)
         e["hp"] -= dano
         parts.append(f"conjura um ritual em {e['name']} ({dano})")
 
@@ -407,7 +407,7 @@ def build_section(s, ver):
                    f'  <tr><td>{btn_html("ritual")}</td><td>{btn_html("fugir")}</td></tr>\n'
                    '</table>\n')
     out.append('\n<sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura '
-               '&nbsp;·&nbsp; <b>Ritual</b> dano alto garantido (3 usos) &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>\n')
+               '&nbsp;·&nbsp; <b>Ritual</b> dano alto garantido (1 uso) &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>\n')
     out.append("</div>\n")
     return "".join(out)
 
