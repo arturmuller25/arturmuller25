@@ -1,15 +1,16 @@
 {
-  "hp": 16,
+  "hp": 20,
   "score": 0,
   "best": 0,
   "rituals": 3,
   "defending": false,
   "over": false,
+  "last_roll": 0,
   "enemy": {
-    "name": "Sussurro do Medo",
-    "elem": "Medo",
-    "hp": 7,
-    "max": 13
+    "name": "Zumbi de Sangue",
+    "elem": "Sangue",
+    "hp": 9,
+    "max": 9
   },
-  "msg": "**Você** atingiu Sussurro do Medo (6) a criatura revidou (4)."
+  "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }
