@@ -1,5 +1,5 @@
 {
-  "hp": 20,
+  "hp": 16,
   "score": 0,
   "best": 0,
   "rituals": 3,
@@ -8,8 +8,8 @@
   "enemy": {
     "name": "Profanado",
     "elem": "Morte",
-    "hp": 11,
+    "hp": 5,
     "max": 11
   },
-  "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
+  "msg": "**@você** atingiu Profanado (6) a criatura revidou (4)."
 }
