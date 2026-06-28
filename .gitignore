@@ -1,2 +1,6 @@
 # arquivos transitórios de resposta das issues dos jogos
 rpg/_comment.md
+
+# python
+__pycache__/
+*.pyc
