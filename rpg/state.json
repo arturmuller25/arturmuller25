@@ -1,16 +1,16 @@
 {
-  "hp": 17,
-  "score": 0,
+  "hp": 20,
+  "score": 1,
   "best": 0,
   "rituals": 3,
   "defending": false,
   "over": false,
-  "last_roll": 17,
+  "last_roll": 12,
   "enemy": {
-    "name": "Raziel (Vampiro)",
-    "elem": "Sangue",
-    "hp": 2,
-    "max": 9
+    "name": "Distorção",
+    "elem": "Energia",
+    "hp": 13,
+    "max": 13
   },
-  "msg": "**Você** atingiu Raziel (Vampiro) (7) a criatura revidou (3)."
+  "msg": "**Você** atingiu Raziel (Vampiro) (5) derrotou e recuperou 3 de vida."
 }
