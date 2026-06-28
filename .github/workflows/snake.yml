@@ -22,6 +22,8 @@ jobs:
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
+          # Usa o token pessoal para enxergar também as contribuições privadas
+          github_token: ${{ secrets.PROFILE_TOKEN }}
           outputs: |
             dist/github-contribution-grid-snake.svg?color_snake=#4a6fa5&color_dots=#eceae6,#bcc9dc,#8197b5,#4a6fa5,#36567d
             dist/github-contribution-grid-snake-dark.svg?color_snake=#8aa6c8&color_dots=#1c2530,#2d3f57,#3f5b80,#5f80ac,#8aa6c8
