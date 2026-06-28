@@ -95,7 +95,8 @@ def row(items, max_width=520, fill=FILL, fg=FG, height=HEIGHT, size=FONT, radius
     width = max(sum(w for _, _, w in ln) + gap * (len(ln) - 1) for ln in lines) + 1
     parts, y = [], 0.5
     for ln in lines:
-        x = 0.5
+        line_w = sum(w for _, _, w in ln) + gap * (len(ln) - 1)
+        x = (width - 1 - line_w) / 2 + 0.5
         for label, icon, w in ln:
             markup, _ = _pill_markup(label, x, y, fill, fg, height - 1, size, radius, icon, stroke)
             parts.append(markup)

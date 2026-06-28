@@ -15,9 +15,9 @@
 
 ## Sobre
 
-Estudante de desenvolvimento e criador de projetos próprios. Gosto de transformar ideias em coisas que funcionam de verdade, do front-end ao back-end, e ultimamente venho explorando bastante inteligência artificial e sistemas de RAG.
+Estudante de desenvolvimento e criador de projetos pessoais. Gosto de transformar ideias em coisas que funcionam de verdade, do front-end ao back-end, e ultimamente venho explorando bastante inteligência artificial e sistemas de RAG.
 
-No momento estou me aprofundando em arquitetura de software, boas práticas e IA aplicada.
+Hoje estou me aprofundando em arquitetura de software, boas práticas, IA aplicada para negócios, automações e mais.
 
 ---
 
@@ -25,17 +25,17 @@ No momento estou me aprofundando em arquitetura de software, boas práticas e IA
 
 <p align="center"><b>Linguagens</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/tech-langs.svg" alt="Python, TypeScript, JavaScript, PHP, PowerShell, HTML, CSS" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-langs.svg" alt="Python, TypeScript, JavaScript, PHP, PowerShell, HTML, CSS" />
 </p>
 
 <p align="center"><b>Frameworks &amp; bibliotecas</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/tech-frameworks.svg" alt="React, Vite, FastAPI, PyTorch, OpenAI, Pinecone, Hugging Face, Twig" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-frameworks.svg" alt="React, Vite, FastAPI, PyTorch, OpenAI, Pinecone, Hugging Face, Twig" />
 </p>
 
 <p align="center"><b>Ferramentas &amp; plataformas</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/tech-tools.svg" alt="Railway, uv, Playwright, Git, VS Code, Claude" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-tools.svg" alt="Railway, uv, Playwright, Git, VS Code, Claude" />
 </p>
 
 ---
@@ -45,7 +45,7 @@ No momento estou me aprofundando em arquitetura de software, boas práticas e IA
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3>comac&#8209;rag &nbsp;<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/privado.svg" alt="privado" /></h3>
+      <h3>comac&#8209;rag &nbsp;<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/priv.svg" alt="Privado" align="top" /></h3>
       <p>Sistema de RAG em Python: busca semântica sobre uma base de conhecimento e geração de respostas, em produção no Railway.</p>
       <p><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/proj-comac.svg?v=2" alt="Python, FastAPI, OpenAI, Pinecone" /></p>
     </td>

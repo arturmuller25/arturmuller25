@@ -35,8 +35,13 @@ COLORED = {
     "Hugging Face": ["logos/hugging-face-icon"], "Railway": ["logos/railway"],
     "Twig": ["vscode-icons/file-type-twig"], "Playwright": ["logos/playwright"],
     "Git": ["logos/git-icon"], "VS Code": ["logos/visual-studio-code"],
-    "MySQL": ["logos/mysql-icon"], "uv": ["logos/astral"], "Claude": ["logos/claude-ai-icon", "logos/anthropic-icon"],
+    "MySQL": ["logos/mysql-icon"], "uv": ["logos/astral"],
+    "Claude": ["logos/claude-icon", "logos/claude", "logos/anthropic-icon"],
 }
+
+# cadeado (mdi) para a etiqueta de repositório privado
+LOCK = ('<path fill="#c3ced9" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 '
+        '2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3v3H9V7a3 3 0 0 1 3-3"/>', 24, 24)
 # cor de marca para fallback (quando não há ícone colorido pronto)
 BRAND = {"PowerShell": "#5391FE", "uv": "#DE5FE9", "Claude": "#D97757", "Railway": "#FFFFFF"}
 # slug Simple Icons para tingir quando não há colorido (logos) disponível
@@ -145,9 +150,9 @@ def main():
     def stack(labels):
         return svgchip.row(citems(labels), max_width=560, fill=STACK_FILL, fg=STACK_FG,
                            stroke=STACK_STROKE, height=34, size=14)
-    write("tech-langs.svg", stack(["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]))
-    write("tech-frameworks.svg", stack(["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face", "Twig"]))
-    write("tech-tools.svg", stack(["Railway", "uv", "Playwright", "Git", "VS Code", "Claude"]))
+    write("th-langs.svg", stack(["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]))
+    write("th-frameworks.svg", stack(["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face", "Twig"]))
+    write("th-tools.svg", stack(["Railway", "uv", "Playwright", "Git", "VS Code", "Claude"]))
 
     # Tecnologias por projeto (aço + ícone branco)
     write("proj-comac.svg", svgchip.row(mitems(["Python", "FastAPI", "OpenAI", "Pinecone"]), max_width=340))
@@ -155,7 +160,8 @@ def main():
     write("proj-clarivid.svg", svgchip.row(mitems(["PHP", "MySQL", "JavaScript"]), max_width=340))
 
     # Utilitárias
-    write("privado.svg", svgchip.pill("privado", fill="#5A6B7B", height=24, size=12))
+    write("priv.svg", svgchip.pill("Privado", LOCK, fill=STACK_FILL, fg=STACK_FG,
+                                   stroke=STACK_STROKE, height=22, size=11))
     write("ver-repos.svg", svgchip.pill("Ver todos os repositórios", height=30, size=14))
 
     print("Pílulas geradas.")
