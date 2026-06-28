@@ -100,47 +100,49 @@ def _paint():
     g = _grid()
     cx = 26
     # sobretudo (sino) com luz à esquerda e sombra à direita
-    _poly(g, [(15, 23), (37, 23), (48, 61), (4, 61)], 2)
-    _poly(g, [(15, 23), (24, 23), (14, 60), (4, 60)], 3)
-    _poly(g, [(28, 23), (37, 23), (48, 61), (38, 61)], 12)
+    _poly(g, [(15, 24), (37, 24), (48, 61), (4, 61)], 2)
+    _poly(g, [(15, 24), (24, 24), (14, 60), (4, 60)], 3)
+    _poly(g, [(28, 24), (37, 24), (48, 61), (38, 61)], 12)
     # mangas
-    _rect(g, 9, 27, 15, 48, 2)
-    _rect(g, 37, 27, 43, 48, 12)
-    # --- GOLA (por cima do sobretudo) ---
-    # faixa atrás do pescoço (liga os dois lados)
-    _poly(g, [(17, 16), (35, 16), (33, 21), (19, 21)], 4)
-    # lapelas: assentam nos ombros, abraçam o pescoço e sobem nas laterais
-    _poly(g, [(11, 30), (8, 11), (13, 10), (18, 17), (21, 31)], 5)
-    _poly(g, [(41, 30), (44, 11), (39, 10), (34, 17), (31, 31)], 5)
-    _poly(g, [(11, 30), (8, 11), (11, 15), (15, 30)], 4)     # dobra externa esq
-    _poly(g, [(41, 30), (44, 11), (41, 15), (37, 30)], 4)    # dobra externa dir
-    _poly(g, [(18, 17), (21, 31), (19, 31), (16, 18)], 4)    # vinco interno esq
-    _poly(g, [(34, 17), (31, 31), (33, 31), (36, 18)], 4)    # vinco interno dir
-    # placa central vermelha (no V da gola, abertura do sobretudo)
+    _rect(g, 9, 32, 15, 50, 2)
+    _rect(g, 37, 32, 43, 50, 12)
+    # GOLA ALTA: leque atrás da cabeça (borda vermelha + interior escuro)
+    _poly(g, [(13, 26), (9, 3), (19, 9), (26, 13), (33, 9), (43, 3), (39, 26)], 5)
+    _poly(g, [(16, 25), (12, 7), (20, 12), (26, 15), (32, 12), (40, 7), (36, 25)], 4)
+    # OMBREIRAS (pauldrons) nos ombros, com franja
+    _ellipse(g, 12, 28, 6, 4, 5)
+    _ellipse(g, 12, 30, 6, 2, 4)
+    _ellipse(g, 40, 28, 6, 4, 5)
+    _ellipse(g, 40, 30, 6, 2, 4)
+    for x in range(7, 18, 2):
+        g[32][x] = 4
+    for x in range(35, 46, 2):
+        g[32][x] = 4
+    # placa central vermelha (abertura em V do sobretudo)
     _poly(g, [(22, 30), (30, 30), (31, 47), (26, 58), (21, 47)], 4)
     _poly(g, [(24, 31), (28, 31), (28, 46), (26, 54), (24, 46)], 5)
-    # correntes douradas
-    for (px, py) in [(20, 34), (23, 36), (26, 37), (29, 36), (32, 34)]:
+    # correntes douradas entre as ombreiras (dois arcos)
+    for (px, py) in [(15, 31), (19, 35), (23, 37), (26, 38), (29, 37), (33, 35), (37, 31)]:
         g[py][px] = 10
-    for (px, py) in [(21, 42), (24, 44), (26, 45), (28, 44), (31, 42)]:
+    for (px, py) in [(18, 30), (22, 33), (26, 34), (30, 33), (34, 30)]:
         g[py][px] = 10
-    # mãos: punhos fechados
-    _fist(g, 12, 48)
-    _fist(g, 40, 48)
+    # punhos fechados
+    _fist(g, 12, 51)
+    _fist(g, 40, 51)
     # cabeça (emerge da gola), luz à esquerda
-    _ellipse(g, cx, 14, 7, 9, 6)
-    _ellipse(g, cx, 14, 7, 9, 7, half="r")
-    _ellipse(g, cx - 1, 13, 6, 8, 6, half="l")
-    for (px, py) in [(cx - 3, 11), (cx - 2, 11), (cx + 2, 11), (cx + 3, 11), (cx, 7), (cx, 9)]:
+    _ellipse(g, cx, 15, 7, 9, 6)
+    _ellipse(g, cx, 15, 7, 9, 7, half="r")
+    _ellipse(g, cx - 1, 14, 6, 8, 6, half="l")
+    for (px, py) in [(cx - 3, 12), (cx - 2, 12), (cx + 2, 12), (cx + 3, 12), (cx, 8), (cx, 10)]:
         g[py][px] = 7
     # bocarra com presas
-    _rect(g, cx - 6, 16, cx + 6, 20, 9)
+    _rect(g, cx - 6, 17, cx + 6, 21, 9)
     for x in range(cx - 6, cx + 7, 2):
-        g[16][x] = 8
         g[17][x] = 8
+        g[18][x] = 8
     for x in range(cx - 5, cx + 6, 2):
+        g[21][x] = 8
         g[20][x] = 8
-        g[19][x] = 8
     # pés
     _rect(g, 16, 60, 23, 63, 2)
     _rect(g, 29, 60, 36, 63, 12)

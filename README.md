@@ -81,12 +81,14 @@ Um mini-RPG jogável aqui no perfil, no clima de *Ordem Paranormal*. Você é um
 <div align="center">
 
 <picture>
-<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=4200047b" />
-<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=4200047b" width="520" alt="Encontro Paranormal" />
+<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=c700f4c1" />
+<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=c700f4c1" width="520" alt="Encontro Paranormal" />
 </picture>
 
 [![Atacar](https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-atacar.svg)](https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Catacar&body=Apenas%20envie%20esta%20issue%20%28Submit%20new%20issue%29%20para%20realizar%20a%20a%C3%A7%C3%A3o.%20O%20resultado%20aparece%20no%20perfil%20em%20alguns%20segundos.) [![Defender](https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-defender.svg)](https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Cdefender&body=Apenas%20envie%20esta%20issue%20%28Submit%20new%20issue%29%20para%20realizar%20a%20a%C3%A7%C3%A3o.%20O%20resultado%20aparece%20no%20perfil%20em%20alguns%20segundos.) [![Ritual](https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-ritual.svg)](https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Critual&body=Apenas%20envie%20esta%20issue%20%28Submit%20new%20issue%29%20para%20realizar%20a%20a%C3%A7%C3%A3o.%20O%20resultado%20aparece%20no%20perfil%20em%20alguns%20segundos.) [![Fugir](https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-fugir.svg)](https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Cfugir&body=Apenas%20envie%20esta%20issue%20%28Submit%20new%20issue%29%20para%20realizar%20a%20a%C3%A7%C3%A3o.%20O%20resultado%20aparece%20no%20perfil%20em%20alguns%20segundos.)
 
+
+<sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura &nbsp;·&nbsp; <b>Ritual</b> dano alto garantido (3 usos) &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>
 </div>
 <!-- RPG:END -->
 

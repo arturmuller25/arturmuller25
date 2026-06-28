@@ -89,7 +89,9 @@ DEMON = [
 def new_enemy(score, elem=None):
     pool = [c for c in CREATURES if c[1] == elem] if elem else CREATURES
     name, el = random.choice(pool)
-    hp = random.randint(8, 13) + score
+    hp = random.randint(14, 20) + score * 2
+    if el == "Sangue":        # Raziel é um chefe: mais resistente
+        hp += 8
     return {"name": name, "elem": el, "hp": hp, "max": hp}
 
 
@@ -122,7 +124,8 @@ def save_state(s):
 # Combate
 # --------------------------------------------------------------------------- #
 def _enemy_attack(s, parts):
-    dano = random.randint(2, 5)
+    base = (5, 10) if s["enemy"]["elem"] == "Sangue" else (3, 7)   # Raziel bate mais forte
+    dano = random.randint(*base)
     if s["defending"]:
         dano = max(1, dano // 2)
         s["defending"] = False
@@ -383,6 +386,8 @@ def build_section(s, ver):
         out.append(btn_md("novo") + "\n\n")
     else:
         out.append(" ".join(btn_md(k) for k in ("atacar", "defender", "ritual", "fugir")) + "\n\n")
+    out.append('\n<sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura '
+               '&nbsp;·&nbsp; <b>Ritual</b> dano alto garantido (3 usos) &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>\n')
     out.append("</div>\n")
     return "".join(out)
 

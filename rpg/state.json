@@ -7,10 +7,10 @@
   "over": false,
   "last_roll": 9,
   "enemy": {
-    "name": "Distorção",
-    "elem": "Energia",
-    "hp": 10,
-    "max": 13
+    "name": "Raziel (Vampiro)",
+    "elem": "Sangue",
+    "hp": 28,
+    "max": 28
   },
   "msg": "**Você** atingiu Distorção (3) a criatura revidou (4)."
 }
