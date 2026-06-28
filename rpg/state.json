@@ -1,15 +1,15 @@
 {
-  "hp": 16,
+  "hp": 20,
   "score": 0,
   "best": 0,
   "rituals": 3,
   "defending": false,
   "over": false,
   "enemy": {
-    "name": "Profanado",
-    "elem": "Morte",
-    "hp": 5,
-    "max": 11
+    "name": "Sussurro do Medo",
+    "elem": "Medo",
+    "hp": 13,
+    "max": 13
   },
-  "msg": "**@você** atingiu Profanado (6) a criatura revidou (4)."
+  "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }

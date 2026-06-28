@@ -122,7 +122,7 @@ def apply(s, action):
         return "O Agente caiu. Comece uma nova investida.", "A run anterior acabou — clique em **Começar de novo**."
 
     e = s["enemy"]
-    parts = [f"**@você**"]
+    parts = ["**Você**"]
 
     if action == "atacar":
         roll = random.randint(1, 20)
