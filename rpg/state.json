@@ -1,0 +1,15 @@
+{
+  "hp": 20,
+  "score": 0,
+  "best": 0,
+  "rituals": 3,
+  "defending": false,
+  "over": false,
+  "enemy": {
+    "name": "Profanado",
+    "elem": "Morte",
+    "hp": 11,
+    "max": 11
+  },
+  "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
+}

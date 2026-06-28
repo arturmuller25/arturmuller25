@@ -1,0 +1,56 @@
+name: Encontro Paranormal
+
+on:
+  # Cada ação é uma issue com título "rpg|<acao>"
+  issues:
+    types: [opened]
+  # Permite re-renderizar/semear manualmente
+  workflow_dispatch:
+
+concurrency:
+  group: rpg-game
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  play:
+    if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.event.issue.title, 'rpg|') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Processar ação / renderizar cena
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/rpg_game.py
+
+      - name: Commit da cena
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nada mudou."
+          else
+            git commit -m "chore(rpg): atualiza encontro paranormal"
+            git push
+          fi
+
+      - name: Responder e fechar a issue
+        if: ${{ github.event_name == 'issues' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --body-file rpg/_comment.md || true
+          gh issue close "${{ github.event.issue.number }}" || true
