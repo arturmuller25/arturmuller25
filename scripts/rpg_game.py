@@ -372,8 +372,7 @@ def btn_md(key):
     return f"[![{BTN[key][0]}]({base}/btn-{key}.svg)]({issue_link(key)})"
 
 
-def build_section(s):
-    ver = hashlib.md5(json.dumps(s, sort_keys=True).encode()).hexdigest()[:8]
+def build_section(s, ver):
     base = f"https://raw.githubusercontent.com/{REPO}/main/rpg"
     out = ['<div align="center">\n\n', "<picture>\n",
            f'<source media="(prefers-color-scheme: dark)" srcset="{base}/scene-dark.svg?v={ver}" />\n',
@@ -415,9 +414,11 @@ def main():
 
     gen_buttons()
     os.makedirs(GAME, exist_ok=True)
-    open(SCENE_LIGHT, "w", encoding="utf-8").write(render_scene(s, LIGHT))
+    light = render_scene(s, LIGHT)
+    open(SCENE_LIGHT, "w", encoding="utf-8").write(light)
     open(SCENE_DARK, "w", encoding="utf-8").write(render_scene(s, DARK))
-    inject(build_section(s))
+    ver = hashlib.md5(light.encode()).hexdigest()[:8]
+    inject(build_section(s, ver))
     save_state(s)
     write_comment(comment)
     print("OK rpg:", "hp", s["hp"], "score", s["score"], "over", s.get("over"))

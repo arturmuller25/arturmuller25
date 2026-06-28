@@ -18,9 +18,9 @@ PALETTE = {
     4: "#5d141b",    # vermelho escuro
     5: "#a3262e",    # vermelho vivo
     13: "#3a0d12",   # vermelho (sombra)
-    6: "#d4cabf",    # pele pálida
-    7: "#9a8a7e",    # pele (sombra)
-    14: "#6d6158",   # pele (sombra profunda)
+    6: "#cf9389",    # pele avermelhada
+    7: "#9c5a52",    # pele (sombra)
+    14: "#6e3a35",   # pele (sombra profunda)
     8: "#efe6cc",    # presas / osso
     9: "#160610",    # bocarra
     10: "#cda24a",   # corrente dourada
@@ -68,13 +68,13 @@ def _poly(g, pts, c):
 
 
 def _claw(g, cx, cy, up):
-    # palma
-    _ellipse(g, cx, cy, 3, 2, 11)
-    g[min(H - 1, cy + 1)][cx] = 15
-    # quatro garras se abrindo em leque
-    for dx in (-3, -1, 1, 3):
-        for t in range(1, 5):
-            x = int(round(cx + dx + dx * 0.35 * t))
+    # mão (palma)
+    _rect(g, cx - 2, cy - 1, cx + 2, cy + 1, 11)
+    _rect(g, cx - 2, cy + (2 if up < 0 else -2), cx + 2, cy + (2 if up < 0 else -2), 15)
+    # três garras longas e separadas, abrindo em leque, com ponta óssea
+    for dx in (-3, 0, 3):
+        for t in range(1, 6):
+            x = int(round(cx + dx + dx * 0.45 * t))
             y = cy + up * (1 + t)
             if 0 <= x < W and 0 <= y < H:
                 g[y][x] = 8 if t >= 3 else 11
