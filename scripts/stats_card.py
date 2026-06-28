@@ -56,6 +56,13 @@ DARK = {
     "ramp": ["#aebccd", "#8aa6c8", "#6E86A8", "#5a78a0", "#46618a", "#36567D"],
 }
 
+# cores de marca das linguagens (legíveis em tema claro e escuro)
+LANG_COLORS = {
+    "Python": "#3776AB", "HTML": "#E34F26", "PHP": "#9179C9", "CSS": "#1572B6",
+    "TypeScript": "#3178C6", "JavaScript": "#E8C020", "PowerShell": "#5391FE",
+    "Shell": "#89E051", "SQLite": "#0F80CC", "C": "#A8B9CC", "Outros": "#8B949E",
+}
+
 
 def fetch():
     req = urllib.request.Request(
@@ -103,7 +110,7 @@ def render_langs(langs, pal):
     for i, (name, val) in enumerate(langs):
         frac = val / total
         seg_w = frac * bar_w
-        color = pal["ramp"][min(i, len(pal["ramp"]) - 1)]
+        color = LANG_COLORS.get(name, pal["ramp"][min(i, len(pal["ramp"]) - 1)])
         segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{seg_w:.1f}" height="{bar_h}" fill="{color}"/>')
         x += seg_w
         col = i % 2
