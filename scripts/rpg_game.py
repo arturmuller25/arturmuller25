@@ -372,9 +372,12 @@ def render_scene(s, pal):
 # --------------------------------------------------------------------------- #
 def gen_buttons():
     os.makedirs(GAME, exist_ok=True)
+    acts = ("atacar", "defender", "ritual", "fugir")
+    target = max(svgchip.content_width(BTN[k][0], ICONS.get(k), 15) for k in acts) + 1
     for key, (label, color) in BTN.items():
+        mw = target if key in acts else 0
         with open(os.path.join(GAME, f"btn-{key}.svg"), "w", encoding="utf-8") as f:
-            f.write(svgchip.pill(label, icon=ICONS.get(key), fill=color, height=38, size=15))
+            f.write(svgchip.pill(label, icon=ICONS.get(key), fill=color, height=38, size=15, min_w=mw))
 
 
 def issue_link(action):

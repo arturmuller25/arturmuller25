@@ -38,36 +38,50 @@ def text_width(s, size=FONT):
     return w * size
 
 
-def _icon_group(icon, height, size):
+def _icon_group(icon, height, size, ox=PAD_X):
     inner, vbw, vbh = icon
     box = size * 1.42
     scale = box / max(vbw, vbh)
     iw, ih = vbw * scale, vbh * scale
     iy = (height - ih) / 2.0
-    return f'<g transform="translate({PAD_X},{iy:.2f}) scale({scale:.4f})">{inner}</g>', iw
+    return f'<g transform="translate({ox},{iy:.2f}) scale({scale:.4f})">{inner}</g>', iw
 
 
-def _pill_markup(label, x, y, fill, fg, height, size, radius, icon, stroke):
+def content_width(label, icon=None, size=FONT):
+    tw = text_width(label, size)
+    if icon:
+        _, iw = _icon_group(icon, HEIGHT, size)
+        return round(PAD_X + iw + ICON_GAP + tw + PAD_X)
+    return round(tw + 2 * PAD_X)
+
+
+def _pill_markup(label, x, y, fill, fg, height, size, radius, icon, stroke, min_w=0):
     tw = text_width(label, size)
     ty = round(height / 2 + size * 0.34)
     if icon:
-        icon_g, iw = _icon_group(icon, height, size)
-        w = round(PAD_X + iw + ICON_GAP + tw + PAD_X)
-        tx = round(PAD_X + iw + ICON_GAP)
+        _, iw = _icon_group(icon, height, size)
+        content = PAD_X + iw + ICON_GAP + tw + PAD_X
+    else:
+        content = tw + 2 * PAD_X
+    w = max(round(content), int(min_w))
+    off = (w - content) / 2.0 if w > content else 0.0
+    if icon:
+        icon_g, iw = _icon_group(icon, height, size, PAD_X + off)
+        tx = round(PAD_X + off + iw + ICON_GAP)
         text = (f'<text x="{tx}" y="{ty}" text-anchor="start" font-family="{FONT_FAMILY}" '
                 f'font-size="{size}" font-weight="600" fill="{fg}">{_esc(label)}</text>')
         inner = icon_g + text
     else:
-        w = round(tw + 2 * PAD_X)
-        inner = (f'<text x="{w/2:.0f}" y="{ty}" text-anchor="middle" font-family="{FONT_FAMILY}" '
-                 f'font-size="{size}" font-weight="600" fill="{fg}">{_esc(label)}</text>')
+        text = (f'<text x="{w/2:.0f}" y="{ty}" text-anchor="middle" font-family="{FONT_FAMILY}" '
+                f'font-size="{size}" font-weight="600" fill="{fg}">{_esc(label)}</text>')
+        inner = text
     sk = f' stroke="{stroke}"' if stroke else ""
     return (f'<g transform="translate({x},{y})"><rect width="{w}" height="{height}" rx="{radius}" '
             f'fill="{fill}"{sk}/>{inner}</g>'), w
 
 
-def pill(label, icon=None, fill=FILL, fg=FG, height=HEIGHT, size=FONT, radius=RADIUS, stroke=None):
-    markup, w = _pill_markup(label, 0.5, 0.5, fill, fg, height - 1, size, radius, icon, stroke)
+def pill(label, icon=None, fill=FILL, fg=FG, height=HEIGHT, size=FONT, radius=RADIUS, stroke=None, min_w=0):
+    markup, w = _pill_markup(label, 0.5, 0.5, fill, fg, height - 1, size, radius, icon, stroke, max(0, min_w - 1))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w+1}" height="{height}" '
             f'viewBox="0 0 {w+1} {height}" role="img" aria-label="{_esc(label)}">{markup}</svg>\n')
 

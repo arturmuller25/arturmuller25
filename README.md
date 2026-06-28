@@ -81,8 +81,8 @@ Um mini-RPG jogável aqui no perfil, no clima de *Ordem Paranormal*. Você é um
 <div align="center">
 
 <picture>
-<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=26ee059a" />
-<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=26ee059a" width="520" alt="Encontro Paranormal" />
+<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=db496dd4" />
+<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=db496dd4" width="520" alt="Encontro Paranormal" />
 </picture>
 
 <table>

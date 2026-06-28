@@ -70,10 +70,15 @@ def _poly(g, pts, c):
 
 
 def _fist(g, cx, cy):
-    # punho fechado, liso e uniforme (sem pixels avulsos)
-    _ellipse(g, cx, cy, 4, 4, 11)
-    _ellipse(g, cx + 1, cy + 1, 3, 3, 15)   # sombra suave
-    _ellipse(g, cx - 1, cy - 1, 2, 2, 11)   # leve luz
+    # punho fechado: bloco levemente arredondado (não uma bola)
+    _rect(g, cx - 3, cy - 2, cx + 3, cy + 3, 11)
+    for dx, dy in ((-3, -2), (3, -2), (-3, 3), (3, 3)):   # arredonda os 4 cantos
+        x, y = cx + dx, cy + dy
+        if 0 <= x < W and 0 <= y < H:
+            g[y][x] = 0
+    _rect(g, cx - 2, cy + 2, cx + 2, cy + 3, 15)          # sombra na base
+    if 0 <= cy - 1 < H and 0 <= cx - 2 < W:
+        g[cy - 1][cx - 2] = 11                            # leve luz no topo
 
 
 def _outline(g, c=1):
