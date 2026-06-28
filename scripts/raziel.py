@@ -24,8 +24,10 @@ PALETTE = {
     8: "#efe6cc",    # presas / osso
     9: "#160610",    # bocarra
     10: "#cda24a",   # corrente dourada
-    11: "#dccfc3",   # garra / mão
-    15: "#a99e92",   # garra (sombra)
+    11: "#dccfc3",   # mão
+    15: "#a99e92",   # mão (sombra)
+    16: "#48121a",   # ombreira (vermelho bem escuro, distinto da gola)
+    17: "#6b1c24",   # ombreira (luz)
 }
 
 
@@ -68,18 +70,10 @@ def _poly(g, pts, c):
 
 
 def _fist(g, cx, cy):
-    # punho fechado (dedos juntos)
-    _ellipse(g, cx, cy, 4, 3, 11)
-    _rect(g, cx - 3, cy - 1, cx + 3, cy + 2, 11)
-    # vincos entre os dedos
-    for dx in (-2, 0, 2):
-        if 0 <= cx + dx < W:
-            g[cy][cx + dx] = 15
-    # pequenas pontas de garra na base do punho
-    for dx in (-3, -1, 1, 3):
-        x, y = cx + dx, cy + 3
-        if 0 <= x < W and 0 <= y < H:
-            g[y][x] = 8
+    # punho fechado, liso e uniforme (sem pixels avulsos)
+    _ellipse(g, cx, cy, 4, 4, 11)
+    _ellipse(g, cx + 1, cy + 1, 3, 3, 15)   # sombra suave
+    _ellipse(g, cx - 1, cy - 1, 2, 2, 11)   # leve luz
 
 
 def _outline(g, c=1):
@@ -106,18 +100,20 @@ def _paint():
     # mangas
     _rect(g, 9, 32, 15, 50, 2)
     _rect(g, 37, 32, 43, 50, 12)
-    # GOLA ALTA: leque atrás da cabeça (borda vermelha + interior escuro)
-    _poly(g, [(13, 26), (9, 3), (19, 9), (26, 13), (33, 9), (43, 3), (39, 26)], 5)
-    _poly(g, [(16, 25), (12, 7), (20, 12), (26, 15), (32, 12), (40, 7), (36, 25)], 4)
-    # OMBREIRAS (pauldrons) nos ombros, com franja
-    _ellipse(g, 12, 28, 6, 4, 5)
-    _ellipse(g, 12, 30, 6, 2, 4)
-    _ellipse(g, 40, 28, 6, 4, 5)
-    _ellipse(g, 40, 30, 6, 2, 4)
+    # GOLA (um pouco mais baixa): leque atrás da cabeça, borda vermelha + interior escuro
+    _poly(g, [(13, 26), (10, 6), (19, 11), (26, 14), (33, 11), (42, 6), (39, 26)], 5)
+    _poly(g, [(16, 25), (13, 9), (20, 13), (26, 16), (32, 13), (39, 9), (36, 25)], 4)
+    # OMBREIRAS (pauldrons) — vermelho ESCURO, distinto da gola, com luz/sombra e franja
+    _ellipse(g, 12, 28, 6, 4, 16)
+    _ellipse(g, 12, 27, 6, 2, 17)
+    _ellipse(g, 12, 30, 6, 2, 13)
+    _ellipse(g, 40, 28, 6, 4, 16)
+    _ellipse(g, 40, 27, 6, 2, 17)
+    _ellipse(g, 40, 30, 6, 2, 13)
     for x in range(7, 18, 2):
-        g[32][x] = 4
+        g[32][x] = 13
     for x in range(35, 46, 2):
-        g[32][x] = 4
+        g[32][x] = 13
     # placa central vermelha (abertura em V do sobretudo)
     _poly(g, [(22, 30), (30, 30), (31, 47), (26, 58), (21, 47)], 4)
     _poly(g, [(24, 31), (28, 31), (28, 46), (26, 54), (24, 46)], 5)

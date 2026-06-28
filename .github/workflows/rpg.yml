@@ -23,17 +23,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Processar ação / renderizar cena
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: python scripts/rpg_game.py
+        run: python3 scripts/rpg_game.py
 
       - name: Commit da cena
         run: |

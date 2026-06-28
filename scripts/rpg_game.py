@@ -64,6 +64,19 @@ BTN = {
     "novo": ("Começar de novo", "#3f7d5a"),
 }
 
+
+def _ic(d):
+    return (f'<path d="{d}" fill="#ffffff"/>', 24, 24)
+
+
+ICONS = {
+    "atacar": _ic("M13 2 4.5 13.5H11l-1 8.5L19.5 10H12z"),
+    "defender": _ic("M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5z"),
+    "ritual": _ic("M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17l-6.2 3.6 1.6-6.7L2.2 8.9l6.9-.6z"),
+    "fugir": _ic("M4 4l8 8-8 8zM12 4l8 8-8 8z"),
+    "novo": _ic("M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"),
+}
+
 # Demônio pixel-art (14x14) usado quando não há PNG. R/D/H = cor do Elemento.
 DEMON = [
     ".D..........D.",
@@ -361,19 +374,20 @@ def gen_buttons():
     os.makedirs(GAME, exist_ok=True)
     for key, (label, color) in BTN.items():
         with open(os.path.join(GAME, f"btn-{key}.svg"), "w", encoding="utf-8") as f:
-            f.write(svgchip.pill(label, fill=color, height=36, size=15))
+            f.write(svgchip.pill(label, icon=ICONS.get(key), fill=color, height=38, size=15))
 
 
 def issue_link(action):
     title = urllib.parse.quote(f"rpg|{action}")
-    body = urllib.parse.quote("Apenas envie esta issue (Submit new issue) para realizar a ação. "
-                              "O resultado aparece no perfil em alguns segundos.")
+    body = urllib.parse.quote("Clique em **Submit new issue** (botão verde abaixo) para confirmar a ação. "
+                              "Depois, em ~15s, volte ao perfil e atualize a página (F5) para ver o resultado. "
+                              "A issue é fechada sozinha.")
     return f"https://github.com/{REPO}/issues/new?title={title}&body={body}"
 
 
-def btn_md(key):
+def btn_html(key):
     base = f"https://raw.githubusercontent.com/{REPO}/main/rpg"
-    return f"[![{BTN[key][0]}]({base}/btn-{key}.svg)]({issue_link(key)})"
+    return f'<a href="{issue_link(key)}"><img src="{base}/btn-{key}.svg" alt="{BTN[key][0]}" /></a>'
 
 
 def build_section(s, ver):
@@ -383,9 +397,12 @@ def build_section(s, ver):
            f'<img src="{base}/scene-light.svg?v={ver}" width="520" alt="Encontro Paranormal" />\n',
            "</picture>\n\n"]
     if s.get("over"):
-        out.append(btn_md("novo") + "\n\n")
+        out.append(f'<p>{btn_html("novo")}</p>\n')
     else:
-        out.append(" ".join(btn_md(k) for k in ("atacar", "defender", "ritual", "fugir")) + "\n\n")
+        out.append('<table>\n'
+                   f'  <tr><td>{btn_html("atacar")}</td><td>{btn_html("defender")}</td></tr>\n'
+                   f'  <tr><td>{btn_html("ritual")}</td><td>{btn_html("fugir")}</td></tr>\n'
+                   '</table>\n')
     out.append('\n<sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura '
                '&nbsp;·&nbsp; <b>Ritual</b> dano alto garantido (3 usos) &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>\n')
     out.append("</div>\n")

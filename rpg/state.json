@@ -9,8 +9,8 @@
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 28,
-    "max": 28
+    "hp": 25,
+    "max": 25
   },
   "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }
