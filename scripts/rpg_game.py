@@ -12,6 +12,7 @@ Sem dependências externas além do svgchip (mesma pasta).
 import os
 import re
 import json
+import math
 import random
 import hashlib
 import urllib.parse
@@ -69,7 +70,7 @@ def new_enemy(score):
 
 def new_state():
     return {"hp": MAX_HP, "score": 0, "best": 0, "rituals": START_RITUALS,
-            "defending": False, "over": False, "enemy": new_enemy(0),
+            "defending": False, "over": False, "last_roll": 0, "enemy": new_enemy(0),
             "msg": "Uma criatura surge das sombras. Boa sorte, Agente."}
 
 
@@ -126,6 +127,7 @@ def apply(s, action):
 
     if action == "atacar":
         roll = random.randint(1, 20)
+        s["last_roll"] = roll
         if roll == 20:
             dano = random.randint(6, 9) * 2
             parts.append(f"ACERTO CRÍTICO em {e['name']} ({dano})")
@@ -192,6 +194,26 @@ def _game_over(s):
 
 
 # --------------------------------------------------------------------------- #
+# Sprites pixel-art (12x12). X = cor do Elemento, e = olho claro, p = pupila
+SPRITES = {
+    "Sangue": ["....XXXX....", "..XXXXXXXX..", ".XXXXXXXXXX.", "XXXXXXXXXXXX",
+               "XXeeXXXXeeXX", "XXeeXXXXeeXX", "XXXXXXXXXXXX", "XXXXXXXXXXXX",
+               "XXXXXXXXXXXX", ".XXXXXXXXXX.", "X.XX.XX.XX.X", "............"],
+    "Morte": ["....XXXX....", "..XXXXXXXX..", ".XXXXXXXXXX.", "XXXXXXXXXXXX",
+              "XXeeXXXXeeXX", "XXeeXXXXeeXX", "XXXXXXXXXXXX", "XXXXXXXXXXXX",
+              "XXXXXXXXXXXX", "XXXXXXXXXXXX", "X.XX.XX.XX.X", ".X..X..X..X."],
+    "Conhecimento": ["............", "...XXXXXX...", ".XXXXXXXXXX.", "XXXXXXXXXXXX",
+                     "XXXeeeeeeXXX", "XXeepppppeXX", "XXeepppppeXX", "XXXeeeeeeXXX",
+                     "XXXXXXXXXXXX", ".XXXXXXXXXX.", "...XXXXXX...", "............"],
+    "Energia": [".....XXX....", "....XXX.....", "...XXX......", "..XXXXXX....",
+                "....XXX.....", "...XXXXX....", "..XXXXXXX...", ".....XXX....",
+                "....XXX.....", "...XXX......", "..XXX.......", "............"],
+    "Medo": ["...XXXXXX...", "..XXXXXXXX..", ".XXXXXXXXXX.", ".XXXXXXXXXX.",
+             ".XXeXXXXeXX.", ".XXeXXXXeXX.", ".XXXXXXXXXX.", ".XXXXXXXXXX.",
+             ".XXXXXXXXXX.", ".XXXXXXXXXX.", ".X.XXXX.X.X.", "............"],
+}
+
+
 def _bar(x, y, w, h, frac, color, pal):
     frac = max(0.0, min(1.0, frac))
     fillw = round(w * frac)
@@ -201,27 +223,62 @@ def _bar(x, y, w, h, frac, color, pal):
     return out
 
 
+def sprite_svg(elem, color, cell, x, y):
+    grid = SPRITES.get(elem, SPRITES["Sangue"])
+    pal = {"X": color, "e": "#f4f4f2", "p": "#16202b"}
+    rects = []
+    for r, line in enumerate(grid):
+        for c, ch in enumerate(line):
+            col = pal.get(ch)
+            if col:
+                rects.append(f'<rect x="{x + c*cell:.0f}" y="{y + r*cell:.0f}" '
+                             f'width="{cell}" height="{cell}" fill="{col}"/>')
+    return ('<g><animateTransform attributeName="transform" type="translate" '
+            'values="0 0;0 -3;0 0" dur="2.6s" repeatCount="indefinite"/>' + "".join(rects) + "</g>")
+
+
+def d20_svg(n, cx, cy, r):
+    pts = [(cx + r * math.cos(math.radians(60 * k - 90)),
+            cy + r * math.sin(math.radians(60 * k - 90))) for k in range(6)]
+    hexp = "M" + " ".join(f"{x:.1f},{y:.1f}" for x, y in pts) + " Z"
+    tri = [(cx, cy - r * 0.6), (cx - r * 0.52, cy + r * 0.34), (cx + r * 0.52, cy + r * 0.34)]
+    trip = "M" + " ".join(f"{x:.1f},{y:.1f}" for x, y in tri) + " Z"
+    label = str(n) if n else "20"
+    fs = r * 0.6
+    return ('<g><animateTransform attributeName="transform" type="rotate" '
+            f'from="0 {cx} {cy}" to="360 {cx} {cy}" dur="0.7s" repeatCount="1" fill="freeze"/>'
+            f'<path d="{hexp}" fill="#3a4f6a" stroke="#9fb0c4" stroke-width="1.6" stroke-linejoin="round"/>'
+            f'<path d="{trip}" fill="#4A6FA5" stroke="#9fb0c4" stroke-width="1"/>'
+            f'<text x="{cx}" y="{cy + fs*0.35:.1f}" text-anchor="middle" '
+            f'font-family="\'Segoe UI\',Helvetica,Arial,sans-serif" font-size="{fs:.0f}" '
+            f'font-weight="800" fill="#ffffff">{label}</text></g>')
+
+
 def render_scene(s, pal):
-    w, h = 500, 212
+    w, h = 500, 214
     e = s["enemy"]
     ecol = ELEMENTS.get(e["elem"], "#b03a3a")
     ff = "'Segoe UI',Helvetica,Arial,sans-serif"
     parts = [
         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="12" fill="{pal["bg"]}" stroke="{pal["border"]}"/>',
-        f'<text x="24" y="34" font-family="{ff}" font-size="16" font-weight="700" fill="{pal["title"]}">Encontro Paranormal</text>',
-        f'<line x1="24" y1="46" x2="{w-24}" y2="46" stroke="{pal["border"]}"/>',
-        # inimigo
-        f'<circle cx="30" cy="72" r="6" fill="{ecol}"/>',
-        f'<text x="44" y="77" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">{_esc(e["name"])}</text>',
-        f'<text x="{w-24}" y="77" text-anchor="end" font-family="{ff}" font-size="12" fill="{pal["muted"]}">Elemento: {e["elem"]}</text>',
-        _bar(24, 88, w - 48, 12, e["hp"] / max(1, e["max"]), ecol, pal),
-        f'<text x="{w-24}" y="116" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,e["hp"])}/{e["max"]} HP</text>',
-        # agente
-        f'<text x="24" y="138" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">Agente da Ordem</text>',
-        _bar(24, 148, w - 48, 12, s["hp"] / MAX_HP, pal["agent"], pal),
-        f'<text x="{w-24}" y="176" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,s["hp"])}/{MAX_HP} HP</text>',
-        f'<text x="24" y="176" font-family="{ff}" font-size="12" fill="{pal["muted"]}">Derrotadas: {s["score"]}   ·   Recorde: {s["best"]}   ·   Rituais: {s["rituals"]}</text>',
-        f'<text x="24" y="200" font-family="{ff}" font-size="12.5" fill="{pal["text"]}">{_esc(_short(s["msg"]))}</text>',
+        f'<text x="24" y="32" font-family="{ff}" font-size="16" font-weight="700" fill="{pal["title"]}">Encontro Paranormal</text>',
+        f'<line x1="24" y1="42" x2="476" y2="42" stroke="{pal["border"]}"/>',
+        # inimigo (esquerda)
+        f'<circle cx="30" cy="60" r="6" fill="{ecol}"/>',
+        f'<text x="44" y="65" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">{_esc(e["name"])}</text>',
+        f'<text x="384" y="65" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,e["hp"])}/{e["max"]} HP</text>',
+        _bar(24, 74, 360, 11, e["hp"] / max(1, e["max"]), ecol, pal),
+        f'<text x="24" y="100" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Elemento: {e["elem"]}</text>',
+        # agente (esquerda)
+        f'<text x="24" y="128" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">Agente da Ordem</text>',
+        f'<text x="384" y="128" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,s["hp"])}/{MAX_HP} HP</text>',
+        _bar(24, 137, 360, 11, s["hp"] / MAX_HP, pal["agent"], pal),
+        f'<text x="24" y="166" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Derrotadas: {s["score"]}   ·   Recorde: {s["best"]}   ·   Rituais: {s["rituals"]}</text>',
+        f'<text x="24" y="196" font-family="{ff}" font-size="12.5" fill="{pal["text"]}">{_esc(_short(s["msg"]))}</text>',
+        # direita: sprite da criatura + d20
+        sprite_svg(e["elem"], ecol, 6, 406, 50),
+        d20_svg(s.get("last_roll", 0), 446, 150, 22),
+        f'<text x="446" y="188" text-anchor="middle" font-family="{ff}" font-size="9" fill="{pal["muted"]}">último d20</text>',
     ]
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             f'role="img" aria-label="Encontro Paranormal">{"".join(parts)}</svg>\n')
