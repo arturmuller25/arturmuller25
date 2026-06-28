@@ -1,16 +1,16 @@
 {
-  "hp": 12,
+  "hp": 20,
   "score": 0,
   "best": 0,
-  "rituals": 2,
+  "rituals": 3,
   "defending": false,
   "over": false,
   "last_roll": 0,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 20,
-    "max": 27
+    "hp": 28,
+    "max": 28
   },
-  "msg": "**Você** conjura um ritual em Raziel (Vampiro) (7) a criatura revidou (8)."
+  "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }
