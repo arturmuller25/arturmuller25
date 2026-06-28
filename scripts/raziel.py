@@ -68,16 +68,17 @@ def _poly(g, pts, c):
 
 
 def _claw(g, cx, cy, up):
-    # mão (palma)
-    _rect(g, cx - 2, cy - 1, cx + 2, cy + 1, 11)
-    _rect(g, cx - 2, cy + (2 if up < 0 else -2), cx + 2, cy + (2 if up < 0 else -2), 15)
-    # três garras longas e separadas, abrindo em leque, com ponta óssea
-    for dx in (-3, 0, 3):
-        for t in range(1, 6):
-            x = int(round(cx + dx + dx * 0.45 * t))
+    # palma compacta
+    _rect(g, cx - 3, cy - 1, cx + 3, cy + 1, 11)
+    g[cy][cx] = 15
+    # quatro talões curtos, levemente abertos, ponta óssea
+    for dx in (-3, -1, 1, 3):
+        s = 1 if dx > 0 else -1
+        for t in range(1, 4):
+            x = cx + dx + s * (t - 1)
             y = cy + up * (1 + t)
             if 0 <= x < W and 0 <= y < H:
-                g[y][x] = 8 if t >= 3 else 11
+                g[y][x] = 8 if t >= 2 else 11
 
 
 def _outline(g, c=1):
@@ -96,49 +97,49 @@ def _outline(g, c=1):
 
 def _paint():
     g = _grid()
-    # gola pontuda (assimétrica: ponta esquerda à frente, direita atrás/sombra)
-    _poly(g, [(23, 27), (4, 2), (19, 24)], 5)
-    _poly(g, [(22, 26), (10, 7), (20, 23)], 4)
-    _poly(g, [(29, 27), (44, 8), (31, 23)], 4)
-    _poly(g, [(29, 26), (40, 11), (31, 24)], 13)
-    # sobretudo (sino levemente torcido) com luz à esquerda e sombra à direita
-    _poly(g, [(13, 23), (35, 23), (47, 61), (3, 61)], 2)
-    _poly(g, [(13, 23), (21, 23), (12, 60), (3, 60)], 3)
-    _poly(g, [(31, 24), (35, 23), (47, 61), (33, 61)], 12)
+    cx = 26
+    # gola pontuda simétrica e alta (vermelho vivo + sombra interna)
+    _poly(g, [(cx - 2, 27), (8, 1), (cx - 5, 23)], 5)
+    _poly(g, [(cx + 2, 27), (44, 1), (cx + 5, 23)], 5)
+    _poly(g, [(cx - 3, 26), (14, 7), (cx - 5, 22)], 4)
+    _poly(g, [(cx + 3, 26), (38, 7), (cx + 5, 22)], 4)
+    # sobretudo (sino) com luz à esquerda e sombra à direita
+    _poly(g, [(15, 23), (37, 23), (48, 61), (4, 61)], 2)
+    _poly(g, [(15, 23), (24, 23), (14, 60), (4, 60)], 3)
+    _poly(g, [(28, 23), (37, 23), (48, 61), (38, 61)], 12)
     # mangas
-    _rect(g, 9, 27, 15, 46, 2)
-    _rect(g, 35, 28, 41, 47, 12)
-    # placa central vermelha (deslocada à esquerda pela rotação)
-    _poly(g, [(19, 25), (28, 25), (30, 46), (24, 58), (17, 46)], 4)
-    _poly(g, [(21, 27), (26, 27), (27, 45), (23, 54), (20, 45)], 5)
-    _poly(g, [(26, 29), (28, 30), (29, 47), (25, 52)], 13)
+    _rect(g, 9, 27, 15, 48, 2)
+    _rect(g, 37, 27, 43, 48, 12)
+    # placa central vermelha (centralizada)
+    _poly(g, [(22, 25), (30, 25), (31, 46), (26, 58), (21, 46)], 4)
+    _poly(g, [(24, 27), (28, 27), (28, 45), (26, 54), (24, 45)], 5)
+    _poly(g, [(27, 30), (29, 31), (28, 47), (26, 52)], 13)
     # correntes douradas (dois arcos)
-    for (px, py) in [(16, 31), (19, 33), (23, 34), (27, 33), (30, 31)]:
+    for (px, py) in [(19, 31), (22, 33), (26, 34), (30, 33), (33, 31)]:
         g[py][px] = 10
-    for (px, py) in [(17, 39), (20, 41), (23, 42), (26, 41), (29, 39)]:
+    for (px, py) in [(20, 39), (23, 41), (26, 42), (29, 41), (32, 39)]:
         g[py][px] = 10
-    # mãos com garras (esquerda erguida à frente, direita baixa)
-    _claw(g, 11, 39, -1)
-    _claw(g, 40, 51, 1)
-    # cabeça pálida virada levemente à esquerda
-    _ellipse(g, 23, 14, 7, 9, 6)
-    _ellipse(g, 23, 14, 7, 9, 7, half="r")
-    _ellipse(g, 21, 13, 5, 8, 6, half="l")
-    _rect(g, 28, 9, 29, 20, 14)
+    # mãos com garras (simétricas, nas laterais, talões para baixo)
+    _claw(g, 12, 48, 1)
+    _claw(g, 40, 48, 1)
+    # cabeça pálida (centralizada, com luz à esquerda)
+    _ellipse(g, cx, 14, 7, 9, 6)
+    _ellipse(g, cx, 14, 7, 9, 7, half="r")
+    _ellipse(g, cx - 1, 13, 6, 8, 6, half="l")
     # olhos fundos + rachaduras
-    for (px, py) in [(20, 11), (21, 11), (25, 11), (26, 11), (23, 7), (23, 9), (19, 13)]:
+    for (px, py) in [(cx - 3, 11), (cx - 2, 11), (cx + 2, 11), (cx + 3, 11), (cx, 7), (cx, 9)]:
         g[py][px] = 7
-    # bocarra curva com presas
-    _poly(g, [(17, 16), (29, 16), (27, 21), (18, 20)], 9)
-    for x in range(17, 29, 2):
+    # bocarra com presas (centralizada)
+    _rect(g, cx - 6, 16, cx + 6, 20, 9)
+    for x in range(cx - 6, cx + 7, 2):
         g[16][x] = 8
         g[17][x] = 8
-    for x in range(18, 28, 2):
+    for x in range(cx - 5, cx + 6, 2):
         g[20][x] = 8
         g[19][x] = 8
-    # pés (passada)
-    _rect(g, 13, 60, 20, 63, 2)
-    _rect(g, 27, 59, 34, 63, 12)
+    # pés
+    _rect(g, 16, 60, 23, 63, 2)
+    _rect(g, 29, 60, 36, 63, 12)
     _outline(g)
     return g
 

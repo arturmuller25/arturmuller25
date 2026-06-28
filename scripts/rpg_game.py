@@ -317,7 +317,8 @@ def d20_svg(cx, cy, r, roll):
             f'<polygon points="{T[0]:.1f},{T[1]:.1f} {I1[0]:.1f},{I1[1]:.1f} {UR[0]:.1f},{UR[1]:.1f}" fill="#ffffff" opacity="0.09"/>')
     shadow = f'<ellipse cx="{cx}" cy="{cy + r + 5:.0f}" rx="{r*0.82:.0f}" ry="{r*0.16:.0f}" fill="#000000" opacity="0.22"/>'
     rot = ('<g><animateTransform attributeName="transform" type="rotate" '
-           f'from="0 {cx} {cy}" to="360 {cx} {cy}" dur="0.7s" repeatCount="1" fill="freeze"/>'
+           f'values="0 {cx} {cy};360 {cx} {cy};360 {cx} {cy}" keyTimes="0;0.1;1" '
+           'dur="6s" repeatCount="indefinite"/>'
            + "".join(polys) + spec + "".join(nums) + "</g>")
     return shadow + rot
 
