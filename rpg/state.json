@@ -1,5 +1,5 @@
 {
-  "hp": 20,
+  "hp": 16,
   "score": 0,
   "best": 0,
   "rituals": 3,
@@ -8,8 +8,8 @@
   "enemy": {
     "name": "Sussurro do Medo",
     "elem": "Medo",
-    "hp": 13,
+    "hp": 7,
     "max": 13
   },
-  "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
+  "msg": "**Você** atingiu Sussurro do Medo (6) a criatura revidou (4)."
 }
