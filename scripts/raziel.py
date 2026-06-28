@@ -67,18 +67,19 @@ def _poly(g, pts, c):
                     g[y][x] = c
 
 
-def _claw(g, cx, cy, up):
-    # palma compacta
-    _rect(g, cx - 3, cy - 1, cx + 3, cy + 1, 11)
-    g[cy][cx] = 15
-    # quatro talões curtos, levemente abertos, ponta óssea
+def _fist(g, cx, cy):
+    # punho fechado (dedos juntos)
+    _ellipse(g, cx, cy, 4, 3, 11)
+    _rect(g, cx - 3, cy - 1, cx + 3, cy + 2, 11)
+    # vincos entre os dedos
+    for dx in (-2, 0, 2):
+        if 0 <= cx + dx < W:
+            g[cy][cx + dx] = 15
+    # pequenas pontas de garra na base do punho
     for dx in (-3, -1, 1, 3):
-        s = 1 if dx > 0 else -1
-        for t in range(1, 4):
-            x = cx + dx + s * (t - 1)
-            y = cy + up * (1 + t)
-            if 0 <= x < W and 0 <= y < H:
-                g[y][x] = 8 if t >= 2 else 11
+        x, y = cx + dx, cy + 3
+        if 0 <= x < W and 0 <= y < H:
+            g[y][x] = 8
 
 
 def _outline(g, c=1):
@@ -98,11 +99,12 @@ def _outline(g, c=1):
 def _paint():
     g = _grid()
     cx = 26
-    # gola pontuda simétrica e alta (vermelho vivo + sombra interna)
-    _poly(g, [(cx - 2, 27), (8, 1), (cx - 5, 23)], 5)
-    _poly(g, [(cx + 2, 27), (44, 1), (cx + 5, 23)], 5)
-    _poly(g, [(cx - 3, 26), (14, 7), (cx - 5, 22)], 4)
-    _poly(g, [(cx + 3, 26), (38, 7), (cx + 5, 22)], 4)
+    # gola alta e CHEIA: base atrás do pescoço + dois painéis largos que sobem às pontas
+    _poly(g, [(18, 27), (34, 27), (32, 19), (20, 19)], 4)
+    _poly(g, [(9, 27), (4, 6), (15, 15), (21, 27)], 5)
+    _poly(g, [(9, 27), (4, 6), (8, 13), (13, 27)], 4)
+    _poly(g, [(43, 27), (48, 6), (37, 15), (31, 27)], 5)
+    _poly(g, [(43, 27), (48, 6), (44, 13), (39, 27)], 4)
     # sobretudo (sino) com luz à esquerda e sombra à direita
     _poly(g, [(15, 23), (37, 23), (48, 61), (4, 61)], 2)
     _poly(g, [(15, 23), (24, 23), (14, 60), (4, 60)], 3)
@@ -119,9 +121,9 @@ def _paint():
         g[py][px] = 10
     for (px, py) in [(20, 39), (23, 41), (26, 42), (29, 41), (32, 39)]:
         g[py][px] = 10
-    # mãos com garras (simétricas, nas laterais, talões para baixo)
-    _claw(g, 12, 48, 1)
-    _claw(g, 40, 48, 1)
+    # mãos: punhos fechados (dedos juntos), nas laterais
+    _fist(g, 12, 48)
+    _fist(g, 40, 48)
     # cabeça pálida (centralizada, com luz à esquerda)
     _ellipse(g, cx, 14, 7, 9, 6)
     _ellipse(g, cx, 14, 7, 9, 7, half="r")
