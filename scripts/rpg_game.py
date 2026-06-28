@@ -20,6 +20,7 @@ import hashlib
 import urllib.parse
 
 import svgchip
+import raziel
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAME = os.path.join(ROOT, "rpg")
@@ -271,6 +272,10 @@ def creature_svg(elem, color, size, x, y):
         uri = "data:image/png;base64," + b64
         inner = (f'<image x="{x}" y="{y}" width="{size}" height="{size}" '
                  f'image-rendering="pixelated" href="{uri}" xlink:href="{uri}" />')
+    elif elem == "Sangue":
+        cell = size / 64.0
+        ox = x + (size - raziel.W * cell) / 2.0
+        inner = raziel.markup(ox, y, cell)
     else:
         inner = _demon(color, x, y, size)
     return ('<g><animateTransform attributeName="transform" type="translate" '

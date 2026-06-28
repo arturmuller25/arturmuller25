@@ -9,8 +9,8 @@
   "enemy": {
     "name": "Carniçal",
     "elem": "Sangue",
-    "hp": 11,
-    "max": 11
+    "hp": 10,
+    "max": 10
   },
   "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }
