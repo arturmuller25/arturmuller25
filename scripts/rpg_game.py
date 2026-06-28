@@ -43,7 +43,7 @@ ELEMENTS = {
     "Energia": "#a85cff", "Medo": "#4f86d6",
 }
 CREATURES = [
-    ("Zumbi de Sangue", "Sangue"), ("Carniçal", "Sangue"), ("Sangrenta", "Sangue"),
+    ("Raziel, o Vampiro", "Sangue"), ("Carniçal", "Sangue"), ("Sanguessuga", "Sangue"),
     ("Espectro", "Morte"), ("Ceifador", "Morte"), ("Profanado", "Morte"),
     ("Membro do Outro Lado", "Conhecimento"), ("Olho Vigia", "Conhecimento"),
     ("Distorção", "Energia"), ("Tempestade Viva", "Energia"),
@@ -283,53 +283,62 @@ def d20_svg(cx, cy, r, roll):
     B = (cx, cy + r); LL = (cx - s3 * r, cy + 0.5 * r); UL = (cx - s3 * r, cy - 0.5 * r)
     I1 = (cx, cy - 0.34 * r); I2 = (cx - 0.56 * r, cy + 0.32 * r); I3 = (cx + 0.56 * r, cy + 0.32 * r)
     center = str(roll) if roll else "20"
+    # tons do mais claro (topo, recebe luz) ao mais escuro (base) -> volume + contraste
     faces = [
-        ((T, UL, I1), "#cf3a33", "18", False), ((T, I1, UR), "#cf3a33", "4", False),
-        ((UL, I2, I1), "#e2453c", "2", False), ((UR, I1, I3), "#e2453c", "14", False),
-        ((UL, LL, I2), "#b22e28", "12", False), ((UR, I3, LR), "#b22e28", "6", False),
-        ((LL, B, I2), "#921f1c", "10", False), ((I3, B, LR), "#921f1c", "16", False),
-        ((I2, B, I3), "#7d1a18", "8", False), ((I1, I2, I3), "#f25a54", center, True),
+        ((T, UL, I1), "#f0463d", "18", False), ((T, I1, UR), "#f0463d", "4", False),
+        ((UL, I2, I1), "#e03a33", "2", False), ((UR, I1, I3), "#e03a33", "14", False),
+        ((UL, LL, I2), "#bf2d27", "12", False), ((UR, I3, LR), "#bf2d27", "6", False),
+        ((LL, B, I2), "#8c201c", "10", False), ((I3, B, LR), "#8c201c", "16", False),
+        ((I2, B, I3), "#6a1413", "8", False), ((I1, I2, I3), "#ff6f66", center, True),
     ]
-    edge = "#2a0707"
+    edge = "#260606"
     ff = "'Segoe UI',Helvetica,Arial,sans-serif"
     polys, nums = [], []
     for verts, shade, num, is_c in faces:
         pts = " ".join(f"{vx:.1f},{vy:.1f}" for vx, vy in verts)
-        polys.append(f'<polygon points="{pts}" fill="{shade}" stroke="{edge}" stroke-width="1.3" stroke-linejoin="round"/>')
+        polys.append(f'<polygon points="{pts}" fill="{shade}" stroke="{edge}" '
+                     f'stroke-width="{r*0.045:.1f}" stroke-linejoin="round"/>')
         nx = sum(v[0] for v in verts) / 3
         ny = sum(v[1] for v in verts) / 3
-        fs = r * 0.5 if is_c else r * 0.26
-        col = "#ffffff" if is_c else "#ffd9d4"
+        if not is_c:
+            nx += (cx - nx) * 0.12
+            ny += (cy - ny) * 0.12
+        fs = r * 0.46 if is_c else r * 0.27
+        col = "#ffffff" if is_c else "#ffe2de"
         wt = 800 if is_c else 700
-        nums.append(f'<text x="{nx:.1f}" y="{ny + fs*0.36:.1f}" text-anchor="middle" '
-                    f'font-family="{ff}" font-size="{fs:.0f}" font-weight="{wt}" fill="{col}">{num}</text>')
-    return ('<g><animateTransform attributeName="transform" type="rotate" '
-            f'from="0 {cx} {cy}" to="360 {cx} {cy}" dur="0.7s" repeatCount="1" fill="freeze"/>'
-            + "".join(polys) + "".join(nums) + "</g>")
+        nums.append(f'<text x="{nx:.1f}" y="{ny + fs*0.35:.1f}" text-anchor="middle" '
+                    f'font-family="{ff}" font-size="{fs:.1f}" font-weight="{wt}" fill="{col}">{num}</text>')
+    spec = (f'<polygon points="{T[0]:.1f},{T[1]:.1f} {UL[0]:.1f},{UL[1]:.1f} {I1[0]:.1f},{I1[1]:.1f}" fill="#ffffff" opacity="0.18"/>'
+            f'<polygon points="{T[0]:.1f},{T[1]:.1f} {I1[0]:.1f},{I1[1]:.1f} {UR[0]:.1f},{UR[1]:.1f}" fill="#ffffff" opacity="0.09"/>')
+    shadow = f'<ellipse cx="{cx}" cy="{cy + r + 5:.0f}" rx="{r*0.82:.0f}" ry="{r*0.16:.0f}" fill="#000000" opacity="0.22"/>'
+    rot = ('<g><animateTransform attributeName="transform" type="rotate" '
+           f'from="0 {cx} {cy}" to="360 {cx} {cy}" dur="0.7s" repeatCount="1" fill="freeze"/>'
+           + "".join(polys) + spec + "".join(nums) + "</g>")
+    return shadow + rot
 
 
 def render_scene(s, pal):
-    w, h = 500, 228
+    w, h = 520, 258
     e = s["enemy"]
     ecol = ELEMENTS.get(e["elem"], "#e0352f")
     ff = "'Segoe UI',Helvetica,Arial,sans-serif"
     parts = [
         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="12" fill="{pal["bg"]}" stroke="{pal["border"]}"/>',
-        f'<text x="24" y="32" font-family="{ff}" font-size="16" font-weight="700" fill="{pal["title"]}">Encontro Paranormal</text>',
-        f'<line x1="24" y1="42" x2="476" y2="42" stroke="{pal["border"]}"/>',
-        f'<circle cx="30" cy="60" r="6" fill="{ecol}"/>',
-        f'<text x="44" y="65" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">{_esc(e["name"])}</text>',
-        f'<text x="384" y="65" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,e["hp"])}/{e["max"]} HP</text>',
-        _bar(24, 74, 360, 11, e["hp"] / max(1, e["max"]), ecol, pal),
-        f'<text x="24" y="100" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Elemento: {e["elem"]}</text>',
-        f'<text x="24" y="128" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">Agente da Ordem</text>',
-        f'<text x="384" y="128" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,s["hp"])}/{MAX_HP} HP</text>',
-        _bar(24, 137, 360, 11, s["hp"] / MAX_HP, pal["agent"], pal),
-        f'<text x="24" y="166" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Derrotadas: {s["score"]}   ·   Recorde: {s["best"]}   ·   Rituais: {s["rituals"]}</text>',
-        f'<text x="24" y="196" font-family="{ff}" font-size="12.5" fill="{pal["text"]}">{_esc(_short(s["msg"]))}</text>',
-        creature_svg(e["elem"], ecol, 86, 396, 46),
-        d20_svg(446, 176, 27, s.get("last_roll", 0)),
-        f'<text x="446" y="216" text-anchor="middle" font-family="{ff}" font-size="9" fill="{pal["muted"]}">rolagem do d20</text>',
+        f'<text x="24" y="34" font-family="{ff}" font-size="17" font-weight="700" fill="{pal["title"]}">Encontro Paranormal</text>',
+        f'<line x1="24" y1="46" x2="496" y2="46" stroke="{pal["border"]}"/>',
+        f'<circle cx="30" cy="66" r="6" fill="{ecol}"/>',
+        f'<text x="44" y="71" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">{_esc(e["name"])}</text>',
+        f'<text x="344" y="71" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,e["hp"])}/{e["max"]} HP</text>',
+        _bar(24, 80, 320, 12, e["hp"] / max(1, e["max"]), ecol, pal),
+        f'<text x="24" y="108" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Elemento: {e["elem"]}</text>',
+        f'<text x="24" y="138" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">Agente da Ordem</text>',
+        f'<text x="344" y="138" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,s["hp"])}/{MAX_HP} HP</text>',
+        _bar(24, 147, 320, 12, s["hp"] / MAX_HP, pal["agent"], pal),
+        f'<text x="24" y="178" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Derrotadas: {s["score"]}   ·   Recorde: {s["best"]}   ·   Rituais: {s["rituals"]}</text>',
+        f'<text x="24" y="210" font-family="{ff}" font-size="12.5" fill="{pal["text"]}">{_esc(_short(s["msg"]))}</text>',
+        creature_svg(e["elem"], ecol, 104, 372, 44),
+        d20_svg(424, 200, 40, s.get("last_roll", 0)),
+        f'<text x="424" y="252" text-anchor="middle" font-family="{ff}" font-size="9.5" fill="{pal["muted"]}">rolagem do d20</text>',
     ]
     return (f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
             f'width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Encontro Paranormal">'
@@ -363,7 +372,7 @@ def build_section(s):
     base = f"https://raw.githubusercontent.com/{REPO}/main/rpg"
     out = ['<div align="center">\n\n', "<picture>\n",
            f'<source media="(prefers-color-scheme: dark)" srcset="{base}/scene-dark.svg?v={ver}" />\n',
-           f'<img src="{base}/scene-light.svg?v={ver}" width="500" alt="Encontro Paranormal" />\n',
+           f'<img src="{base}/scene-light.svg?v={ver}" width="520" alt="Encontro Paranormal" />\n',
            "</picture>\n\n"]
     if s.get("over"):
         out.append(btn_md("novo") + "\n\n")

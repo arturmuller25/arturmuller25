@@ -7,10 +7,10 @@
   "over": false,
   "last_roll": 0,
   "enemy": {
-    "name": "Zumbi de Sangue",
+    "name": "Carniçal",
     "elem": "Sangue",
-    "hp": 9,
-    "max": 9
+    "hp": 11,
+    "max": 11
   },
   "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }
