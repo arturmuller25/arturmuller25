@@ -1,27 +1,31 @@
 #!/usr/bin/env python3
 """
-Pixel-art procedural do Raziel, o Vampiro de Sangue (Ordem Paranormal).
+Pixel-art procedural do Raziel (Vampiro) — Ordem Paranormal.
 
-Pinta a figura numa grade 52x64 (cabeça pálida com sorriso de presas, gola
-vermelha pontuda, sobretudo preto/vermelho com correntes douradas, garras),
-faz um contorno automático e devolve markup SVG (com run-length nas linhas
-para não gerar milhares de <rect>).
+Pose em 3/4 (levemente de lado), com sombreado em camadas, gola vermelha
+pontuda, cabeça pálida com sorriso de presas, sobretudo preto/vermelho com
+correntes douradas e mãos com garras. Contorno automático e run-length nas
+linhas para não gerar milhares de <rect>.
 """
 
 W, H = 52, 64
 
 PALETTE = {
-    1: "#0c0a0c",   # contorno
-    2: "#181219",   # sobretudo (preto)
-    3: "#241d2b",   # sobretudo (luz)
-    4: "#5d141b",   # vermelho escuro
-    5: "#a3262e",   # vermelho vivo
-    6: "#d2c8bf",   # pele pálida
-    7: "#8c8079",   # pele (sombra)
-    8: "#efe6cc",   # presas / osso
-    9: "#160610",   # bocarra
-    10: "#c9a24a",  # corrente dourada
-    11: "#dccfc3",  # garra
+    1: "#0c0a0c",    # contorno
+    2: "#181219",    # sobretudo (preto)
+    3: "#2a2230",    # sobretudo (luz, lado iluminado)
+    12: "#0e0a11",   # sobretudo (sombra profunda, lado afastado)
+    4: "#5d141b",    # vermelho escuro
+    5: "#a3262e",    # vermelho vivo
+    13: "#3a0d12",   # vermelho (sombra)
+    6: "#d4cabf",    # pele pálida
+    7: "#9a8a7e",    # pele (sombra)
+    14: "#6d6158",   # pele (sombra profunda)
+    8: "#efe6cc",    # presas / osso
+    9: "#160610",    # bocarra
+    10: "#cda24a",   # corrente dourada
+    11: "#dccfc3",   # garra / mão
+    15: "#a99e92",   # garra (sombra)
 }
 
 
@@ -63,6 +67,19 @@ def _poly(g, pts, c):
                     g[y][x] = c
 
 
+def _claw(g, cx, cy, up):
+    # palma
+    _ellipse(g, cx, cy, 3, 2, 11)
+    g[min(H - 1, cy + 1)][cx] = 15
+    # quatro garras se abrindo em leque
+    for dx in (-3, -1, 1, 3):
+        for t in range(1, 5):
+            x = int(round(cx + dx + dx * 0.35 * t))
+            y = cy + up * (1 + t)
+            if 0 <= x < W and 0 <= y < H:
+                g[y][x] = 8 if t >= 3 else 11
+
+
 def _outline(g, c=1):
     add = []
     for y in range(H):
@@ -79,49 +96,49 @@ def _outline(g, c=1):
 
 def _paint():
     g = _grid()
-    # gola vermelha pontuda (atrás da cabeça)
-    _poly(g, [(24, 27), (7, 5), (21, 23)], 5)
-    _poly(g, [(28, 27), (45, 5), (31, 23)], 5)
-    _poly(g, [(23, 26), (12, 9), (21, 22)], 4)
-    _poly(g, [(29, 26), (40, 9), (31, 22)], 4)
-    # sobretudo (sino)
-    _poly(g, [(15, 23), (37, 23), (49, 61), (3, 61)], 2)
-    _poly(g, [(15, 23), (25, 23), (16, 60), (4, 60)], 3)   # luz no lado esquerdo
+    # gola pontuda (assimétrica: ponta esquerda à frente, direita atrás/sombra)
+    _poly(g, [(23, 27), (4, 2), (19, 24)], 5)
+    _poly(g, [(22, 26), (10, 7), (20, 23)], 4)
+    _poly(g, [(29, 27), (44, 8), (31, 23)], 4)
+    _poly(g, [(29, 26), (40, 11), (31, 24)], 13)
+    # sobretudo (sino levemente torcido) com luz à esquerda e sombra à direita
+    _poly(g, [(13, 23), (35, 23), (47, 61), (3, 61)], 2)
+    _poly(g, [(13, 23), (21, 23), (12, 60), (3, 60)], 3)
+    _poly(g, [(31, 24), (35, 23), (47, 61), (33, 61)], 12)
     # mangas
-    _rect(g, 10, 27, 16, 47, 2)
-    _rect(g, 36, 27, 42, 47, 2)
-    # placa central vermelha
-    _poly(g, [(22, 25), (30, 25), (32, 46), (26, 59), (20, 46)], 4)
-    _poly(g, [(24, 27), (28, 27), (29, 45), (26, 55), (23, 45)], 5)
+    _rect(g, 9, 27, 15, 46, 2)
+    _rect(g, 35, 28, 41, 47, 12)
+    # placa central vermelha (deslocada à esquerda pela rotação)
+    _poly(g, [(19, 25), (28, 25), (30, 46), (24, 58), (17, 46)], 4)
+    _poly(g, [(21, 27), (26, 27), (27, 45), (23, 54), (20, 45)], 5)
+    _poly(g, [(26, 29), (28, 30), (29, 47), (25, 52)], 13)
     # correntes douradas (dois arcos)
-    for (px, py) in [(19, 31), (22, 33), (26, 34), (30, 33), (33, 31)]:
+    for (px, py) in [(16, 31), (19, 33), (23, 34), (27, 33), (30, 31)]:
         g[py][px] = 10
-    for (px, py) in [(20, 39), (23, 41), (26, 42), (29, 41), (32, 39)]:
+    for (px, py) in [(17, 39), (20, 41), (23, 42), (26, 41), (29, 39)]:
         g[py][px] = 10
-    # mãos com garras
-    _ellipse(g, 13, 49, 4, 4, 11)
-    _ellipse(g, 39, 49, 4, 4, 11)
-    for (px, py) in [(9, 52), (11, 53), (13, 53), (15, 53), (37, 53), (39, 53), (41, 53), (43, 52)]:
-        g[py][px] = 11
-    # cabeça pálida
-    _ellipse(g, 26, 14, 7, 9, 6)
-    _ellipse(g, 26, 14, 7, 9, 7, half="r")
-    _ellipse(g, 25, 13, 6, 8, 6, half="l")
+    # mãos com garras (esquerda erguida à frente, direita baixa)
+    _claw(g, 11, 39, -1)
+    _claw(g, 40, 51, 1)
+    # cabeça pálida virada levemente à esquerda
+    _ellipse(g, 23, 14, 7, 9, 6)
+    _ellipse(g, 23, 14, 7, 9, 7, half="r")
+    _ellipse(g, 21, 13, 5, 8, 6, half="l")
+    _rect(g, 28, 9, 29, 20, 14)
     # olhos fundos + rachaduras
-    for (px, py) in [(23, 11), (24, 11), (28, 11), (29, 11), (26, 7), (26, 9)]:
+    for (px, py) in [(20, 11), (21, 11), (25, 11), (26, 11), (23, 7), (23, 9), (19, 13)]:
         g[py][px] = 7
-    # bocarra com presas
-    _rect(g, 20, 16, 32, 20, 9)
-    for x in range(20, 33, 2):      # presas de cima
+    # bocarra curva com presas
+    _poly(g, [(17, 16), (29, 16), (27, 21), (18, 20)], 9)
+    for x in range(17, 29, 2):
         g[16][x] = 8
-        if 16 + 1 < H:
-            g[17][x] = 8
-    for x in range(21, 33, 2):      # presas de baixo
+        g[17][x] = 8
+    for x in range(18, 28, 2):
         g[20][x] = 8
         g[19][x] = 8
-    # pés
-    _rect(g, 17, 60, 24, 63, 2)
-    _rect(g, 28, 60, 35, 63, 2)
+    # pés (passada)
+    _rect(g, 13, 60, 20, 63, 2)
+    _rect(g, 27, 59, 34, 63, 12)
     _outline(g)
     return g
 
@@ -130,7 +147,6 @@ _CACHE = None
 
 
 def markup(ox, oy, cell):
-    """Devolve <rect>s posicionados (run-length por linha) para a figura."""
     global _CACHE
     if _CACHE is None:
         _CACHE = _paint()

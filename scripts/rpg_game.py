@@ -44,7 +44,7 @@ ELEMENTS = {
     "Energia": "#a85cff", "Medo": "#4f86d6",
 }
 CREATURES = [
-    ("Raziel, o Vampiro", "Sangue"), ("Carniçal", "Sangue"), ("Sanguessuga", "Sangue"),
+    ("Raziel (Vampiro)", "Sangue"),
     ("Espectro", "Morte"), ("Ceifador", "Morte"), ("Profanado", "Morte"),
     ("Membro do Outro Lado", "Conhecimento"), ("Olho Vigia", "Conhecimento"),
     ("Distorção", "Energia"), ("Tempestade Viva", "Energia"),

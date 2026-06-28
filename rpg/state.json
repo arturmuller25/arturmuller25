@@ -7,10 +7,10 @@
   "over": false,
   "last_roll": 0,
   "enemy": {
-    "name": "Carniçal",
+    "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 10,
-    "max": 10
+    "hp": 11,
+    "max": 11
   },
   "msg": "Uma criatura surge das sombras. Boa sorte, Agente."
 }
