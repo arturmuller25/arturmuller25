@@ -1,16 +1,16 @@
 {
-  "hp": 14,
+  "hp": 7,
   "score": 0,
   "best": 0,
   "rituals": 1,
   "defending": false,
   "over": false,
-  "last_roll": 11,
+  "last_roll": 7,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 26,
+    "hp": 23,
     "max": 32
   },
-  "msg": "**Você** assume defesa e recupera 3 defendeu e sofreu 3."
+  "msg": "**Você** atingiu Raziel (Vampiro) (3) a criatura revidou (7)."
 }
