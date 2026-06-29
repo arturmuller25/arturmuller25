@@ -66,8 +66,11 @@ LANG_COLORS = {
     "JavaScript": "#FACC15",  # amarelo vivo
     "PowerShell": "#6366F1",  # índigo vivo
     "Shell": "#22C55E",       # verde vivo
+    "Blade": "#84CC16",       # lima vivo
     "SQLite": "#14B8A6", "C": "#94A3B8", "Outros": "#EF4444",  # outros = vermelho vivo
 }
+# fallback vívido para qualquer linguagem não mapeada
+EXTRA = ["#84CC16", "#F59E0B", "#14B8A6", "#D946EF", "#0EA5E9", "#FB7185", "#A3E635"]
 
 
 def fetch():
@@ -118,7 +121,7 @@ def render_langs(langs, pal):
     for i, (name, val) in enumerate(langs):
         frac = val / total
         seg_w = frac * bar_w
-        color = LANG_COLORS.get(name, pal["ramp"][min(i, len(pal["ramp"]) - 1)])
+        color = LANG_COLORS.get(name) or EXTRA[i % len(EXTRA)]
         segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{seg_w:.1f}" height="{bar_h}" fill="{color}"/>')
         x += seg_w
         col = i % 2
