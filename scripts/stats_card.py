@@ -58,15 +58,15 @@ DARK = {
 
 # cores de marca das linguagens (legíveis em tema claro e escuro)
 LANG_COLORS = {
-    "Python": "#4C8DD6",      # azul
-    "PHP": "#A86CE0",         # roxo
-    "HTML": "#F1662A",        # laranja
-    "TypeScript": "#25B8C4",  # ciano/teal
-    "CSS": "#E45C9A",         # rosa
-    "JavaScript": "#F2C13D",  # amarelo
-    "PowerShell": "#5C6BF0",  # índigo
-    "Shell": "#3DBC5E",       # verde
-    "SQLite": "#7C9CB8", "C": "#9AA7B4", "Outros": "#8089A0",
+    "Python": "#3B82F6",      # azul vivo
+    "PHP": "#A855F7",         # roxo vivo
+    "HTML": "#F97316",        # laranja vivo
+    "TypeScript": "#06B6D4",  # ciano vivo
+    "CSS": "#EC4899",         # rosa vivo
+    "JavaScript": "#FACC15",  # amarelo vivo
+    "PowerShell": "#6366F1",  # índigo vivo
+    "Shell": "#22C55E",       # verde vivo
+    "SQLite": "#14B8A6", "C": "#94A3B8", "Outros": "#EF4444",  # outros = vermelho vivo
 }
 
 
@@ -108,7 +108,9 @@ def render_stats(stats, pal):
 
 
 def render_langs(langs, pal):
-    w, h = 480, 168
+    w = 480
+    rows = (len(langs) + 1) // 2
+    h = 104 + (rows - 1) * 22 + 18
     total = sum(v for _, v in langs) or 1
     bar_x, bar_w, bar_y, bar_h = 24, w - 48, 66, 14
     segs, x = [], bar_x
@@ -145,8 +147,8 @@ def aggregate_langs(repos):
         for e in node["languages"]["edges"]:
             totals[e["node"]["name"]] = totals.get(e["node"]["name"], 0) + e["size"]
     ordered = sorted(totals.items(), key=lambda kv: -kv[1])
-    top = ordered[:5]
-    rest = sum(v for _, v in ordered[5:])
+    top = ordered[:8]
+    rest = sum(v for _, v in ordered[8:])
     if rest:
         top.append(("Outros", rest))
     return top
