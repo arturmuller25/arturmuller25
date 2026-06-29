@@ -58,9 +58,15 @@ DARK = {
 
 # cores de marca das linguagens (legíveis em tema claro e escuro)
 LANG_COLORS = {
-    "Python": "#3776AB", "HTML": "#E34F26", "PHP": "#9179C9", "CSS": "#1572B6",
-    "TypeScript": "#3178C6", "JavaScript": "#E8C020", "PowerShell": "#5391FE",
-    "Shell": "#89E051", "SQLite": "#0F80CC", "C": "#A8B9CC", "Outros": "#8B949E",
+    "Python": "#4C8DD6",      # azul
+    "PHP": "#A86CE0",         # roxo
+    "HTML": "#F1662A",        # laranja
+    "TypeScript": "#25B8C4",  # ciano/teal
+    "CSS": "#E45C9A",         # rosa
+    "JavaScript": "#F2C13D",  # amarelo
+    "PowerShell": "#5C6BF0",  # índigo
+    "Shell": "#3DBC5E",       # verde
+    "SQLite": "#7C9CB8", "C": "#9AA7B4", "Outros": "#8089A0",
 }
 
 
