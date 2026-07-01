@@ -56,8 +56,15 @@ DARK = {
     "ramp": ["#aebccd", "#8aa6c8", "#6E86A8", "#5a78a0", "#46618a", "#36567D"],
 }
 
-# Gradiente frio e elegante (combina com a paleta aço/quartzo do perfil)
-GRAD = [(0.0, "#38BDF8"), (0.35, "#5488D8"), (0.66, "#7C6BE0"), (1.0, "#A855F7")]
+# Presets de gradiente (bem coloridos). O card usa PRESETS[ATIVO].
+PRESETS = {
+    "aurora":  [(0.0, "#22D3EE"), (0.22, "#3B82F6"), (0.45, "#8B5CF6"), (0.65, "#EC4899"), (0.83, "#FB923C"), (1.0, "#FACC15")],
+    "rainbow": [(0.0, "#FF5C5C"), (0.2, "#FFB13D"), (0.4, "#FFE24D"), (0.58, "#4ADE80"), (0.78, "#38BDF8"), (1.0, "#A855F7")],
+    "sunset":  [(0.0, "#F97316"), (0.3, "#EF4444"), (0.6, "#EC4899"), (1.0, "#8B5CF6")],
+    "neon":    [(0.0, "#00F5D4"), (0.3, "#00BBF9"), (0.6, "#9B5DE5"), (0.82, "#F15BB5"), (1.0, "#FEE440")],
+}
+ATIVO = "aurora"
+GRAD = PRESETS[ATIVO]
 
 
 def _hx(h):
@@ -65,16 +72,16 @@ def _hx(h):
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
 
 
-def _grad(t):
+def _grad(t, grad):
     t = max(0.0, min(1.0, t))
-    for i in range(len(GRAD) - 1):
-        p0, c0 = GRAD[i]
-        p1, c1 = GRAD[i + 1]
+    for i in range(len(grad) - 1):
+        p0, c0 = grad[i]
+        p1, c1 = grad[i + 1]
         if p0 <= t <= p1:
             f = (t - p0) / (p1 - p0) if p1 > p0 else 0.0
             a, b = _hx(c0), _hx(c1)
             return "#%02x%02x%02x" % tuple(round(a[k] + (b[k] - a[k]) * f) for k in range(3))
-    return GRAD[-1][1]
+    return grad[-1][1]
 
 
 def fetch():
@@ -114,18 +121,18 @@ def render_stats(stats, pal):
 '''
 
 
-def render_langs(langs, pal):
+def render_langs(langs, pal, grad=GRAD):
     w = 480
     rows = (len(langs) + 1) // 2
     h = 104 + (rows - 1) * 22 + 18
     total = sum(v for _, v in langs) or 1
     bar_x, bar_w, bar_y, bar_h = 24, w - 48, 66, 14
-    stops = "".join(f'<stop offset="{p*100:.0f}%" stop-color="{c}"/>' for p, c in GRAD)
+    stops = "".join(f'<stop offset="{p*100:.0f}%" stop-color="{c}"/>' for p, c in grad)
     dividers, legend, x = [], [], bar_x
     for i, (name, val) in enumerate(langs):
         frac = val / total
         mid = (x - bar_x + frac * bar_w / 2) / bar_w
-        color = _grad(mid)
+        color = _grad(mid, grad)
         x += frac * bar_w
         if i < len(langs) - 1:
             dividers.append(f'<rect x="{x-0.75:.1f}" y="{bar_y}" width="1.5" height="{bar_h}" '

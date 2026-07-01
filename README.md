@@ -107,8 +107,8 @@ Um mini-RPG jogável aqui no perfil, no clima de *Ordem Paranormal*. Você é um
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-dark.svg?v=6" />
-    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-light.svg?v=6" alt="Linguagens mais usadas (inclui repositórios privados)" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-dark.svg?v=7" />
+    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-light.svg?v=7" alt="Linguagens mais usadas (inclui repositórios privados)" />
   </picture>
 </p>
 
