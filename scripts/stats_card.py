@@ -56,27 +56,35 @@ DARK = {
     "ramp": ["#aebccd", "#8aa6c8", "#6E86A8", "#5a78a0", "#46618a", "#36567D"],
 }
 
-# Paletas categoricas: cores solidas, distintas e variadas por linguagem.
-# Hues espalhados (sem tons repetidos) e ordem nao-espectral (sem cara de bandeira).
-PALETTES = {
-    "vivo": {
-        "Python": "#3B82F6", "PHP": "#F97316", "HTML": "#EC4899", "TypeScript": "#22C55E",
-        "CSS": "#EAB308", "Blade": "#A855F7", "JavaScript": "#EF4444", "PowerShell": "#14B8A6",
-        "Shell": "#F472B6", "Outros": "#94A3B8",
-    },
-    "moderno": {
-        "Python": "#4E79A7", "PHP": "#F28E2B", "HTML": "#E15759", "TypeScript": "#59A14F",
-        "CSS": "#EDC948", "Blade": "#B07AA1", "JavaScript": "#76B7B2", "PowerShell": "#FF9DA7",
-        "Shell": "#9C755F", "Outros": "#BAB0AC",
-    },
-    "profundo": {
-        "Python": "#2563EB", "PHP": "#C2410C", "HTML": "#BE185D", "TypeScript": "#047857",
-        "CSS": "#CA8A04", "Blade": "#6D28D9", "JavaScript": "#B91C1C", "PowerShell": "#0F766E",
-        "Shell": "#7C3AED", "Outros": "#64748B",
-    },
+def _hx(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _shift(c, f):
+    r, g, b = _hx(c)
+    if f >= 0:
+        r, g, b = (round(v + (255 - v) * f) for v in (r, g, b))
+    else:
+        r, g, b = (round(v * (1 + f)) for v in (r, g, b))
+    return "#%02x%02x%02x" % (r, g, b)
+
+
+# Cor caracteristica de cada linguagem (baseada na logo/identidade oficial).
+LANG_COLORS = {
+    "Python": "#3776AB",      # azul da logo do Python
+    "PHP": "#777BB4",         # roxo do elefante do PHP
+    "HTML": "#E34F26",        # laranja do HTML5
+    "TypeScript": "#3178C6",  # azul do TypeScript
+    "CSS": "#563D7C",         # roxo/indigo (cor do CSS no GitHub)
+    "Blade": "#F7523F",       # vermelho do Blade/Laravel
+    "JavaScript": "#F7DF1E",  # amarelo do JavaScript
+    "PowerShell": "#5391FE",  # azul do PowerShell
+    "Shell": "#89E051",       # verde do Shell/Bash
+    "C": "#A8B9CC", "SQLite": "#003B57",
+    "Outros": "#94A3B8",      # cinza neutro
 }
 EXTRA = ["#F59E0B", "#8B5CF6", "#10B981", "#E11D48", "#0EA5E9", "#D946EF", "#84CC16"]
-ATIVO = "vivo"
 
 
 def fetch():
@@ -117,38 +125,47 @@ def render_stats(stats, pal):
 
 
 def render_langs(langs, pal, palette=None):
-    palette = palette or PALETTES[ATIVO]
+    palette = palette or LANG_COLORS
     w = 480
     rows = (len(langs) + 1) // 2
     h = 104 + (rows - 1) * 22 + 18
     total = sum(v for _, v in langs) or 1
     bar_x, bar_w, bar_y, bar_h = 24, w - 48, 66, 14
     gap, n = 2.0, len(langs)
+    defs = [f'<clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath>']
     segs, legend, x = [], [], bar_x
     for i, (name, val) in enumerate(langs):
         frac = val / total
         seg_w = frac * bar_w
         color = palette.get(name) or EXTRA[i % len(EXTRA)]
+        gid = f"g{i}"
+        defs.append(
+            f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">'
+            f'<stop offset="0%" stop-color="{_shift(color, 0.34)}"/>'
+            f'<stop offset="50%" stop-color="{color}"/>'
+            f'<stop offset="100%" stop-color="{_shift(color, -0.2)}"/></linearGradient>'
+        )
         draw_w = seg_w - gap if i < n - 1 else seg_w
         if draw_w < 2:
             draw_w = max(2.0, seg_w)
-        segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{draw_w:.1f}" height="{bar_h}" fill="{color}"/>')
+        segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{draw_w:.1f}" height="{bar_h}" fill="url(#{gid})"/>')
         x += seg_w
         col = i % 2
         row = i // 2
         lx = 28 + col * 230
         ly = 104 + row * 22
         legend.append(
-            f'<circle cx="{lx}" cy="{ly-4}" r="5" fill="{color}"/>'
+            f'<circle cx="{lx}" cy="{ly-4}" r="5" fill="{color}" stroke="{_shift(color, -0.25)}" stroke-width="0.75"/>'
             f'<text x="{lx+12}" y="{ly}" font-family="\'Segoe UI\',Helvetica,Arial,sans-serif" '
             f'font-size="13" fill="{pal["label"]}">{name} {frac*100:.1f}%</text>'
         )
+    sheen = f'<rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h*0.42:.1f}" fill="#ffffff" opacity="0.12"/>'
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Linguagens mais usadas">
-  <defs><clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath></defs>
+  <defs>{''.join(defs)}</defs>
   <rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" fill="{pal["bg"]}" stroke="{pal["border"]}"/>
   <text x="24" y="38" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="{pal["title"]}">Linguagens mais usadas &#183; todos os repos</text>
   <line x1="24" y1="50" x2="{w-24}" y2="50" stroke="{pal["border"]}"/>
-  <g clip-path="url(#r)">{''.join(segs)}</g>
+  <g clip-path="url(#r)">{''.join(segs)}{sheen}</g>
   {''.join(legend)}
 </svg>
 '''
