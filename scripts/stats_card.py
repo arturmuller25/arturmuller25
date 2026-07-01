@@ -56,21 +56,25 @@ DARK = {
     "ramp": ["#aebccd", "#8aa6c8", "#6E86A8", "#5a78a0", "#46618a", "#36567D"],
 }
 
-# cores de marca das linguagens (legíveis em tema claro e escuro)
-LANG_COLORS = {
-    "Python": "#3B82F6",      # azul vivo
-    "PHP": "#A855F7",         # roxo vivo
-    "HTML": "#F97316",        # laranja vivo
-    "TypeScript": "#06B6D4",  # ciano vivo
-    "CSS": "#EC4899",         # rosa vivo
-    "JavaScript": "#FACC15",  # amarelo vivo
-    "PowerShell": "#6366F1",  # índigo vivo
-    "Shell": "#22C55E",       # verde vivo
-    "Blade": "#84CC16",       # lima vivo
-    "SQLite": "#14B8A6", "C": "#94A3B8", "Outros": "#EF4444",  # outros = vermelho vivo
-}
-# fallback vívido para qualquer linguagem não mapeada
-EXTRA = ["#84CC16", "#F59E0B", "#14B8A6", "#D946EF", "#0EA5E9", "#FB7185", "#A3E635"]
+# Gradiente frio e elegante (combina com a paleta aço/quartzo do perfil)
+GRAD = [(0.0, "#38BDF8"), (0.35, "#5488D8"), (0.66, "#7C6BE0"), (1.0, "#A855F7")]
+
+
+def _hx(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _grad(t):
+    t = max(0.0, min(1.0, t))
+    for i in range(len(GRAD) - 1):
+        p0, c0 = GRAD[i]
+        p1, c1 = GRAD[i + 1]
+        if p0 <= t <= p1:
+            f = (t - p0) / (p1 - p0) if p1 > p0 else 0.0
+            a, b = _hx(c0), _hx(c1)
+            return "#%02x%02x%02x" % tuple(round(a[k] + (b[k] - a[k]) * f) for k in range(3))
+    return GRAD[-1][1]
 
 
 def fetch():
@@ -116,14 +120,16 @@ def render_langs(langs, pal):
     h = 104 + (rows - 1) * 22 + 18
     total = sum(v for _, v in langs) or 1
     bar_x, bar_w, bar_y, bar_h = 24, w - 48, 66, 14
-    segs, x = [], bar_x
-    legend = []
+    stops = "".join(f'<stop offset="{p*100:.0f}%" stop-color="{c}"/>' for p, c in GRAD)
+    dividers, legend, x = [], [], bar_x
     for i, (name, val) in enumerate(langs):
         frac = val / total
-        seg_w = frac * bar_w
-        color = LANG_COLORS.get(name) or EXTRA[i % len(EXTRA)]
-        segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{seg_w:.1f}" height="{bar_h}" fill="{color}"/>')
-        x += seg_w
+        mid = (x - bar_x + frac * bar_w / 2) / bar_w
+        color = _grad(mid)
+        x += frac * bar_w
+        if i < len(langs) - 1:
+            dividers.append(f'<rect x="{x-0.75:.1f}" y="{bar_y}" width="1.5" height="{bar_h}" '
+                            f'fill="{pal["bg"]}" opacity="0.5"/>')
         col = i % 2
         row = i // 2
         lx = 28 + col * 230
@@ -134,11 +140,14 @@ def render_langs(langs, pal):
             f'font-size="13" fill="{pal["label"]}">{name} {frac*100:.1f}%</text>'
         )
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Linguagens mais usadas">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">{stops}</linearGradient>
+    <clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath>
+  </defs>
   <rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" fill="{pal["bg"]}" stroke="{pal["border"]}"/>
   <text x="24" y="38" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="{pal["title"]}">Linguagens mais usadas &#183; todos os repos</text>
   <line x1="24" y1="50" x2="{w-24}" y2="50" stroke="{pal["border"]}"/>
-  <clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath>
-  <g clip-path="url(#r)">{''.join(segs)}</g>
+  <g clip-path="url(#r)"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" fill="url(#lg)"/>{''.join(dividers)}</g>
   {''.join(legend)}
 </svg>
 '''
