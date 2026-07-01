@@ -56,32 +56,27 @@ DARK = {
     "ramp": ["#aebccd", "#8aa6c8", "#6E86A8", "#5a78a0", "#46618a", "#36567D"],
 }
 
-# Presets de gradiente (bem coloridos). O card usa PRESETS[ATIVO].
-PRESETS = {
-    "aurora":  [(0.0, "#22D3EE"), (0.22, "#3B82F6"), (0.45, "#8B5CF6"), (0.65, "#EC4899"), (0.83, "#FB923C"), (1.0, "#FACC15")],
-    "rainbow": [(0.0, "#FF5C5C"), (0.2, "#FFB13D"), (0.4, "#FFE24D"), (0.58, "#4ADE80"), (0.78, "#38BDF8"), (1.0, "#A855F7")],
-    "sunset":  [(0.0, "#F97316"), (0.3, "#EF4444"), (0.6, "#EC4899"), (1.0, "#8B5CF6")],
-    "neon":    [(0.0, "#00F5D4"), (0.3, "#00BBF9"), (0.6, "#9B5DE5"), (0.82, "#F15BB5"), (1.0, "#FEE440")],
+# Paletas categoricas: cores solidas, distintas e variadas por linguagem.
+# Hues espalhados (sem tons repetidos) e ordem nao-espectral (sem cara de bandeira).
+PALETTES = {
+    "vivo": {
+        "Python": "#3B82F6", "PHP": "#F97316", "HTML": "#EC4899", "TypeScript": "#22C55E",
+        "CSS": "#EAB308", "Blade": "#A855F7", "JavaScript": "#EF4444", "PowerShell": "#14B8A6",
+        "Shell": "#F472B6", "Outros": "#94A3B8",
+    },
+    "moderno": {
+        "Python": "#4E79A7", "PHP": "#F28E2B", "HTML": "#E15759", "TypeScript": "#59A14F",
+        "CSS": "#EDC948", "Blade": "#B07AA1", "JavaScript": "#76B7B2", "PowerShell": "#FF9DA7",
+        "Shell": "#9C755F", "Outros": "#BAB0AC",
+    },
+    "profundo": {
+        "Python": "#2563EB", "PHP": "#C2410C", "HTML": "#BE185D", "TypeScript": "#047857",
+        "CSS": "#CA8A04", "Blade": "#6D28D9", "JavaScript": "#B91C1C", "PowerShell": "#0F766E",
+        "Shell": "#7C3AED", "Outros": "#64748B",
+    },
 }
-ATIVO = "aurora"
-GRAD = PRESETS[ATIVO]
-
-
-def _hx(h):
-    h = h.lstrip("#")
-    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
-
-
-def _grad(t, grad):
-    t = max(0.0, min(1.0, t))
-    for i in range(len(grad) - 1):
-        p0, c0 = grad[i]
-        p1, c1 = grad[i + 1]
-        if p0 <= t <= p1:
-            f = (t - p0) / (p1 - p0) if p1 > p0 else 0.0
-            a, b = _hx(c0), _hx(c1)
-            return "#%02x%02x%02x" % tuple(round(a[k] + (b[k] - a[k]) * f) for k in range(3))
-    return grad[-1][1]
+EXTRA = ["#F59E0B", "#8B5CF6", "#10B981", "#E11D48", "#0EA5E9", "#D946EF", "#84CC16"]
+ATIVO = "vivo"
 
 
 def fetch():
@@ -121,22 +116,24 @@ def render_stats(stats, pal):
 '''
 
 
-def render_langs(langs, pal, grad=GRAD):
+def render_langs(langs, pal, palette=None):
+    palette = palette or PALETTES[ATIVO]
     w = 480
     rows = (len(langs) + 1) // 2
     h = 104 + (rows - 1) * 22 + 18
     total = sum(v for _, v in langs) or 1
     bar_x, bar_w, bar_y, bar_h = 24, w - 48, 66, 14
-    stops = "".join(f'<stop offset="{p*100:.0f}%" stop-color="{c}"/>' for p, c in grad)
-    dividers, legend, x = [], [], bar_x
+    gap, n = 2.0, len(langs)
+    segs, legend, x = [], [], bar_x
     for i, (name, val) in enumerate(langs):
         frac = val / total
-        mid = (x - bar_x + frac * bar_w / 2) / bar_w
-        color = _grad(mid, grad)
-        x += frac * bar_w
-        if i < len(langs) - 1:
-            dividers.append(f'<rect x="{x-0.75:.1f}" y="{bar_y}" width="1.5" height="{bar_h}" '
-                            f'fill="{pal["bg"]}" opacity="0.5"/>')
+        seg_w = frac * bar_w
+        color = palette.get(name) or EXTRA[i % len(EXTRA)]
+        draw_w = seg_w - gap if i < n - 1 else seg_w
+        if draw_w < 2:
+            draw_w = max(2.0, seg_w)
+        segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{draw_w:.1f}" height="{bar_h}" fill="{color}"/>')
+        x += seg_w
         col = i % 2
         row = i // 2
         lx = 28 + col * 230
@@ -147,14 +144,11 @@ def render_langs(langs, pal, grad=GRAD):
             f'font-size="13" fill="{pal["label"]}">{name} {frac*100:.1f}%</text>'
         )
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Linguagens mais usadas">
-  <defs>
-    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0">{stops}</linearGradient>
-    <clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath>
-  </defs>
+  <defs><clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath></defs>
   <rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" fill="{pal["bg"]}" stroke="{pal["border"]}"/>
   <text x="24" y="38" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="{pal["title"]}">Linguagens mais usadas &#183; todos os repos</text>
   <line x1="24" y1="50" x2="{w-24}" y2="50" stroke="{pal["border"]}"/>
-  <g clip-path="url(#r)"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" fill="url(#lg)"/>{''.join(dividers)}</g>
+  <g clip-path="url(#r)">{''.join(segs)}</g>
   {''.join(legend)}
 </svg>
 '''
