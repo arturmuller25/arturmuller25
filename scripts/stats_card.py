@@ -70,6 +70,11 @@ def _shift(c, f):
     return "#%02x%02x%02x" % (r, g, b)
 
 
+def _mix(c1, c2, t):
+    a, b = _hx(c1), _hx(c2)
+    return "#%02x%02x%02x" % tuple(round(a[k] + (b[k] - a[k]) * t) for k in range(3))
+
+
 # Cor caracteristica de cada linguagem (baseada na logo/identidade oficial).
 LANG_COLORS = {
     "Python": "#3776AB",      # azul da logo do Python
@@ -132,40 +137,49 @@ def render_langs(langs, pal, palette=None):
     total = sum(v for _, v in langs) or 1
     bar_x, bar_w, bar_y, bar_h = 24, w - 48, 66, 14
     gap, n = 2.0, len(langs)
-    defs = [f'<clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath>']
+    colors = [palette.get(nm) or EXTRA[i % len(EXTRA)] for i, (nm, _) in enumerate(langs)]
+    defs = [f'<clipPath id="r"><rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="7"/></clipPath>',
+            '<linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0%" stop-color="#ffffff" stop-opacity="0.32"/>'
+            '<stop offset="42%" stop-color="#ffffff" stop-opacity="0"/>'
+            '<stop offset="58%" stop-color="#000000" stop-opacity="0"/>'
+            '<stop offset="100%" stop-color="#000000" stop-opacity="0.22"/></linearGradient>']
     segs, legend, x = [], [], bar_x
     for i, (name, val) in enumerate(langs):
         frac = val / total
         seg_w = frac * bar_w
-        color = palette.get(name) or EXTRA[i % len(EXTRA)]
+        c = colors[i]
+        left = _mix(c, colors[i - 1] if i > 0 else c, 0.35)      # borda esquerda puxa pro vizinho anterior
+        right = _mix(c, colors[i + 1] if i < n - 1 else c, 0.35)  # borda direita puxa pro proximo
         gid = f"g{i}"
         defs.append(
-            f'<linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1">'
-            f'<stop offset="0%" stop-color="{_shift(color, 0.34)}"/>'
-            f'<stop offset="50%" stop-color="{color}"/>'
-            f'<stop offset="100%" stop-color="{_shift(color, -0.2)}"/></linearGradient>'
+            f'<linearGradient id="{gid}" x1="0" y1="0" x2="1" y2="0">'
+            f'<stop offset="0%" stop-color="{left}"/>'
+            f'<stop offset="20%" stop-color="{c}"/>'
+            f'<stop offset="80%" stop-color="{c}"/>'
+            f'<stop offset="100%" stop-color="{right}"/></linearGradient>'
         )
         draw_w = seg_w - gap if i < n - 1 else seg_w
         if draw_w < 2:
             draw_w = max(2.0, seg_w)
-        segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{draw_w:.1f}" height="{bar_h}" fill="url(#{gid})"/>')
+        segs.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{draw_w:.1f}" height="{bar_h}" fill="url(#{gid})"/>'
+                    f'<rect x="{x:.1f}" y="{bar_y}" width="{draw_w:.1f}" height="{bar_h}" fill="url(#gloss)"/>')
         x += seg_w
         col = i % 2
         row = i // 2
         lx = 28 + col * 230
         ly = 104 + row * 22
         legend.append(
-            f'<circle cx="{lx}" cy="{ly-4}" r="5" fill="{color}" stroke="{_shift(color, -0.25)}" stroke-width="0.75"/>'
+            f'<circle cx="{lx}" cy="{ly-4}" r="5" fill="{c}" stroke="{_shift(c, -0.25)}" stroke-width="0.75"/>'
             f'<text x="{lx+12}" y="{ly}" font-family="\'Segoe UI\',Helvetica,Arial,sans-serif" '
             f'font-size="13" fill="{pal["label"]}">{name} {frac*100:.1f}%</text>'
         )
-    sheen = f'<rect x="{bar_x}" y="{bar_y}" width="{bar_w}" height="{bar_h*0.42:.1f}" fill="#ffffff" opacity="0.12"/>'
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Linguagens mais usadas">
   <defs>{''.join(defs)}</defs>
   <rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" fill="{pal["bg"]}" stroke="{pal["border"]}"/>
   <text x="24" y="38" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="{pal["title"]}">Linguagens mais usadas &#183; todos os repos</text>
   <line x1="24" y1="50" x2="{w-24}" y2="50" stroke="{pal["border"]}"/>
-  <g clip-path="url(#r)">{''.join(segs)}{sheen}</g>
+  <g clip-path="url(#r)">{''.join(segs)}</g>
   {''.join(legend)}
 </svg>
 '''
