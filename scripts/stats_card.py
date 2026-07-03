@@ -75,18 +75,20 @@ def _mix(c1, c2, t):
     return "#%02x%02x%02x" % tuple(round(a[k] + (b[k] - a[k]) * t) for k in range(3))
 
 
-# Cor caracteristica de cada linguagem (baseada na logo/identidade oficial).
+# Paleta pedida: vermelho, laranja, amarelo, verde, azul claro, indigo, violeta.
+# Mantem a cor de identidade onde ela ja bate (HTML laranja, JS amarelo, Blade
+# vermelho, PHP roxo, Python/TS azuis) e completa o espectro nas demais.
 LANG_COLORS = {
-    "Python": "#3776AB",      # azul da logo do Python
-    "PHP": "#777BB4",         # roxo do elefante do PHP
-    "HTML": "#E34F26",        # laranja do HTML5
-    "TypeScript": "#3178C6",  # azul do TypeScript
-    "CSS": "#563D7C",         # roxo/indigo (cor do CSS no GitHub)
-    "Blade": "#F7523F",       # vermelho do Blade/Laravel
-    "JavaScript": "#F7DF1E",  # amarelo do JavaScript
-    "PowerShell": "#5391FE",  # azul do PowerShell
-    "Shell": "#89E051",       # verde do Shell/Bash
-    "C": "#A8B9CC", "SQLite": "#003B57",
+    "Python": "#4338CA",      # azul escuro / indigo
+    "PHP": "#8B5CF6",         # violeta / roxo
+    "HTML": "#F97316",        # laranja
+    "TypeScript": "#38BDF8",  # azul bem claro
+    "CSS": "#22C55E",         # verde
+    "Blade": "#EF4444",       # vermelho
+    "JavaScript": "#EAB308",  # amarelo
+    "PowerShell": "#EC4899",  # rosa (destaque extra)
+    "Shell": "#14B8A6",       # teal
+    "C": "#A8B9CC", "SQLite": "#0EA5E9",
     "Outros": "#94A3B8",      # cinza neutro
 }
 EXTRA = ["#F59E0B", "#8B5CF6", "#10B981", "#E11D48", "#0EA5E9", "#D946EF", "#84CC16"]
