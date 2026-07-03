@@ -3,7 +3,7 @@
 Encontro Paranormal — mini-RPG jogável no README (tema Ordem Paranormal).
 
 O visitante é um Agente da Ordem e enfrenta criaturas. Cada ação é uma issue
-com título  rpg|<acao>  (atacar | defender | ritual | fugir | novo). Uma Action
+com título  rpg|<acao>  (atacar | defender | fugir | novo). Uma Action
 rola os dados, aplica o resultado, regenera a cena (SVG claro/escuro) e os botões.
 
 Sprite da criatura: se existir rpg/sprites/<Elemento>.png (de preferência 64x64,
@@ -36,7 +36,6 @@ MARK_START = "<!-- RPG:START -->"
 MARK_END = "<!-- RPG:END -->"
 
 MAX_HP = 20
-START_RITUALS = 1
 
 # Cores vivas dos Elementos (boas em tema claro e escuro)
 ELEMENTS = {
@@ -59,7 +58,6 @@ DARK = {"bg": "#1c2530", "border": "#2d3f57", "title": "#8aa6c8", "text": "#dfe6
 BTN = {
     "atacar": ("Atacar", "#c0392b"),
     "defender": ("Defender", "#4A6FA5"),
-    "ritual": ("Ritual", "#7c5fb0"),
     "fugir": ("Fugir", "#5A6B7B"),
     "novo": ("Começar de novo", "#3f7d5a"),
 }
@@ -72,7 +70,6 @@ def _ic(d):
 ICONS = {
     "atacar": _ic("M13 2 4.5 13.5H11l-1 8.5L19.5 10H12z"),
     "defender": _ic("M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5z"),
-    "ritual": _ic("M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17l-6.2 3.6 1.6-6.7L2.2 8.9l6.9-.6z"),
     "fugir": _ic("M4 4l8 8-8 8zM12 4l8 8-8 8z"),
     "novo": _ic("M12 4V1L8 5l4 4V6a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"),
 }
@@ -109,7 +106,7 @@ def new_enemy(score, elem=None):
 
 
 def new_state():
-    return {"hp": MAX_HP, "score": 0, "best": 0, "rituals": START_RITUALS,
+    return {"hp": MAX_HP, "score": 0, "best": 0,
             "defending": False, "over": False, "last_roll": 0,
             "enemy": new_enemy(0, "Sangue"),
             "msg": "Uma criatura surge das sombras. Boa sorte, Agente."}
@@ -119,7 +116,7 @@ def load_state():
     if os.path.exists(STATE):
         try:
             s = json.load(open(STATE, encoding="utf-8"))
-            for k in ("hp", "score", "best", "rituals", "enemy"):
+            for k in ("hp", "score", "best", "enemy"):
                 if k not in s:
                     raise ValueError
             return s
@@ -187,14 +184,6 @@ def apply(s, action):
         cura = random.randint(1, 3)
         s["hp"] = min(MAX_HP, s["hp"] + cura)
         parts.append(f"assume defesa e recupera {cura}")
-
-    elif action == "ritual":
-        if s["rituals"] <= 0:
-            return "Sem rituais restantes nesta investida.", "Você está sem rituais; use Atacar ou Defender."
-        s["rituals"] -= 1
-        dano = random.randint(10, 15)
-        e["hp"] -= dano
-        parts.append(f"conjura um ritual em {e['name']} ({dano})")
 
     elif action == "fugir":
         if random.random() < 0.5:
@@ -356,7 +345,7 @@ def render_scene(s, pal):
         f'<text x="24" y="138" font-family="{ff}" font-size="15" font-weight="600" fill="{pal["text"]}">Agente da Ordem</text>',
         f'<text x="344" y="138" text-anchor="end" font-family="{ff}" font-size="11" fill="{pal["muted"]}">{max(0,s["hp"])}/{MAX_HP} HP</text>',
         _bar(24, 147, 320, 12, s["hp"] / MAX_HP, pal["agent"], pal),
-        f'<text x="24" y="178" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Derrotadas: {s["score"]}   ·   Recorde: {s["best"]}   ·   Rituais: {s["rituals"]}</text>',
+        f'<text x="24" y="178" font-family="{ff}" font-size="11" fill="{pal["muted"]}">Derrotadas: {s["score"]}   ·   Recorde: {s["best"]}</text>',
         f'<text x="24" y="210" font-family="{ff}" font-size="12.5" fill="{pal["text"]}">{_esc(_short(s["msg"]))}</text>',
         creature_svg(e["elem"], ecol, 104, 372, 44),
         d20_svg(424, 200, 40, s.get("last_roll", 0)),
@@ -372,7 +361,7 @@ def render_scene(s, pal):
 # --------------------------------------------------------------------------- #
 def gen_buttons():
     os.makedirs(GAME, exist_ok=True)
-    acts = ("atacar", "defender", "ritual", "fugir")
+    acts = ("atacar", "defender", "fugir")
     target = max(svgchip.content_width(BTN[k][0], ICONS.get(k), 15) for k in acts) + 1
     for key, (label, color) in BTN.items():
         mw = target if key in acts else 0
@@ -403,11 +392,10 @@ def build_section(s, ver):
         out.append(f'<p>{btn_html("novo")}</p>\n')
     else:
         out.append('<table>\n'
-                   f'  <tr><td>{btn_html("atacar")}</td><td>{btn_html("defender")}</td></tr>\n'
-                   f'  <tr><td>{btn_html("ritual")}</td><td>{btn_html("fugir")}</td></tr>\n'
+                   f'  <tr><td>{btn_html("atacar")}</td><td>{btn_html("defender")}</td><td>{btn_html("fugir")}</td></tr>\n'
                    '</table>\n')
     out.append('\n<sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura '
-               '&nbsp;·&nbsp; <b>Ritual</b> dano alto garantido (1 uso) &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>\n')
+               '&nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>\n')
     out.append("</div>\n")
     return "".join(out)
 
