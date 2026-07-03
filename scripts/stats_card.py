@@ -19,6 +19,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(ROOT, "assets")
 USER = os.environ.get("PROFILE_USER", "arturmuller25")
 TOKEN = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+TICK = os.environ.get("STATS_TICK", "")
+
+
+def _tick(svg):
+    # marca de geracao (comentario oculto) p/ gerar um diff real a cada atualizacao
+    return svg.replace(">", f"><!--t:{TICK}-->", 1) if TICK else svg
 
 QUERY = """
 query {
@@ -215,10 +221,10 @@ def main():
     }
     langs = aggregate_langs(repos)
     os.makedirs(ASSETS, exist_ok=True)
-    open(os.path.join(ASSETS, "stats-light.svg"), "w", encoding="utf-8").write(render_stats(stats, LIGHT))
-    open(os.path.join(ASSETS, "stats-dark.svg"), "w", encoding="utf-8").write(render_stats(stats, DARK))
-    open(os.path.join(ASSETS, "langs-light.svg"), "w", encoding="utf-8").write(render_langs(langs, LIGHT))
-    open(os.path.join(ASSETS, "langs-dark.svg"), "w", encoding="utf-8").write(render_langs(langs, DARK))
+    open(os.path.join(ASSETS, "stats-light.svg"), "w", encoding="utf-8").write(_tick(render_stats(stats, LIGHT)))
+    open(os.path.join(ASSETS, "stats-dark.svg"), "w", encoding="utf-8").write(_tick(render_stats(stats, DARK)))
+    open(os.path.join(ASSETS, "langs-light.svg"), "w", encoding="utf-8").write(_tick(render_langs(langs, LIGHT)))
+    open(os.path.join(ASSETS, "langs-dark.svg"), "w", encoding="utf-8").write(_tick(render_langs(langs, DARK)))
     print("OK stats:", stats)
     print("OK langs:", langs)
 
