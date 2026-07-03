@@ -1,15 +1,16 @@
 name: Atualizar cards de estatísticas
 
 on:
-  # Uma vez por dia (06:00 UTC = 03:00 BRT). O horário do cron pode variar um pouco.
+  # Fim da noite BRT (01:30 UTC = 22:30 BRT). Roda tarde pra poder datar os
+  # commits em horários do dia (08h-21h30 BRT) sem cair no futuro.
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "30 1 * * *"
   # Permite rodar manualmente na aba Actions
   workflow_dispatch:
     inputs:
       quantidade:
         description: "Quantos commits de atualização gerar"
-        default: "10"
+        default: "4"
 
 permissions:
   contents: write
@@ -35,7 +36,7 @@ jobs:
           # Personal Access Token SEU (enxerga dados privados). Secret PROFILE_TOKEN.
           GH_TOKEN: ${{ secrets.PROFILE_TOKEN }}
           PROFILE_USER: arturmuller25
-          N: ${{ github.event.inputs.quantidade || '10' }}
+          N: ${{ github.event.inputs.quantidade || '4' }}
         run: |
           if [ -z "$GH_TOKEN" ]; then
             echo "Secret PROFILE_TOKEN ausente — abortando sem farmar."
@@ -57,9 +58,16 @@ jobs:
           )
           n=${#MSGS[@]}
 
-          for i in $(seq 1 "$N"); do
-            # marca única por commit -> diff real nos cards
-            export STATS_TICK="$(date -u +%Y-%m-%dT%H:%M:%S.%N)-$i"
+          # Data BRT de hoje e N horários aleatórios entre 08:00 e 21:30 (ordenados)
+          BRDATE=$(TZ='America/Sao_Paulo' date +%Y-%m-%d)
+          TIMES=$(python3 -c "import random; N=int('$N'); ms=sorted(random.sample(range(480,1290),N)); print(' '.join('%02d:%02d:%02d'%(m//60,m%60,random.randint(0,59)) for m in ms))")
+
+          i=0
+          for t in $TIMES; do
+            i=$((i + 1))
+            export STATS_TICK="${BRDATE}T${t}-$i"
+            export GIT_AUTHOR_DATE="${BRDATE}T${t}-03:00"
+            export GIT_COMMITTER_DATE="${BRDATE}T${t}-03:00"
             python scripts/stats_card.py
             git add assets/stats-light.svg assets/stats-dark.svg assets/langs-light.svg assets/langs-dark.svg
             if git diff --cached --quiet; then
