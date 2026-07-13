@@ -25,8 +25,8 @@ jobs:
           # Usa o token pessoal para enxergar também as contribuições privadas
           github_token: ${{ secrets.PROFILE_TOKEN }}
           outputs: |
-            dist/github-contribution-grid-snake.svg?color_snake=#0ea5e9&color_dots=#eceae6,#bfdbfe,#60a5fa,#3b82f6,#1d4ed8
-            dist/github-contribution-grid-snake-dark.svg?color_snake=#22d3ee&color_dots=#1c2530,#1e3a8a,#2563eb,#3b82f6,#60a5fa
+            dist/github-contribution-grid-snake.svg?color_snake=#00b8d4&color_dots=#eceae6,#bfdbfe,#60a5fa,#3b82f6,#1d4ed8
+            dist/github-contribution-grid-snake-dark.svg?color_snake=#00e5ff&color_dots=#1c2530,#1e3a8a,#2563eb,#3b82f6,#60a5fa
 
       - name: Publicar na branch output
         uses: crazy-max/ghaction-github-pages@v4
