@@ -6,10 +6,10 @@
   "over": false,
   "last_roll": 10,
   "enemy": {
-    "name": "Olho Vigia",
-    "elem": "Conhecimento",
-    "hp": 24,
-    "max": 24
+    "name": "Raziel (Vampiro)",
+    "elem": "Sangue",
+    "hp": 33,
+    "max": 33
   },
-  "msg": "**Você** atingiu Raziel (Vampiro) (7) derrotou e recuperou 5 de vida."
+  "msg": "**Você** fugiu de Olho Vigia."
 }
