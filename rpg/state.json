@@ -1,15 +1,15 @@
 {
-  "hp": 20,
+  "hp": 13,
   "score": 0,
   "best": 0,
   "defending": false,
   "over": false,
-  "last_roll": 0,
+  "last_roll": 17,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 28,
+    "hp": 21,
     "max": 28
   },
-  "msg": "Novo Agente em campo. Que os Elementos te protejam."
+  "msg": "**Você** atingiu Raziel (Vampiro) (7) a criatura revidou (7)."
 }
