@@ -11,5 +11,5 @@
     "hp": 24,
     "max": 33
   },
-  "msg": "O Agente tombou após derrotar 1 criatura(s). Recorde: 1."
+  "msg": "O Agente caiu. Comece uma nova investida."
 }
