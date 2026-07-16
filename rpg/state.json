@@ -1,5 +1,5 @@
 {
-  "hp": 13,
+  "hp": 10,
   "score": 0,
   "best": 0,
   "defending": false,
@@ -11,5 +11,5 @@
     "hp": 21,
     "max": 28
   },
-  "msg": "**Você** atingiu Raziel (Vampiro) (7) a criatura revidou (7)."
+  "msg": "**Você** assume defesa e recupera 2 defendeu e sofreu 5."
 }
