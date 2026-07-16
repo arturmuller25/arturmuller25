@@ -1,15 +1,15 @@
 {
-  "hp": 0,
+  "hp": 20,
   "score": 0,
   "best": 0,
   "defending": false,
-  "over": true,
-  "last_roll": 16,
+  "over": false,
+  "last_roll": 0,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 16,
-    "max": 32
+    "hp": 28,
+    "max": 28
   },
-  "msg": "O Agente tombou após derrotar 0 criatura(s). Recorde: 0."
+  "msg": "Novo Agente em campo. Que os Elementos te protejam."
 }
