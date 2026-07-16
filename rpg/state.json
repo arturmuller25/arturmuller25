@@ -1,15 +1,15 @@
 {
-  "hp": 10,
+  "hp": 3,
   "score": 0,
   "best": 0,
   "defending": false,
   "over": false,
-  "last_roll": 17,
+  "last_roll": 20,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 21,
+    "hp": 5,
     "max": 28
   },
-  "msg": "**Você** assume defesa e recupera 2 defendeu e sofreu 5."
+  "msg": "**Você** ACERTO CRÍTICO em Raziel (Vampiro) (16) a criatura revidou (7)."
 }
