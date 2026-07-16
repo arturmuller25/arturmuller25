@@ -1,15 +1,15 @@
 {
-  "hp": 3,
-  "score": 0,
+  "hp": 8,
+  "score": 1,
   "best": 0,
   "defending": false,
   "over": false,
-  "last_roll": 20,
+  "last_roll": 10,
   "enemy": {
-    "name": "Raziel (Vampiro)",
-    "elem": "Sangue",
-    "hp": 5,
-    "max": 28
+    "name": "Olho Vigia",
+    "elem": "Conhecimento",
+    "hp": 24,
+    "max": 24
   },
-  "msg": "**Você** ACERTO CRÍTICO em Raziel (Vampiro) (16) a criatura revidou (7)."
+  "msg": "**Você** atingiu Raziel (Vampiro) (7) derrotou e recuperou 5 de vida."
 }
