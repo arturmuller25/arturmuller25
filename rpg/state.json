@@ -1,15 +1,15 @@
 {
-  "hp": 14,
+  "hp": 6,
   "score": 0,
   "best": 1,
   "defending": false,
   "over": false,
-  "last_roll": 1,
+  "last_roll": 13,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 31,
+    "hp": 27,
     "max": 31
   },
-  "msg": "**Você** errou o golpe a criatura revidou (6)."
+  "msg": "**Você** atingiu Raziel (Vampiro) (4) a criatura revidou (8)."
 }
