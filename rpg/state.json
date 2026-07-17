@@ -1,15 +1,15 @@
 {
-  "hp": 5,
+  "hp": 0,
   "score": 0,
   "best": 1,
   "defending": false,
-  "over": false,
-  "last_roll": 5,
+  "over": true,
+  "last_roll": 17,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 21,
+    "hp": 16,
     "max": 29
   },
-  "msg": "**Você** atingiu Raziel (Vampiro) (5) a criatura revidou (6)."
+  "msg": "O Agente tombou após derrotar 0 criatura(s). Recorde: 1."
 }
