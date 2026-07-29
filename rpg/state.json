@@ -1,5 +1,5 @@
 {
-  "hp": 20,
+  "hp": 15,
   "score": 0,
   "best": 1,
   "defending": false,
@@ -11,5 +11,5 @@
     "hp": 32,
     "max": 32
   },
-  "msg": "Novo Agente em campo. Que os Elementos te protejam."
+  "msg": "**Você** assume defesa e recupera 1 defendeu e sofreu 5."
 }
