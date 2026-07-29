@@ -1,15 +1,15 @@
 {
-  "hp": 6,
+  "hp": 0,
   "score": 0,
   "best": 1,
   "defending": false,
-  "over": false,
-  "last_roll": 13,
+  "over": true,
+  "last_roll": 11,
   "enemy": {
     "name": "Raziel (Vampiro)",
     "elem": "Sangue",
-    "hp": 27,
+    "hp": 21,
     "max": 31
   },
-  "msg": "**Você** assume defesa e recupera 3 defendeu e sofreu 3."
+  "msg": "O Agente tombou após derrotar 0 criatura(s). Recorde: 1."
 }

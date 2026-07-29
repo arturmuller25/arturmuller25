@@ -81,13 +81,11 @@ Um mini-RPG jogável aqui no perfil, no clima de *Ordem Paranormal*. Você é um
 <div align="center">
 
 <picture>
-<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=34788ac2" />
-<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=34788ac2" width="520" alt="Encontro Paranormal" />
+<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=1c81a8d4" />
+<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=1c81a8d4" width="520" alt="Encontro Paranormal" />
 </picture>
 
-<table>
-  <tr><td><a href="https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Catacar&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20%28bot%C3%A3o%20verde%20abaixo%29%20para%20confirmar%20a%20a%C3%A7%C3%A3o.%20Depois%2C%20em%20~15s%2C%20volte%20ao%20perfil%20e%20atualize%20a%20p%C3%A1gina%20%28F5%29%20para%20ver%20o%20resultado.%20A%20issue%20%C3%A9%20fechada%20sozinha."><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-atacar.svg" alt="Atacar" /></a></td><td><a href="https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Cdefender&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20%28bot%C3%A3o%20verde%20abaixo%29%20para%20confirmar%20a%20a%C3%A7%C3%A3o.%20Depois%2C%20em%20~15s%2C%20volte%20ao%20perfil%20e%20atualize%20a%20p%C3%A1gina%20%28F5%29%20para%20ver%20o%20resultado.%20A%20issue%20%C3%A9%20fechada%20sozinha."><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-defender.svg" alt="Defender" /></a></td><td><a href="https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Cfugir&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20%28bot%C3%A3o%20verde%20abaixo%29%20para%20confirmar%20a%20a%C3%A7%C3%A3o.%20Depois%2C%20em%20~15s%2C%20volte%20ao%20perfil%20e%20atualize%20a%20p%C3%A1gina%20%28F5%29%20para%20ver%20o%20resultado.%20A%20issue%20%C3%A9%20fechada%20sozinha."><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-fugir.svg" alt="Fugir" /></a></td></tr>
-</table>
+<p><a href="https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Cnovo&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20%28bot%C3%A3o%20verde%20abaixo%29%20para%20confirmar%20a%20a%C3%A7%C3%A3o.%20Depois%2C%20em%20~15s%2C%20volte%20ao%20perfil%20e%20atualize%20a%20p%C3%A1gina%20%28F5%29%20para%20ver%20o%20resultado.%20A%20issue%20%C3%A9%20fechada%20sozinha."><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-novo.svg" alt="Começar de novo" /></a></p>
 
 <sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>
 </div>
