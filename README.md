@@ -79,7 +79,14 @@ Agora estou me aprofundando em arquitetura de aplicações e em IA aplicada a pr
 
 ---
 
-## Contribuições
+## Estatísticas
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stats-dark.svg" />
+    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stats-light.svg" alt="Atividade no GitHub no último ano: contribuições, commits, issues e repositórios" />
+  </picture>
+</p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/output/github-contribution-grid-snake-dark.svg" />
