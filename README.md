@@ -11,9 +11,9 @@
 
 Estudante de desenvolvimento. Trabalho com PHP e Laravel no web e com Python e FastAPI em sistemas de IA.
 
-JÃ¡ construÃ­ um catÃ¡logo de filmes em Laravel com Ã¡rea administrativa e avaliaÃ§Ãµes, um rastreador de posiÃ§Ãµes em tempo real com WebSockets, um analisador de partidas de xadrez que usa Stockfish para encontrar padrÃµes de erro, e um sistema de RAG rodando em produÃ§Ã£o no Railway.
+Já construí um catálogo de filmes em Laravel com área administrativa e avaliações, um rastreador de posições em tempo real com WebSockets, um analisador de partidas de xadrez que usa Stockfish para encontrar padrões de erro, e um sistema de RAG rodando em produção no Railway.
 
-Agora estou me aprofundando em arquitetura de aplicaÃ§Ãµes e em IA aplicada a problemas reais.
+Agora estou me aprofundando em arquitetura de aplicações e em IA aplicada a problemas reais.
 
 ---
 
