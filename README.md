@@ -1,8 +1,8 @@
 <!-- ============================ HERO ============================ -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light.svg" />
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light.svg" width="100%" alt="Artur Müller" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-dark-v2.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light-v2.svg" />
+  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light-v2.svg" width="100%" alt="Artur Müller" />
 </picture>
 
 ---
