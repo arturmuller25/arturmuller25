@@ -35,30 +35,44 @@ Agora estou me aprofundando em arquitetura de aplicações e em IA aplicada a pr
     <td width="50%" valign="top">
       <a href="https://github.com/arturmuller25/cineif"><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/shot-cineif.jpg" width="100%" alt="CineIF: galeria com filme em destaque, notas por estrelas e grade de posteres" /></a>
       <h3><a href="https://github.com/arturmuller25/cineif">cineif</a></h3>
-      <p>Cat&#225;logo de filmes em Laravel: galeria p&#250;blica com filtros por ano e categoria, &#225;rea administrativa com CRUD, avalia&#231;&#245;es estilo IMDb e watchlist. Migrations, seeders e rela&#231;&#245;es Eloquent.</p>
-      <p><sub><b>Stack</b> &#183; PHP &#183; Laravel &#183; Blade &#183; MySQL</sub></p>
+      <p>Catálogo de filmes em Laravel: galeria pública com filtros por ano e categoria, área administrativa com CRUD, avaliações estilo IMDb e watchlist. Migrations, seeders e relações Eloquent.</p>
+      <p><sub><b>Stack</b> · PHP · Laravel · Blade · MySQL</sub></p>
     </td>
     <td width="50%" valign="top">
       <a href="https://github.com/arturmuller25/radar"><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/shot-radar.jpg" width="100%" alt="Radar: tres clientes plotados em tempo real num mapa Leaflet, com painel lateral" /></a>
       <h3><a href="https://github.com/arturmuller25/radar">radar</a></h3>
-      <p>Rastreamento em tempo real: cada cliente transmite a posi&#231;&#227;o do GPS por WebSocket e o servidor retransmite para um mapa compartilhado, com painel de quem est&#225; online.</p>
-      <p><sub><b>Stack</b> &#183; Node.js &#183; Socket.io &#183; Leaflet &#183; Express</sub></p>
+      <p>Rastreamento em tempo real: cada cliente transmite a posição do GPS por WebSocket e o servidor retransmite para um mapa compartilhado, com painel de quem está online.</p>
+      <p><sub><b>Stack</b> · Node.js · Socket.io · Leaflet · Express</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/shot-muller-site.jpg" width="100%" alt="Muller: landing page com titulo grande, chamadas para orcamento e prova social" />
+      <h3>muller&#8209;site &nbsp;<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/priv.svg" alt="Privado" align="top" /></h3>
+      <p>Site da minha operação de freelance, em Next.js: página única com animações em Framer Motion, cena 3D com react-three-fiber, tema claro e escuro e fluxo de orçamento.</p>
+      <p><sub><b>Stack</b> · Next.js · React · TypeScript · Framer Motion</sub></p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/shot-gabarita.jpg" width="100%" alt="Gabarita: landing com contagem regressiva para o ENEM e chamada para acesso" />
+      <h3>gabarita &nbsp;<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/priv.svg" alt="Privado" align="top" /></h3>
+      <p>Produto de estudo para o ENEM: a landing traz contagem regressiva para a prova e a proposta montada sobre as questões das provas anteriores, com calculadora de nota e app em repositórios próprios.</p>
+      <p><sub><b>Stack</b> · Next.js · React · TypeScript · Tailwind</sub></p>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
       <a href="https://github.com/arturmuller25/chat-web"><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/shot-chat.png" width="100%" alt="ChatIRC: sala de chat com tres usuarios conversando e lista de conectados" /></a>
       <h3><a href="https://github.com/arturmuller25/chat-web">chat-web</a></h3>
-      <p>Sala de chat em tempo real com Node.js puro e WebSockets, sem framework: broadcast para todos na sala, lista de conectados e avisos de entrada e sa&#237;da.</p>
-      <p><sub><b>Stack</b> &#183; Node.js &#183; ws &#183; JavaScript</sub></p>
+      <p>Sala de chat em tempo real com Node.js puro e WebSockets, sem framework: broadcast para todos na sala, lista de conectados e avisos de entrada e saída.</p>
+      <p><sub><b>Stack</b> · Node.js · ws · JavaScript</sub></p>
     </td>
     <td width="50%" valign="top">
       <h3><a href="https://github.com/arturmuller25/mullerchess">mullerchess</a></h3>
       <p>Analisador de partidas de xadrez: baixa jogos do Lichess e do Chess.com, avalia com <b>Stockfish</b>, classifica os erros pela queda de <em>winning chances</em> e agrega as fraquezas recorrentes num dashboard.</p>
-      <p><sub><b>Stack</b> &#183; Python &#183; Stockfish &#183; FastAPI &#183; React</sub></p>
+      <p><sub><b>Stack</b> · Python · Stockfish · FastAPI · React</sub></p>
       <h3>comac&#8209;rag &nbsp;<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/priv.svg" alt="Privado" align="top" /></h3>
-      <p>Sistema de RAG em Python: busca sem&#226;ntica sobre uma base de conhecimento e gera&#231;&#227;o de respostas, em produ&#231;&#227;o no Railway.</p>
-      <p><sub><b>Stack</b> &#183; Python &#183; FastAPI &#183; OpenAI &#183; Pinecone</sub></p>
+      <p>Sistema de RAG em Python: busca semântica sobre uma base de conhecimento e geração de respostas, em produção no Railway.</p>
+      <p><sub><b>Stack</b> · Python · FastAPI · OpenAI · Pinecone</sub></p>
     </td>
   </tr>
 </table>
