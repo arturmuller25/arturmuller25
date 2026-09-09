@@ -88,6 +88,13 @@ Agora estou me aprofundando em arquitetura de aplicações e em IA aplicada a pr
   </picture>
 </p>
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-dark.svg" />
+    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-light.svg" alt="Linguagens mais usadas: Python, TypeScript, PHP, JavaScript, Blade" />
+  </picture>
+</p>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/output/github-contribution-grid-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/output/github-contribution-grid-snake.svg" />

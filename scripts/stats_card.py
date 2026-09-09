@@ -193,11 +193,19 @@ def render_langs(langs, pal, palette=None):
 '''
 
 
+# Markup e estilo inflam por bytes de conteudo (o gabarita-app sozinho tem
+# ~100 MB de HTML), entao ficam de fora: o card mostra linguagens de programacao.
+EXCLUDE_LANGS = {"HTML", "CSS"}
+
+
 def aggregate_langs(repos):
     totals = {}
     for node in repos:
         for e in node["languages"]["edges"]:
-            totals[e["node"]["name"]] = totals.get(e["node"]["name"], 0) + e["size"]
+            nome = e["node"]["name"]
+            if nome in EXCLUDE_LANGS:
+                continue
+            totals[nome] = totals.get(nome, 0) + e["size"]
     ordered = sorted(totals.items(), key=lambda kv: -kv[1])
     top = ordered[:8]
     rest = sum(v for _, v in ordered[8:])
