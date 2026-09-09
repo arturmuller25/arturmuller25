@@ -1,10 +1,13 @@
 name: Encontro Paranormal
 
 on:
-  # Cada ação é uma issue com título "rpg|<acao>"
-  issues:
-    types: [opened]
-  # Permite re-renderizar/semear manualmente
+  # Gatilho por issue desativado: a seção do jogo saiu do README e o inject()
+  # do rpg_game.py reanexa o bloco no fim do arquivo quando não acha os
+  # marcadores RPG:START/RPG:END. Para reativar, descomente o bloco abaixo e
+  # devolva os marcadores ao README.
+  #
+  # issues:
+  #   types: [opened]
   workflow_dispatch:
 
 concurrency:

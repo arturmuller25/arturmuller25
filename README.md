@@ -5,12 +5,6 @@
   <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/hero-light.svg" width="100%" alt="Artur Müller" />
 </picture>
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=arturmuller25&style=flat-square&color=4A6FA5&labelColor=36567D&label=Visitas" alt="Visitas" />
-  <img src="https://img.shields.io/github/followers/arturmuller25?style=flat-square&logo=github&logoColor=white&label=Seguidores&color=4A6FA5&labelColor=36567D" alt="Seguidores" />
-  <a href="https://checkmygit.com/arturmuller25"><img src="https://img.shields.io/badge/Modo%20visual-CheckMyGit-4A6FA5?style=flat-square&logo=github&logoColor=white&labelColor=36567D" alt="CheckMyGit" /></a>
-</p>
-
 ---
 
 ## Sobre
@@ -73,41 +67,7 @@ Hoje estou me aprofundando em arquitetura de software, boas práticas, IA aplica
 
 ---
 
-## Encontro Paranormal
-
-Um mini-RPG jogável aqui no perfil, no clima de *Ordem Paranormal*. Você é um **Agente da Ordem** enfrentando criaturas dos Outros Lados. Cada ação abre uma _issue_ já preenchida; envie (**Submit new issue**) e, em segundos, os dados são rolados e a cena se atualiza.
-
-<!-- RPG:START -->
-<div align="center">
-
-<picture>
-<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-dark.svg?v=f7bb01ff" />
-<img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/scene-light.svg?v=f7bb01ff" width="520" alt="Encontro Paranormal" />
-</picture>
-
-<p><a href="https://github.com/arturmuller25/arturmuller25/issues/new?title=rpg%7Cnovo&body=Clique%20em%20%2A%2ASubmit%20new%20issue%2A%2A%20%28bot%C3%A3o%20verde%20abaixo%29%20para%20confirmar%20a%20a%C3%A7%C3%A3o.%20Depois%2C%20em%20~15s%2C%20volte%20ao%20perfil%20e%20atualize%20a%20p%C3%A1gina%20%28F5%29%20para%20ver%20o%20resultado.%20A%20issue%20%C3%A9%20fechada%20sozinha."><img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/rpg/btn-novo.svg" alt="Começar de novo" /></a></p>
-
-<sub><b>Atacar</b> rola um d20 (20 = crítico) &nbsp;·&nbsp; <b>Defender</b> reduz o próximo golpe e cura &nbsp;·&nbsp; <b>Fugir</b> 50% de escapar</sub>
-</div>
-<!-- RPG:END -->
-
----
-
-## Estatísticas
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stats-dark.svg" />
-    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/stats-light.svg" alt="Estatísticas reais (inclui repositórios privados)" />
-  </picture>
-</p>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-dark.svg?v=11" />
-    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/langs-light.svg?v=11" alt="Linguagens mais usadas (inclui repositórios privados)" />
-  </picture>
-</p>
+## Contribuições
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/output/github-contribution-grid-snake-dark.svg" />
