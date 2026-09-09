@@ -185,7 +185,7 @@ def render_langs(langs, pal, palette=None):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Linguagens mais usadas">
   <defs>{''.join(defs)}</defs>
   <rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" fill="{pal["bg"]}" stroke="{pal["border"]}"/>
-  <text x="24" y="38" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="{pal["title"]}">Linguagens mais usadas &#183; todos os repos</text>
+  <text x="24" y="38" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="{pal["title"]}">Linguagens de programação &#183; todos os repos</text>
   <line x1="24" y1="50" x2="{w-24}" y2="50" stroke="{pal["border"]}"/>
   <g clip-path="url(#r)">{''.join(segs)}</g>
   {''.join(legend)}
