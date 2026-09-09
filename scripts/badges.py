@@ -15,6 +15,13 @@ ASSETS = os.path.join(ROOT, "assets")
 STACK_FILL = "#22303f"
 STACK_FG = "#eef2f7"
 STACK_STROKE = "#3a4f6a"
+# Mesma banda em tema claro (o README serve as duas via <picture>)
+STACK_FILL_LIGHT = "#EEF2F7"
+STACK_FG_LIGHT = "#2E3A48"
+STACK_STROKE_LIGHT = "#CBD6E2"
+# Uma faixa so, com o que da para conferir em repositorio publico
+STACK_LABELS = ["Python", "PHP", "Laravel", "JavaScript", "TypeScript",
+                "React", "Node.js", "FastAPI", "HTML", "CSS"]
 
 # slugs Simple Icons (monocromático) -> usado em contato/projetos (ícone branco)
 SLUGS = {
@@ -36,6 +43,7 @@ COLORED = {
     "Twig": ["vscode-icons/file-type-twig"], "Playwright": ["logos/playwright"],
     "Git": ["logos/git-icon"], "VS Code": ["logos/visual-studio-code"],
     "MySQL": ["logos/mysql-icon"], "uv": ["logos/astral"],
+    "Laravel": ["logos/laravel"], "Node.js": ["logos/nodejs-icon"],
     "Claude": ["logos/claude-icon", "logos/claude", "logos/anthropic-icon"],
 }
 
@@ -146,13 +154,14 @@ def main():
     write("contact-linkedin.svg", svgchip.pill("LinkedIn", mono_icon("LinkedIn"), height=40, size=15))
     write("contact-gmail.svg", svgchip.pill("Gmail", mono_icon("Gmail"), height=40, size=15))
 
-    # Stack (categorias, tile escura, ícone colorido)
-    def stack(labels):
-        return svgchip.row(citems(labels), max_width=560, fill=STACK_FILL, fg=STACK_FG,
-                           stroke=STACK_STROKE, height=34, size=14)
-    write("th-langs.svg", stack(["Python", "TypeScript", "JavaScript", "PHP", "PowerShell", "HTML", "CSS"]))
-    write("th-frameworks.svg", stack(["React", "Vite", "FastAPI", "PyTorch", "OpenAI", "Pinecone", "Hugging Face", "Twig"]))
-    write("th-tools.svg", stack(["Railway", "uv", "Playwright", "Git", "VS Code", "Claude"]))
+    # Stack: uma faixa unica, mesmas pilulas nos dois temas
+    itens = citems(STACK_LABELS)
+    write("th-stack-dark.svg",
+          svgchip.row(itens, max_width=620, fill=STACK_FILL, fg=STACK_FG,
+                      stroke=STACK_STROKE, height=34, size=14))
+    write("th-stack-light.svg",
+          svgchip.row(itens, max_width=620, fill=STACK_FILL_LIGHT, fg=STACK_FG_LIGHT,
+                      stroke=STACK_STROKE_LIGHT, height=34, size=14))
 
     # Tecnologias por projeto (aço + ícone branco)
     write("proj-comac.svg", svgchip.row(mitems(["Python", "FastAPI", "OpenAI", "Pinecone"]), max_width=340))

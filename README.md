@@ -9,27 +9,21 @@
 
 ## Sobre
 
-Estudante de desenvolvimento e criador de projetos pessoais. Gosto de transformar ideias em coisas que funcionam de verdade, do front-end ao back-end, e ultimamente venho explorando bastante inteligência artificial e sistemas de RAG.
+Estudante de desenvolvimento. Trabalho com PHP e Laravel no web e com Python e FastAPI em sistemas de IA.
 
-Hoje estou me aprofundando em arquitetura de software, boas práticas, IA aplicada para negócios, automações e mais.
+JÃ¡ construÃ­ um catÃ¡logo de filmes em Laravel com Ã¡rea administrativa e avaliaÃ§Ãµes, um rastreador de posiÃ§Ãµes em tempo real com WebSockets, um analisador de partidas de xadrez que usa Stockfish para encontrar padrÃµes de erro, e um sistema de RAG rodando em produÃ§Ã£o no Railway.
+
+Agora estou me aprofundando em arquitetura de aplicaÃ§Ãµes e em IA aplicada a problemas reais.
 
 ---
 
-## Tecnologias & Habilidades
+## Tecnologias
 
-<p align="center"><b>Linguagens</b></p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-langs.svg" alt="Python, TypeScript, JavaScript, PHP, PowerShell, HTML, CSS" />
-</p>
-
-<p align="center"><b>Frameworks &amp; bibliotecas</b></p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-frameworks.svg" alt="React, Vite, FastAPI, PyTorch, OpenAI, Pinecone, Hugging Face, Twig" />
-</p>
-
-<p align="center"><b>Ferramentas &amp; plataformas</b></p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-tools.svg" alt="Railway, uv, Playwright, Git, VS Code, Claude" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-stack-dark.svg" />
+    <img src="https://raw.githubusercontent.com/arturmuller25/arturmuller25/main/assets/th-stack-light.svg" alt="Python, PHP, Laravel, JavaScript, TypeScript, React, Node.js, FastAPI, HTML, CSS" />
+  </picture>
 </p>
 
 ---
